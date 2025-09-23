@@ -11,7 +11,8 @@
     "lint": "eslint . --ext .ts,.js"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "mysql2": "^3.15.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",

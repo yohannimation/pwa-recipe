@@ -40,6 +40,7 @@ export interface RecipeListInterface {
 //           "categories": [
 //               {
 //                   "id": 123,
+//                   "id_category_type": 123,
 //                   "name": "Yohann"
 //               }
 //           ]
@@ -50,10 +51,12 @@ export interface RecipeListInterface {
 //           "categories": [
 //               {
 //                   "id": 223,
+//                   "id_category_type": 223,
 //                   "name": "Apéritif"
 //               },
 //               {
 //                   "id": 323,
+//                   "id_category_type": 223,
 //                   "name": "Plat principal"
 //               }
 //           ]
