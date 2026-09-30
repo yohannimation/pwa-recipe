@@ -80,7 +80,8 @@
   --sidebar-accent: var(--accent);
   --sidebar-accent-foreground: var(--accent-foreground);
   --sidebar-border: var(--border);
-  --sidebar-ring: var(--ring)
+  --sidebar-ring: var(--ring);
+  --shadow: 0 5px 10px oklch(0.395 0.099 52.89 / 30%)
 }
 
 .dark {
