@@ -1,7 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Avatar, AvatarImage, AvatarFallback, AvatarBadge, AvatarGroup, AvatarGroupCount } from '@/components/ui/avatar';
 
-const meta: Meta<typeof Avatar> = {
+// Define a type for the Storybook args that includes our custom preview controls
+type AvatarStoryArgs = React.ComponentProps<typeof Avatar> & {
+  showBadge?: boolean;
+  showImage?: boolean;
+};
+
+const meta: Meta<AvatarStoryArgs> = {
   title: 'UI/Avatar',
   component: Avatar,
   tags: ['autodocs'],
@@ -10,43 +16,73 @@ const meta: Meta<typeof Avatar> = {
       control: 'select',
       options: ['default', 'sm', 'lg'],
     },
+    showBadge: {
+      control: 'boolean',
+      description: 'Afficher l\'état de connection',
+      table: { category: 'Test' },
+    },
+    showImage: {
+      control: 'boolean',
+      description: 'Afficher l\'image de la personne',
+      table: { category: 'Test' },
+    },
   },
+  render: (args) => {
+    const { showBadge, showImage, ...avatarArgs } = args;
+
+    return (
+    <Avatar {...avatarArgs}>
+      { showImage && (
+        <AvatarImage src="https://github.com/shadcn.png" alt="User" />
+      )}
+      <AvatarFallback>CN</AvatarFallback>
+      {showBadge && (
+        <AvatarBadge />
+      )}
+    </Avatar>
+    )
+  }
 };
 
 export default meta;
-type Story = StoryObj<typeof Avatar>;
+type Story = StoryObj<AvatarStoryArgs>;
 
 export const Default: Story = {
-  render: (args) => (
-    <Avatar {...args}>
-      <AvatarImage src="https://github.com/shadcn.png" alt="User" />
-      <AvatarFallback>CN</AvatarFallback>
-    </Avatar>
-  ),
   args: {
     size: 'default',
-  },
+    showBadge: false,
+    showImage: false
+  }
 };
 
 export const WithBadge: Story = {
-  render: (args) => (
-    <Avatar {...args}>
-      <AvatarImage src="https://github.com/shadcn.png" alt="User" />
-      <AvatarFallback>CN</AvatarFallback>
-      <AvatarBadge>Online</AvatarBadge>
-    </Avatar>
-  ),
   args: {
     size: 'default',
-  },
+    showBadge: true,
+    showImage: true
+  }
 };
 
 export const Group: Story = {
+  args: {
+    size: 'default',
+    showBadge: false,
+    showImage: false
+  },
   render: () => (
     <AvatarGroup>
-      <Avatar size="sm"><AvatarImage src="https://github.com/shadcn.png" /><AvatarFallback>CN</AvatarFallback></Avatar>
-      <Avatar size="sm"><AvatarImage src="https://github.com/vercel.png" /><AvatarFallback>V</AvatarFallback></Avatar>
-      <Avatar size="sm"><AvatarImage src="https://github.com/nextjs.png" /><AvatarFallback>N</AvatarFallback></Avatar>
+      <Avatar>
+        <AvatarImage src="https://github.com/shadcn.png" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
+      <Avatar>
+        <AvatarImage src="https://github.com/vercel.png" />
+        <AvatarFallback>V</AvatarFallback>
+      </Avatar>
+      <Avatar>
+        <AvatarImage src="https://github.com/nextjs.png" />
+        <AvatarFallback>N</AvatarFallback>
+      </Avatar>
       <AvatarGroupCount>+2</AvatarGroupCount>
     </AvatarGroup>
   ),
