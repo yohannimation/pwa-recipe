@@ -32,12 +32,10 @@ export const Default: Story = {
             Make changes to your profile here. Click save when you are done.
           </DialogDescription>
         </DialogHeader>
-        <div className="py-4">
-          <p className="text-sm text-muted-foreground">
-            This is where the content of the dialog goes. You can verify your
-            popover colors and rounded corners here.
-          </p>
-        </div>
+        <p>
+          This is where the content of the dialog goes. You can verify your
+          popover colors and rounded corners here.
+        </p>
         <DialogFooter>
           <Button variant="outline">Cancel</Button>
           <Button>Save changes</Button>
