@@ -26,7 +26,6 @@ export const Default: Story = {
         <Button variant="outline">Open Drawer</Button>
       </DrawerTrigger>
       <DrawerContent>
-        <div className="mx-auto w-full max-w-sm">
           <DrawerHeader>
             <DrawerTitle>Drawer Title</DrawerTitle>
             <DrawerDescription>
@@ -34,17 +33,14 @@ export const Default: Story = {
               color and rounded top corners.
             </DrawerDescription>
           </DrawerHeader>
-          <div className="p-4 py-6">
-            <p className="text-sm text-muted-foreground">
-              Drawer content goes here. You can verify the popover styles
-              and spacing.
-            </p>
-          </div>
+          <p>
+            Drawer content goes here. You can verify the popover styles
+            and spacing.
+          </p>
           <DrawerFooter>
             <Button>Confirm</Button>
             <Button variant="outline">Cancel</Button>
           </DrawerFooter>
-        </div>
       </DrawerContent>
     </Drawer>
   ),
