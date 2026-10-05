@@ -46,3 +46,10 @@ export const WithLabel: Story = {
     </div>
   ),
 };
+
+export const Error: Story = {
+  args: {
+    placeholder: 'Invalid input',
+    'aria-invalid': true,
+  }
+}
