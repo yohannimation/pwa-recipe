@@ -58,10 +58,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/* -------------------------------------------------------------------------- */
-/*  Contrôles de base                                                          */
-/* -------------------------------------------------------------------------- */
-
 export const Default: Story = {
   args: { orientation: 'vertical' },
   render: (args) => (
@@ -112,10 +108,6 @@ export const WithSelect: Story = {
   ),
 };
 
-/* -------------------------------------------------------------------------- */
-/*  Orientation horizontale                                                    */
-/* -------------------------------------------------------------------------- */
-
 export const WithCheckbox: Story = {
   render: () => (
     <Field orientation="horizontal">
@@ -131,37 +123,11 @@ export const WithCheckbox: Story = {
   ),
 };
 
-export const Responsive: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "En `responsive`, le champ passe de vertical à horizontal selon la largeur du conteneur. Redimensionne la fenêtre pour voir le changement.",
-      },
-    },
-  },
-  render: () => (
-    <Field orientation="responsive">
-      <FieldContent>
-        <FieldLabel htmlFor="field-responsive">E-mail</FieldLabel>
-        <FieldDescription>Utilisé pour te connecter.</FieldDescription>
-      </FieldContent>
-      <Input id="field-responsive" type="email" placeholder="email@exemple.com" />
-    </Field>
-  ),
-};
-
-/* -------------------------------------------------------------------------- */
-/*  Groupes de choix                                                           */
-/* -------------------------------------------------------------------------- */
-
-
 export const WithCheckboxGroup: Story = {
   render: () => (
     <FieldSet>
       <FieldLegend variant="label">Centres d'intérêt</FieldLegend>
-      <FieldDescription>Sélectionne ce qui t'intéresse.</FieldDescription>
-      <FieldGroup className="gap-3">
+      <FieldGroup>
         {['Design', 'Développement', 'Marketing'].map((label) => {
           const id = `field-interest-${label.toLowerCase()}`;
           return (
@@ -177,7 +143,6 @@ export const WithCheckboxGroup: Story = {
     </FieldSet>
   ),
 };
-
 
 /* -------------------------------------------------------------------------- */
 /*  États                                                                      */
