@@ -144,7 +144,7 @@ export const CopyToClipboard: Story = {
           <InputGroupButton
             aria-label="Copier le lien"
             title="Copier le lien"
-            size="icon-xs"
+            size="icon-sm"
             onClick={handleCopy}
           >
             {copied ? <Check /> : <Copy />}
@@ -169,7 +169,7 @@ export const PasswordToggle: Story = {
         <InputGroupAddon align="inline-end">
           <InputGroupButton
             aria-label={visible ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
-            size="icon-xs"
+            size="icon-sm"
             onClick={() => setVisible((v) => !v)}
           >
             {visible ? <EyeOff /> : <Eye />}
