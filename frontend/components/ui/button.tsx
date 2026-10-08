@@ -8,7 +8,7 @@ const buttonVariants = cva(
     "group/button cursor-pointer inline-flex shrink-0 items-center justify-center border border-2 border-transparent bg-clip-padding whitespace-nowrap transition-all outline-none select-none active:not-aria-[haspopup]:translate-y-px [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
     "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20",
     "focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50",
-    "disabled:pointer-events-none disabled:bg-muted/75",
+    "disabled:pointer-events-none",
   ),
   {
     variants: {
