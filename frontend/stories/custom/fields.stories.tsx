@@ -10,6 +10,12 @@ import { FileField } from '@/components/custom/file-field';
 import { SelectField } from '@/components/custom/select-field';
 import { ComboboxField } from '@/components/custom/combobox-field';
 
+
+const triggerLog = (componentName: string, value: unknown) => {
+  console.log(componentName, value)
+}
+
+
 const meta = {
   title: 'Custom/Field',
   component: Field,
@@ -47,6 +53,7 @@ export const Password: Story = {
     <PasswordField
       label='Password field'
       placeholder='MotDePasse123!'
+      onValueChange={(value: unknown) => triggerLog("PasswordField", value)}
     />
   )
 }
@@ -56,6 +63,7 @@ export const PasswordSingleInvalid: Story = {
       label='Password field error'
       error={'Password incorrect'}
       placeholder='MotDePasse123!'
+      onValueChange={(value: unknown) => triggerLog("PasswordField", value)}
     />
   )
 }
@@ -68,6 +76,7 @@ export const PasswordMultipleInvalid: Story = {
         {message: 'minimum 1 special char'}
       ]}
       placeholder='MotDePasse123!'
+      onValueChange={(value: unknown) => triggerLog("PasswordField", value)}
     />
   )
 }
@@ -77,6 +86,7 @@ export const PasswordDisabled: Story = {
       label='Password field disabled'
       disabled
       placeholder='MotDePasse123!'
+      onValueChange={(value: unknown) => triggerLog("PasswordField", value)}
     />
   )
 }
@@ -91,6 +101,7 @@ export const Number: Story = {
       label="Number field"
       defaultValue={8}
       description="With default value"
+      onValueChange={(value: unknown) => triggerLog("NumberField", value)}
     />
   )
 }
@@ -100,6 +111,7 @@ export const NumberSingleInvalid: Story = {
       label="Number field error"
       defaultValue={100000}
       error={'Range incorrect'}
+      onValueChange={(value: unknown) => triggerLog("NumberField", value)}
     />
   )
 }
@@ -112,6 +124,7 @@ export const NumberMultipleInvalid: Story = {
         {message: 'minimum 0'},
         {message: 'maximum 99999'}
       ]}
+      onValueChange={(value: unknown) => triggerLog("NumberField", value)}
     />
   )
 }
@@ -121,6 +134,7 @@ export const NumberDisabled: Story = {
       label="Number field disabled"
       value={5}
       disabled
+      onValueChange={(value: unknown) => triggerLog("NumberField", value)}
     />
   )
 }
@@ -133,6 +147,7 @@ export const File: Story = {
   render: () => (
     <FileField
       label="File"
+      onValueChange={(value: unknown) => triggerLog("FileField", value)}
     />
   )
 }
@@ -141,6 +156,7 @@ export const FileSingleInvalid: Story = {
     <FileField
       label="File field error"
       error="Format not accepted"
+      onValueChange={(value: unknown) => triggerLog("FileField", value)}
     />
   )
 }
@@ -152,6 +168,7 @@ export const FileMultipleInvalid: Story = {
         {message: 'Format not accepted'},
         {message: 'Size too excessive'}
       ]}
+      onValueChange={(value: unknown) => triggerLog("FileField", value)}
     />
   )
 }
@@ -160,6 +177,7 @@ export const FileDisabled: Story = {
     <FileField
       label="File field disabled"
       disabled
+      onValueChange={(value: unknown) => triggerLog("FileField", value)}
     />
   )
 }
@@ -181,6 +199,7 @@ export const Select: Story = {
         { value: "en", label: "Angleterre" },
         { value: "ch", label: "Suisse", disabled: true },
       ]}
+      onValueChange={(value: unknown) => triggerLog("SelectField", value)}
     />
   )
 }
@@ -199,6 +218,7 @@ export const SelectSingleInvalid: Story = {
       ]}
       defaultValue='us'
       error="Value not accepted"
+      onValueChange={(value: unknown) => triggerLog("SelectField", value)}
     />
   )
 }
@@ -220,6 +240,7 @@ export const SelectMultipleInvalid: Story = {
         {message: 'Value not accepted'},
         {message: 'Error 2'}
       ]}
+      onValueChange={(value: unknown) => triggerLog("SelectField", value)}
     />
   )
 }
@@ -238,6 +259,7 @@ export const SelectDisabled: Story = {
       ]}
       defaultValue='us'
       disabled
+      onValueChange={(value: unknown) => triggerLog("SelectField", value)}
     />
   )
 }
@@ -256,6 +278,7 @@ export const Combobox: Story = {
         { value: "be", label: "Belgique" },
         { value: "ch", label: "Suisse", disabled: true },
       ]}
+      onValueChange={(value: unknown) => triggerLog("ComboboxField", value)}
     />
   )
 }
@@ -270,6 +293,7 @@ export const ComboboxMultiple: Story = {
         { value: "be", label: "Belgique" },
         { value: "ch", label: "Suisse", disabled: true },
       ]}
+      onValueChange={(value: unknown) => triggerLog("ComboboxField", value)}
     />
   )
 }
@@ -284,6 +308,7 @@ export const ComboboxSingleInvalid: Story = {
         { value: "ch", label: "Suisse", disabled: true },
       ]}
       error="Value not accepted"
+      onValueChange={(value: unknown) => triggerLog("ComboboxField", value)}
     />
   )
 }
@@ -301,6 +326,7 @@ export const ComboboxMultipleInvalid: Story = {
         {message: 'Value not accepted'},
         {message: 'Error 2'}
       ]}
+      onValueChange={(value: unknown) => triggerLog("ComboboxField", value)}
     />
   )
 }
@@ -316,6 +342,7 @@ export const ComboboxDisabled: Story = {
         { value: "ch", label: "Suisse", disabled: true },
       ]}
       disabled
+      onValueChange={(value: unknown) => triggerLog("ComboboxField", value)}
     />
   )
 }

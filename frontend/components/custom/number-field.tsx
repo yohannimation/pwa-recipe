@@ -74,7 +74,7 @@ function NumberField({
 
   const update = (next: number | undefined) => {
     if (!isControlled) setInternalValue(next)
-    onValueChange?.(next)
+      onValueChange?.(next)
   }
 
   const stepBy = (direction: 1 | -1) => {

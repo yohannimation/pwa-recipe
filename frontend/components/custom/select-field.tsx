@@ -34,6 +34,7 @@ type SelectFieldProps = Omit<
   description?: string
   id?: string
   className?: string
+  onValueChange?: (value: string) => void
 }
 
 function SelectField({
@@ -44,6 +45,7 @@ function SelectField({
   description,
   id,
   className,
+  onValueChange,
   disabled,
   ...props
 }: SelectFieldProps) {
@@ -56,7 +58,13 @@ function SelectField({
     <Field data-invalid={hasError} data-disabled={disabled}>
       <FieldLabel htmlFor={triggerId}>{label}</FieldLabel>
 
-      <Select disabled={disabled} {...props}>
+      <Select
+      disabled={disabled}
+      onValueChange={(value) => {
+        onValueChange?.(value)
+      }}
+      {...props}
+    >
         <SelectTrigger
           id={triggerId}
           aria-invalid={hasError}

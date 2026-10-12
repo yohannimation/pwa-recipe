@@ -100,7 +100,7 @@ function FileField({
 
   const update = (next: File | null) => {
     if (!isControlled) setInternalFile(next)
-    onValueChange?.(next)
+      onValueChange?.(next)
   }
 
   const openPicker = () => {
@@ -159,7 +159,6 @@ function FileField({
     <Field data-invalid={hasError} data-disabled={disabled}>
       <FieldLabel htmlFor={inputId}>{label}</FieldLabel>
 
-      {/* Vrai input file, masqué : le champ visible ci-dessous le pilote */}
       {/* Real input file hidden. The visible field below control it */}
       <input
         ref={fileInputRef}
