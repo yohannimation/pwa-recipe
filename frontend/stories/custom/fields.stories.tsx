@@ -8,6 +8,7 @@ import { NumberField } from '@/components/custom/number-field';
 import { PasswordField } from '@/components/custom/password-field';
 import { FileField } from '@/components/custom/file-field';
 import { SelectField } from '@/components/custom/select-field';
+import { ComboboxField } from '@/components/custom/combobox-field';
 
 const meta = {
   title: 'Custom/Field',
@@ -236,6 +237,84 @@ export const SelectDisabled: Story = {
         { value: "ch", label: "Suisse", disabled: true },
       ]}
       defaultValue='us'
+      disabled
+    />
+  )
+}
+
+
+/* -------------------------------------------------------------------- */
+/*  Combobox                                                            */
+/* -------------------------------------------------------------------- */
+export const Combobox: Story = {
+  render: () => (
+    <ComboboxField
+      label='Combobox field'
+      showClear
+      options={[
+        { value: "fr", label: "France" },
+        { value: "be", label: "Belgique" },
+        { value: "ch", label: "Suisse", disabled: true },
+      ]}
+    />
+  )
+}
+export const ComboboxMultiple: Story = {
+  render: () => (
+    <ComboboxField
+      label='Combobox multiple value field'
+      showClear
+      multiple
+      options={[
+        { value: "fr", label: "France" },
+        { value: "be", label: "Belgique" },
+        { value: "ch", label: "Suisse", disabled: true },
+      ]}
+    />
+  )
+}
+export const ComboboxSingleInvalid: Story = {
+  render: () => (
+    <ComboboxField
+      label='Combobox field error'
+      showClear
+      options={[
+        { value: "fr", label: "France" },
+        { value: "be", label: "Belgique" },
+        { value: "ch", label: "Suisse", disabled: true },
+      ]}
+      error="Value not accepted"
+    />
+  )
+}
+export const ComboboxMultipleInvalid: Story = {
+  render: () => (
+    <ComboboxField
+      label='Combobox field multi error'
+      showClear
+      options={[
+        { value: "fr", label: "France" },
+        { value: "be", label: "Belgique" },
+        { value: "ch", label: "Suisse", disabled: true },
+      ]}
+      error={[
+        {message: 'Value not accepted'},
+        {message: 'Error 2'}
+      ]}
+    />
+  )
+}
+export const ComboboxDisabled: Story = {
+  render: () => (
+    <ComboboxField
+      label='Combobox field disabled'
+      showClear
+      multiple
+      options={[
+        { value: "fr", label: "France" },
+        { value: "be", label: "Belgique" },
+        { value: "ch", label: "Suisse", disabled: true },
+      ]}
       disabled
     />
   )
