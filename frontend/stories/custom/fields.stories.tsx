@@ -9,6 +9,10 @@ import { PasswordField } from '@/components/custom/password-field';
 import { FileField } from '@/components/custom/file-field';
 import { SelectField } from '@/components/custom/select-field';
 import { ComboboxField } from '@/components/custom/combobox-field';
+import { TextField } from '@/components/custom/text-field';
+
+
+import { Mail } from 'lucide-react';
 
 
 const triggerLog = (componentName: string, value: unknown) => {
@@ -35,14 +39,59 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Text: Story = {
   render: () => (
-    <Field>
-      <FieldLabel htmlFor="field-default">Nom</FieldLabel>
-      <Input id="field-default" placeholder="Jean Dupont" />
-    </Field>
+    <TextField
+      label='Text field'
+      placeholder='Text'
+      onValueChange={(value: unknown) => triggerLog("TextField", value)}
+    />
   ),
 };
+export const TextTypeEmail: Story = {
+  render: () => (
+    <TextField
+      label='Text type email field'
+      type='email'
+      placeholder='Text email'
+      startAddon={<Mail />}
+      onValueChange={(value: unknown) => triggerLog("TextField", value)}
+    />
+  )
+}
+export const TextSingleInvalid: Story = {
+  render: () => (
+    <TextField
+      label='Text field error'
+      error={'Text incorrect'}
+      placeholder='Text'
+      onValueChange={(value: unknown) => triggerLog("TextField", value)}
+    />
+  )
+}
+export const TextMultipleInvalid: Story = {
+  render: () => (
+    <TextField
+      label='Text field multi error'
+      error={[
+        {message: 'minimum 8 char'},
+        {message: 'minimum 1 special char'}
+      ]}
+      placeholder='Text'
+      onValueChange={(value: unknown) => triggerLog("TextField", value)}
+    />
+  )
+}
+export const TextDisabled: Story = {
+  render: () => (
+    <TextField
+      label='Text field disabled'
+      disabled
+      placeholder='Text'
+      onValueChange={(value: unknown) => triggerLog("TextField", value)}
+    />
+  )
+}
 
 
 /* -------------------------------------------------------------------- */
