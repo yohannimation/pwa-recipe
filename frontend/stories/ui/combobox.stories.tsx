@@ -1,6 +1,5 @@
-import * as React from "react"
-import type { Meta, StoryObj } from "@storybook/react"
-
+import * as React from 'react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import {
   Combobox,
   ComboboxChip,
@@ -17,92 +16,80 @@ import {
   ComboboxSeparator,
   ComboboxValue,
   useComboboxAnchor,
-} from "@/components/ui/combobox"
+} from '@/components/ui/combobox';
 
-/* ----------------------------------------------------------------------- */
-/*  Data                                                                   */
-/* ----------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*  Données                                                                   */
+/* -------------------------------------------------------------------------- */
 
-const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"]
+const frameworks = ['Next.js', 'SvelteKit', 'Nuxt.js', 'Remix', 'Astro'];
 
 const groupedFrameworks = [
-  { value: "React", items: ["Next.js", "Remix", "Gatsby"] },
-  { value: "Vue", items: ["Nuxt.js", "VitePress"] },
-  { value: "Autres", items: ["SvelteKit", "Astro", "Qwik"] },
-]
+  { value: 'React', items: ['Next.js', 'Remix', 'Gatsby'] },
+  { value: 'Vue', items: ['Nuxt.js', 'VitePress'] },
+  { value: 'Autres', items: ['SvelteKit', 'Astro', 'Qwik'] },
+];
 
-type Country = { code: string; label: string; continent: string }
+type Country = { code: string; label: string; continent: string };
 
 const countries: Country[] = [
-  { code: "fr", label: "France", continent: "Europe" },
-  { code: "de", label: "Allemagne", continent: "Europe" },
-  { code: "es", label: "Espagne", continent: "Europe" },
-  { code: "jp", label: "Japon", continent: "Asie" },
-  { code: "br", label: "Brésil", continent: "Amérique du Sud" },
-  { code: "ca", label: "Canada", continent: "Amérique du Nord" },
-]
+  { code: 'fr', label: 'France', continent: 'Europe' },
+  { code: 'de', label: 'Allemagne', continent: 'Europe' },
+  { code: 'es', label: 'Espagne', continent: 'Europe' },
+  { code: 'jp', label: 'Japon', continent: 'Asie' },
+  { code: 'br', label: 'Brésil', continent: 'Amérique du Sud' },
+  { code: 'ca', label: 'Canada', continent: 'Amérique du Nord' },
+];
 
 /* -------------------------------------------------------------------------- */
-/*  Helpers de rendu                                                          */
+/*  Meta                                                                      */
 /* -------------------------------------------------------------------------- */
 
-function FrameworkList() {
-  return (
-    <ComboboxContent>
-      <ComboboxEmpty>Aucun résultat.</ComboboxEmpty>
-      <ComboboxList>
-        {(item: string) => (
-          <ComboboxItem key={item} value={item}>
-            {item}
-          </ComboboxItem>
-        )}
-      </ComboboxList>
-    </ComboboxContent>
-  )
-}
+const meta = {
+  title: 'UI/Combobox',
+  component: Combobox,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+    docs: {
+      description: {
+        component:
+          "Champ de recherche avec liste d'options filtrable. Se compose de `ComboboxInput`, `ComboboxContent`, `ComboboxList`, `ComboboxItem`, `ComboboxEmpty`, ainsi que de `ComboboxGroup`, `ComboboxLabel` et `ComboboxSeparator` pour les groupes, et de `ComboboxChips` pour la sélection multiple.",
+      },
+    },
+  },
+  argTypes: {
+    disabled: {
+      control: 'boolean',
+      description: 'Désactive entièrement le combobox',
+    },
+    defaultValue: {
+      control: 'text',
+      description: 'Valeur initiale (mode non contrôlé)',
+    },
+    value: {
+      control: false,
+      description: 'Valeur courante (mode contrôlé)',
+    },
+    onValueChange: {
+      action: 'valueChanged',
+      description: "Appelé quand l'utilisateur choisit une option",
+    },
+  },
+} satisfies Meta<typeof Combobox>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 /* -------------------------------------------------------------------------- */
-/*  Composants dédiés (nécessaires pour utiliser des hooks)                   */
+/*  Basique                                                                   */
 /* -------------------------------------------------------------------------- */
 
-function ControlledExample() {
-  const [value, setValue] = React.useState<string | null>("Next.js")
-
-  return (
-    <div className="flex flex-col gap-3">
-      <Combobox items={frameworks} value={value} onValueChange={setValue}>
-        <ComboboxInput placeholder="Choisir un framework" showClear />
-        <FrameworkList />
-      </Combobox>
-      <p className="text-sm text-muted-foreground">
-        Valeur : <code>{value ?? "null"}</code>
-      </p>
-    </div>
-  )
-}
-
-function MultipleExample({
-  defaultValue = ["Next.js", "Astro"],
-}: {
-  defaultValue?: string[]
-}) {
-  const anchor = useComboboxAnchor()
-
-  return (
-    <Combobox multiple autoHighlight items={frameworks} defaultValue={defaultValue}>
-      <ComboboxChips ref={anchor}>
-        <ComboboxValue>
-          {(values: string[]) => (
-            <React.Fragment>
-              {values.map((value) => (
-                <ComboboxChip key={value}>{value}</ComboboxChip>
-              ))}
-              <ComboboxChipsInput placeholder="Ajouter..." />
-            </React.Fragment>
-          )}
-        </ComboboxValue>
-      </ComboboxChips>
-      <ComboboxContent anchor={anchor}>
+export const Default: Story = {
+  render: (args) => (
+    <Combobox {...args} items={frameworks}>
+      <ComboboxInput placeholder="Choisir un framework" />
+      <ComboboxContent>
         <ComboboxEmpty>Aucun résultat.</ComboboxEmpty>
         <ComboboxList>
           {(item: string) => (
@@ -113,82 +100,186 @@ function MultipleExample({
         </ComboboxList>
       </ComboboxContent>
     </Combobox>
-  )
-}
-
-/* -------------------------------------------------------------------------- */
-/*  Meta                                                                      */
-/* -------------------------------------------------------------------------- */
-
-const meta: Meta<typeof Combobox> = {
-  title: "UI/Combobox",
-  component: Combobox,
-  tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-    docs: { story: { inline: false, iframeHeight: 360 } },
-  },
-  decorators: [
-    (Story) => (
-      <div className="w-72">
-        <Story />
-      </div>
-    ),
-  ],
-}
-
-export default meta
-type Story = StoryObj<typeof Combobox>
-
-/* -------------------------------------------------------------------------- */
-/*  Stories                                                                   */
-/* -------------------------------------------------------------------------- */
-
-export const Default: Story = {
-  render: () => (
-    <Combobox items={frameworks}>
-      <ComboboxInput placeholder="Choisir un framework" />
-      <FrameworkList />
-    </Combobox>
   ),
-}
+};
 
-/** Popup ouvert d'office : pratique pour itérer sur le style du contenu. */
-export const Open: Story = {
-  parameters: { docs: { story: { inline: false, iframeHeight: 360 } } },
-  render: () => (
-    <Combobox items={frameworks} defaultOpen>
-      <ComboboxInput placeholder="Choisir un framework" />
-      <FrameworkList />
-    </Combobox>
-  ),
-}
-
-export const WithClearButton: Story = {
-  render: () => (
-    <Combobox items={frameworks} defaultValue="Remix">
+export const WithDefaultValue: Story = {
+  args: { defaultValue: 'Remix' },
+  render: (args) => (
+    <Combobox {...args} items={frameworks}>
       <ComboboxInput placeholder="Choisir un framework" showClear />
-      <FrameworkList />
+      <ComboboxContent>
+        <ComboboxEmpty>Aucun résultat.</ComboboxEmpty>
+        <ComboboxList>
+          {(item: string) => (
+            <ComboboxItem key={item} value={item}>
+              {item}
+            </ComboboxItem>
+          )}
+        </ComboboxList>
+      </ComboboxContent>
     </Combobox>
   ),
-}
+};
 
-export const WithoutTrigger: Story = {
-  render: () => (
-    <Combobox items={frameworks}>
-      <ComboboxInput placeholder="Rechercher..." showTrigger={false} />
-      <FrameworkList />
+/* -------------------------------------------------------------------------- */
+/*  États                                                                     */
+/* -------------------------------------------------------------------------- */
+
+export const Disabled: Story = {
+  args: { disabled: true, defaultValue: 'Next.js' },
+  render: (args) => (
+    <Combobox {...args} items={frameworks}>
+      <ComboboxInput placeholder="Choisir un framework" />
+      <ComboboxContent>
+        <ComboboxEmpty>Aucun résultat.</ComboboxEmpty>
+        <ComboboxList>
+          {(item: string) => (
+            <ComboboxItem key={item} value={item}>
+              {item}
+            </ComboboxItem>
+          )}
+        </ComboboxList>
+      </ComboboxContent>
     </Combobox>
   ),
-}
+};
 
-export const Controlled: Story = {
-  render: () => <ControlledExample />,
-}
+export const Invalid: Story = {
+  render: (args) => (
+    <Combobox {...args} items={frameworks}>
+      <ComboboxInput placeholder="Choisir un framework" aria-invalid />
+      <ComboboxContent>
+        <ComboboxEmpty>Aucun résultat.</ComboboxEmpty>
+        <ComboboxList>
+          {(item: string) => (
+            <ComboboxItem key={item} value={item}>
+              {item}
+            </ComboboxItem>
+          )}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  ),
+};
 
-export const Groups: Story = {
-  render: () => (
-    <Combobox items={groupedFrameworks}>
+/* -------------------------------------------------------------------------- */
+/*  Spécifiques                                                               */
+/* -------------------------------------------------------------------------- */
+
+export const Multiple: Story = {
+  render: () => {
+    const anchor = useComboboxAnchor();
+    return (
+      <Combobox
+        multiple
+        autoHighlight
+        items={frameworks}
+        defaultValue={['Next.js', 'Astro']}
+      >
+        <ComboboxChips ref={anchor}>
+          <ComboboxValue>
+            {(values: string[]) => (
+              <React.Fragment>
+                {values.map((value) => (
+                  <ComboboxChip key={value}>{value}</ComboboxChip>
+                ))}
+                <ComboboxChipsInput placeholder="Ajouter..." />
+              </React.Fragment>
+            )}
+          </ComboboxValue>
+        </ComboboxChips>
+        <ComboboxContent anchor={anchor}>
+          <ComboboxEmpty>Aucun résultat.</ComboboxEmpty>
+          <ComboboxList>
+            {(item: string) => (
+              <ComboboxItem key={item} value={item}>
+                {item}
+              </ComboboxItem>
+            )}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
+    );
+  },
+};
+
+export const MultipleDisabled: Story = {
+  render: () => {
+    const anchor = useComboboxAnchor();
+    return (
+      <Combobox
+        multiple
+        disabled
+        items={frameworks}
+        defaultValue={['Next.js', 'Astro']}
+      >
+        <ComboboxChips ref={anchor}>
+          <ComboboxValue>
+            {(values: string[]) => (
+              <React.Fragment>
+                {values.map((value) => (
+                  <ComboboxChip key={value}>{value}</ComboboxChip>
+                ))}
+                <ComboboxChipsInput placeholder="Ajouter..." />
+              </React.Fragment>
+            )}
+          </ComboboxValue>
+        </ComboboxChips>
+        <ComboboxContent anchor={anchor}>
+          <ComboboxEmpty>Aucun résultat.</ComboboxEmpty>
+          <ComboboxList>
+            {(item: string) => (
+              <ComboboxItem key={item} value={item}>
+                {item}
+              </ComboboxItem>
+            )}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
+    );
+  },
+};
+
+export const MultipleInvalid: Story = {
+  render: () => {
+    const anchor = useComboboxAnchor();
+    return (
+      <Combobox
+        multiple
+        items={frameworks}
+        defaultValue={['Next.js', 'Astro']}
+      >
+        <ComboboxChips ref={anchor} aria-invalid>
+          <ComboboxValue>
+            {(values: string[]) => (
+              <React.Fragment>
+                {values.map((value) => (
+                  <ComboboxChip key={value}>{value}</ComboboxChip>
+                ))}
+                <ComboboxChipsInput placeholder="Ajouter..." />
+              </React.Fragment>
+            )}
+          </ComboboxValue>
+        </ComboboxChips>
+        <ComboboxContent anchor={anchor}>
+          <ComboboxEmpty>Aucun résultat.</ComboboxEmpty>
+          <ComboboxList>
+            {(item: string) => (
+              <ComboboxItem key={item} value={item}>
+                {item}
+              </ComboboxItem>
+            )}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
+    );
+  },
+};
+
+export const WithGroups: Story = {
+  render: (args) => (
+    <Combobox {...args} items={groupedFrameworks}>
       <ComboboxInput placeholder="Choisir un framework" />
       <ComboboxContent>
         <ComboboxEmpty>Aucun résultat.</ComboboxEmpty>
@@ -210,13 +301,14 @@ export const Groups: Story = {
       </ComboboxContent>
     </Combobox>
   ),
-}
+};
 
 export const WithObjects: Story = {
-  render: () => (
+  render: (args) => (
     <Combobox
+      {...args}
       items={countries}
-      itemToStringValue={(country: Country) => country.label}
+      itemToStringValue={(country: any) => country.label}
     >
       <ComboboxInput placeholder="Choisir un pays" showClear />
       <ComboboxContent>
@@ -236,30 +328,4 @@ export const WithObjects: Story = {
       </ComboboxContent>
     </Combobox>
   ),
-}
-
-export const Multiple: Story = {
-  render: () => <MultipleExample />,
-}
-
-export const MultipleEmpty: Story = {
-  render: () => <MultipleExample defaultValue={[]} />,
-}
-
-export const Disabled: Story = {
-  render: () => (
-    <Combobox items={frameworks} defaultValue="Next.js">
-      <ComboboxInput placeholder="Choisir un framework" disabled />
-      <FrameworkList />
-    </Combobox>
-  ),
-}
-
-export const Invalid: Story = {
-  render: () => (
-    <Combobox items={frameworks}>
-      <ComboboxInput placeholder="Choisir un framework" aria-invalid />
-      <FrameworkList />
-    </Combobox>
-  ),
-}
+};
