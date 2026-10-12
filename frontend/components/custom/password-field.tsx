@@ -24,6 +24,7 @@ type PasswordFieldProps = Omit<
   label: string
   error?: string | { message: string }[]
   description?: string
+  onValueChange?: (value: string) => void
 }
 
 function PasswordField({
@@ -32,6 +33,7 @@ function PasswordField({
   description,
   id,
   disabled,
+  onValueChange,
   ...props
 }: PasswordFieldProps) {
   const generatedId = useId()
@@ -41,7 +43,7 @@ function PasswordField({
   const hasError = Array.isArray(error) ? error.length > 0 : !!error
 
   return (
-    <Field data-invalid={!!error} data-disabled={disabled}>
+    <Field data-invalid={hasError} data-disabled={disabled}>
       <FieldLabel htmlFor={inputId}>{label}</FieldLabel>
 
       <InputGroup>
@@ -49,9 +51,10 @@ function PasswordField({
           id={inputId}
           type={visible ? "text" : "password"}
           autoComplete="current-password"
-          aria-invalid={!!error}
+          aria-invalid={hasError}
           disabled={disabled}
           {...props}
+          onChange={(e) => onValueChange?.(e.target.value)}
         />
         <InputGroupAddon align="inline-end">
           <InputGroupButton

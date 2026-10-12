@@ -127,9 +127,9 @@ function ComboboxField(props: ComboboxFieldProps) {
       <Combobox
         multiple
         {...sharedProps}
-        onValueChange={(selected: ComboboxFieldOption[]) =>
-          onValueChange?.(selected.map((object) => object.value))
-        }
+        onValueChange={(selected: ComboboxFieldOption[]) => {
+          onValueChange?.(selected.map((option) => option.value))
+        }}
         {...valueProps}
       >
         <ComboboxChips
@@ -166,9 +166,9 @@ function ComboboxField(props: ComboboxFieldProps) {
     control = (
       <Combobox
         {...sharedProps}
-        onValueChange={(option: ComboboxFieldOption | null) =>
+        onValueChange={(option: ComboboxFieldOption | null) => {
           onValueChange?.(option?.value ?? null)
-        }
+        }}
         {...valueProps}
       >
         <ComboboxInput
