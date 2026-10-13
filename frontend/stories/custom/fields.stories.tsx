@@ -12,6 +12,7 @@ import { TextField } from '@/components/custom/text-field';
 
 
 import { Mail } from 'lucide-react';
+import { TextareaField } from '@/components/custom/textarea-field';
 
 
 const triggerLog = (componentName: string, value: unknown) => {
@@ -391,6 +392,61 @@ export const ComboboxDisabled: Story = {
       ]}
       disabled
       onValueChange={(value: unknown) => triggerLog("ComboboxField", value)}
+    />
+  )
+}
+
+
+/* -------------------------------------------------------------------- */
+/*  Textarea                                                            */
+/* -------------------------------------------------------------------- */
+export const Textarea: Story = {
+  render: () => (
+    <TextareaField
+      label="Textarea field"
+      placeholder="Textarea"
+      description="Soyez le plus précis"
+      onValueChange={(value: unknown) => triggerLog("TextareaField", value)}
+    />
+  )
+}
+export const TextareaSingleInvalid: Story = {
+  render: () => (
+    <TextareaField
+      label="Textarea field error"
+      placeholder="Textarea"
+      defaultValue={"Voici une valeur par défaut"}
+      error="Length excessive"
+      showCount
+      maxLength={5}
+      onValueChange={(value: unknown) => triggerLog("TextareaField", value)}
+    />
+  )
+}
+export const TextareaMultipleInvalid: Story = {
+  render: () => (
+    <TextareaField
+      label="Textarea field multi error"
+      placeholder="Textarea"
+      defaultValue={"Voici une valeur par défaut"}
+      error={[
+        {message: 'Length excessive'},
+        {message: 'Error 2'}
+      ]}
+      showCount
+      maxLength={5}
+      onValueChange={(value: unknown) => triggerLog("TextareaField", value)}
+    />
+  )
+}
+export const TextareaDisabled: Story = {
+  render: () => (
+    <TextareaField
+      label="Textarea field disabled"
+      placeholder="Textarea"
+      description="Soyez le plus précis"
+      disabled
+      onValueChange={(value: unknown) => triggerLog("TextareaField", value)}
     />
   )
 }
