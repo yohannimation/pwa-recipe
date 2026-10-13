@@ -13,6 +13,7 @@ import { TextField } from '@/components/custom/text-field';
 
 import { Mail } from 'lucide-react';
 import { TextareaField } from '@/components/custom/textarea-field';
+import { CheckboxField } from '@/components/custom/checkbox-field';
 
 
 const triggerLog = (componentName: string, value: unknown) => {
@@ -447,6 +448,49 @@ export const TextareaDisabled: Story = {
       description="Soyez le plus précis"
       disabled
       onValueChange={(value: unknown) => triggerLog("TextareaField", value)}
+    />
+  )
+}
+
+
+/* -------------------------------------------------------------------- */
+/*  Checkbox                                                            */
+/* -------------------------------------------------------------------- */
+export const Checkbox: Story = {
+  render: () => (
+    <CheckboxField
+      label="Checkbox field"
+      onCheckedChange={(value: unknown) => triggerLog("CheckboxField", value)}
+    />
+  )
+}
+export const CheckboxSingleInvalid: Story = {
+  render: () => (
+    <CheckboxField
+      label="Checkbox field error"
+      error="This field is required"
+      onCheckedChange={(value: unknown) => triggerLog("CheckboxField", value)}
+    />
+  )
+}
+export const CheckboxMultipleInvalid: Story = {
+  render: () => (
+    <CheckboxField
+      label="Checkbox field multi error"
+      error={[
+        {message: 'This field is required'},
+        {message: 'Error 2'}
+      ]}
+      onCheckedChange={(value: unknown) => triggerLog("CheckboxField", value)}
+    />
+  )
+}
+export const CheckboxDisabled: Story = {
+  render: () => (
+    <CheckboxField
+      label="Checkbox field disabled"
+      onCheckedChange={(value: unknown) => triggerLog("CheckboxField", value)}
+      disabled
     />
   )
 }
