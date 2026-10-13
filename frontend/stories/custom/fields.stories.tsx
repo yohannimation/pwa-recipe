@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Field, FieldLabel } from '@/components/ui/field';
-import { Input } from '@/components/ui/input';
+import { Field } from '@/components/ui/field';
 
 // Custom fields
 import { NumberField } from '@/components/custom/number-field';
