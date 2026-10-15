@@ -25,10 +25,12 @@ const buttonVariants = cva(
           "bg-destructive text-white hover:bg-destructive/50 focus-visible:border-destructive/40 focus-visible:ring-destructive/20",
         link:
           "text-secondary underline underline-offset-6 hover:text-secondary-foreground hover:underline-offset-4",
+        icon:
+          "bg-muted text-white border-white ring-4 ring-inset ring-white shadow-[var(--shadow)] hover:bg-primary",
       },
       size: {
         default:
-          " px-4 py-1.5 gap-1.5 rounded-lg has-data-[icon=inline-start]:pl-3.5 has-data-[icon=inline-start]:gap-2 has-data-[icon=inline-end]:pr-3.5 has-data-[icon=inline-end]:gap-2",
+          "px-4 py-1.5 gap-1.5 rounded-lg has-data-[icon=inline-start]:pl-3.5 has-data-[icon=inline-start]:gap-2 has-data-[icon=inline-end]:pr-3.5 has-data-[icon=inline-end]:gap-2",
         xs:
           "px-2.5 py-1.25 gap-1.5 text-xs rounded-full has-data-[icon=inline-start]:pl-1.75 has-data-[icon=inline-end]:pr-2 [&_svg:not([class*='size-'])]:size-3",
         sm:
@@ -36,13 +38,13 @@ const buttonVariants = cva(
         lg:
           "px-5 py-2 gap-2.5 text-lg rounded-xl has-data-[icon=inline-start]:pl-4.5 has-data-[icon=inline-end]:pr-4.5 [&_svg:not([class*='size-'])]:size-4.5",
         icon:
-          "p-2 [&_svg:not([class*='size-'])]:size-5",
+          "p-2 rounded-lg [&_svg:not([class*='size-'])]:size-5",
         "icon-xs":
-          "p-1.5 [&_svg:not([class*='size-'])]:size-3.5",
+          "p-1.5 rounded-full [&_svg:not([class*='size-'])]:size-3.5",
         "icon-sm":
-          "p-1.75 [&_svg:not([class*='size-'])]:size-4",
+          "p-1.75 rounded-md [&_svg:not([class*='size-'])]:size-4",
         "icon-lg":
-          "p-2.5 [&_svg:not([class*='size-'])]:size-6",
+          "p-2.5 rounded-xl [&_svg:not([class*='size-'])]:size-6",
       },
     },
     defaultVariants: {
