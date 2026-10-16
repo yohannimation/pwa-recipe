@@ -1,33 +1,33 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
+import type { Meta, StoryObj } from '@storybook/react'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Label } from '@/components/ui/label'
 
 const meta: Meta<typeof Checkbox> = {
   title: 'UI/Checkbox',
   component: Checkbox,
   tags: ['autodocs'],
-};
+}
 
-export default meta;
-type Story = StoryObj<typeof Checkbox>;
+export default meta
+type Story = StoryObj<typeof Checkbox>
 
 export const Default: Story = {
   args: {
     disabled: false,
   },
-};
+}
 
 export const Checked: Story = {
   args: {
     defaultChecked: true,
   },
-};
+}
 
 export const Disabled: Story = {
   args: {
     disabled: true,
   },
-};
+}
 
 export const WithLabel: Story = {
   render: (args) => (
@@ -36,4 +36,4 @@ export const WithLabel: Story = {
       <Label htmlFor="terms">Accept terms and conditions</Label>
     </div>
   ),
-};
+}

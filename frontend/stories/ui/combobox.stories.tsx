@@ -1,5 +1,5 @@
-import * as React from 'react';
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import * as React from 'react'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import {
   Combobox,
   ComboboxChip,
@@ -16,21 +16,21 @@ import {
   ComboboxSeparator,
   ComboboxValue,
   useComboboxAnchor,
-} from '@/components/ui/combobox';
+} from '@/components/ui/combobox'
 
 /* -------------------------------------------------------------------------- */
 /*  Données                                                                   */
 /* -------------------------------------------------------------------------- */
 
-const frameworks = ['Next.js', 'SvelteKit', 'Nuxt.js', 'Remix', 'Astro'];
+const frameworks = ['Next.js', 'SvelteKit', 'Nuxt.js', 'Remix', 'Astro']
 
 const groupedFrameworks = [
   { value: 'React', items: ['Next.js', 'Remix', 'Gatsby'] },
   { value: 'Vue', items: ['Nuxt.js', 'VitePress'] },
   { value: 'Autres', items: ['SvelteKit', 'Astro', 'Qwik'] },
-];
+]
 
-type Country = { code: string; label: string; continent: string };
+type Country = { code: string; label: string; continent: string }
 
 const countries: Country[] = [
   { code: 'fr', label: 'France', continent: 'Europe' },
@@ -39,7 +39,7 @@ const countries: Country[] = [
   { code: 'jp', label: 'Japon', continent: 'Asie' },
   { code: 'br', label: 'Brésil', continent: 'Amérique du Sud' },
   { code: 'ca', label: 'Canada', continent: 'Amérique du Nord' },
-];
+]
 
 /* -------------------------------------------------------------------------- */
 /*  Meta                                                                      */
@@ -76,10 +76,10 @@ const meta = {
       description: "Appelé quand l'utilisateur choisit une option",
     },
   },
-} satisfies Meta<typeof Combobox>;
+} satisfies Meta<typeof Combobox>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 /* -------------------------------------------------------------------------- */
 /*  Basique                                                                   */
@@ -101,7 +101,7 @@ export const Default: Story = {
       </ComboboxContent>
     </Combobox>
   ),
-};
+}
 
 export const WithDefaultValue: Story = {
   args: { defaultValue: 'Remix' },
@@ -120,7 +120,7 @@ export const WithDefaultValue: Story = {
       </ComboboxContent>
     </Combobox>
   ),
-};
+}
 
 /* -------------------------------------------------------------------------- */
 /*  États                                                                     */
@@ -143,7 +143,7 @@ export const Disabled: Story = {
       </ComboboxContent>
     </Combobox>
   ),
-};
+}
 
 export const Invalid: Story = {
   render: (args) => (
@@ -161,7 +161,7 @@ export const Invalid: Story = {
       </ComboboxContent>
     </Combobox>
   ),
-};
+}
 
 /* -------------------------------------------------------------------------- */
 /*  Spécifiques                                                               */
@@ -169,7 +169,7 @@ export const Invalid: Story = {
 
 export const Multiple: Story = {
   render: () => {
-    const anchor = useComboboxAnchor();
+    const anchor = useComboboxAnchor()
     return (
       <Combobox
         multiple
@@ -200,13 +200,13 @@ export const Multiple: Story = {
           </ComboboxList>
         </ComboboxContent>
       </Combobox>
-    );
+    )
   },
-};
+}
 
 export const MultipleDisabled: Story = {
   render: () => {
-    const anchor = useComboboxAnchor();
+    const anchor = useComboboxAnchor()
     return (
       <Combobox
         multiple
@@ -237,19 +237,15 @@ export const MultipleDisabled: Story = {
           </ComboboxList>
         </ComboboxContent>
       </Combobox>
-    );
+    )
   },
-};
+}
 
 export const MultipleInvalid: Story = {
   render: () => {
-    const anchor = useComboboxAnchor();
+    const anchor = useComboboxAnchor()
     return (
-      <Combobox
-        multiple
-        items={frameworks}
-        defaultValue={['Next.js', 'Astro']}
-      >
+      <Combobox multiple items={frameworks} defaultValue={['Next.js', 'Astro']}>
         <ComboboxChips ref={anchor} aria-invalid>
           <ComboboxValue>
             {(values: string[]) => (
@@ -273,9 +269,9 @@ export const MultipleInvalid: Story = {
           </ComboboxList>
         </ComboboxContent>
       </Combobox>
-    );
+    )
   },
-};
+}
 
 export const WithGroups: Story = {
   render: (args) => (
@@ -301,7 +297,7 @@ export const WithGroups: Story = {
       </ComboboxContent>
     </Combobox>
   ),
-};
+}
 
 export const WithObjects: Story = {
   render: (args) => (
@@ -318,7 +314,7 @@ export const WithObjects: Story = {
             <ComboboxItem key={country.code} value={country}>
               <div className="flex flex-col">
                 <span>{country.label}</span>
-                <span className="text-xs text-muted-foreground">
+                <span className="text-muted-foreground text-xs">
                   {country.continent}
                 </span>
               </div>
@@ -328,4 +324,4 @@ export const WithObjects: Story = {
       </ComboboxContent>
     </Combobox>
   ),
-};
+}

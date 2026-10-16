@@ -1,5 +1,5 @@
-import * as React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import * as React from 'react'
+import type { Meta, StoryObj } from '@storybook/react'
 import {
   AtSign,
   Check,
@@ -9,7 +9,7 @@ import {
   Loader2,
   Mail,
   Search,
-} from 'lucide-react';
+} from 'lucide-react'
 import {
   InputGroup,
   InputGroupAddon,
@@ -17,7 +17,7 @@ import {
   InputGroupInput,
   InputGroupText,
   InputGroupTextarea,
-} from '@/components/ui/input-group';
+} from '@/components/ui/input-group'
 
 const meta = {
   title: 'UI/InputGroup',
@@ -39,10 +39,10 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof InputGroup>;
+} satisfies Meta<typeof InputGroup>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 /* -------------------------------------------------------------------------- */
 /*  Addons simples                                                             */
@@ -57,7 +57,7 @@ export const Default: Story = {
       <InputGroupInput type="email" placeholder="email@exemple.com" />
     </InputGroup>
   ),
-};
+}
 
 export const IconAtEnd: Story = {
   render: () => (
@@ -68,7 +68,7 @@ export const IconAtEnd: Story = {
       </InputGroupAddon>
     </InputGroup>
   ),
-};
+}
 
 export const WithTextPrefixAndSuffix: Story = {
   render: () => (
@@ -94,7 +94,7 @@ export const WithTextPrefixAndSuffix: Story = {
       </InputGroup>
     </div>
   ),
-};
+}
 
 export const Username: Story = {
   render: () => (
@@ -105,7 +105,7 @@ export const Username: Story = {
       <InputGroupInput placeholder="nom_utilisateur" />
     </InputGroup>
   ),
-};
+}
 
 /* -------------------------------------------------------------------------- */
 /*  Avec boutons                                                               */
@@ -120,22 +120,22 @@ export const WithButton: Story = {
       </InputGroupAddon>
     </InputGroup>
   ),
-};
+}
 
 export const CopyToClipboard: Story = {
   render: function CopyRender() {
-    const [copied, setCopied] = React.useState(false);
-    const value = 'https://exemple.com/invitation/abc123';
+    const [copied, setCopied] = React.useState(false)
+    const value = 'https://exemple.com/invitation/abc123'
 
     const handleCopy = async () => {
       try {
-        await navigator.clipboard.writeText(value);
+        await navigator.clipboard.writeText(value)
       } catch {
         // clipboard indisponible (iframe, permissions…) : on garde le feedback visuel
       }
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    };
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1500)
+    }
 
     return (
       <InputGroup>
@@ -151,13 +151,13 @@ export const CopyToClipboard: Story = {
           </InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
-    );
+    )
   },
-};
+}
 
 export const PasswordToggle: Story = {
   render: function PasswordRender() {
-    const [visible, setVisible] = React.useState(false);
+    const [visible, setVisible] = React.useState(false)
 
     return (
       <InputGroup>
@@ -168,7 +168,9 @@ export const PasswordToggle: Story = {
         />
         <InputGroupAddon align="inline-end">
           <InputGroupButton
-            aria-label={visible ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+            aria-label={
+              visible ? 'Masquer le mot de passe' : 'Afficher le mot de passe'
+            }
             size="icon-sm"
             onClick={() => setVisible((v) => !v)}
           >
@@ -176,20 +178,23 @@ export const PasswordToggle: Story = {
           </InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
-    );
+    )
   },
-};
+}
 
 export const Loading: Story = {
   render: () => (
     <InputGroup>
-      <InputGroupInput placeholder="Recherche en cours…" defaultValue="storybook" />
+      <InputGroupInput
+        placeholder="Recherche en cours…"
+        defaultValue="storybook"
+      />
       <InputGroupAddon align="inline-end">
         <Loader2 className="animate-spin" />
       </InputGroupAddon>
     </InputGroup>
   ),
-};
+}
 
 /* -------------------------------------------------------------------------- */
 /*  Textarea et addons en bloc                                                 */
@@ -197,8 +202,8 @@ export const Loading: Story = {
 
 export const WithTextarea: Story = {
   render: function TextareaRender() {
-    const [text, setText] = React.useState('');
-    const max = 200;
+    const [text, setText] = React.useState('')
+    const max = 200
 
     return (
       <InputGroup>
@@ -218,9 +223,9 @@ export const WithTextarea: Story = {
           </InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
-    );
+    )
   },
-};
+}
 
 export const BlockStartAddon: Story = {
   render: () => (
@@ -231,7 +236,7 @@ export const BlockStartAddon: Story = {
       <InputGroupTextarea placeholder="Ajoute un commentaire…" rows={3} />
     </InputGroup>
   ),
-};
+}
 
 /* -------------------------------------------------------------------------- */
 /*  États                                                                      */
@@ -246,7 +251,7 @@ export const Disabled: Story = {
       <InputGroupInput placeholder="Désactivé" disabled />
     </InputGroup>
   ),
-};
+}
 
 export const Invalid: Story = {
   render: () => (
@@ -264,7 +269,7 @@ export const Invalid: Story = {
       <p className="text-destructive text-sm">Adresse e-mail invalide.</p>
     </div>
   ),
-};
+}
 
 /* -------------------------------------------------------------------------- */
 /*  Vue d'ensemble                                                             */
@@ -302,4 +307,4 @@ export const AllVariants: Story = {
       </InputGroup>
     </div>
   ),
-};
+}

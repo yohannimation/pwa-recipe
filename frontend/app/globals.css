@@ -1,6 +1,6 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -81,7 +81,7 @@
   --sidebar-accent-foreground: var(--accent-foreground);
   --sidebar-border: var(--border);
   --sidebar-ring: var(--ring);
-  --shadow: 0 5px 10px oklch(0.395 0.099 52.89 / 30%)
+  --shadow: 0 5px 10px oklch(0.395 0.099 52.89 / 30%);
 }
 
 .dark {

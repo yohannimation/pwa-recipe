@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react'
 
 // Custom fields
-import { Cta } from '@/components/custom/cta';
+import { Cta } from '@/components/custom/cta'
 
-import { ArrowRight, Mail } from 'lucide-react';
+import { ArrowRight, Mail } from 'lucide-react'
 
 const meta = {
   title: 'Custom/Cta',
@@ -14,27 +14,29 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div className='w-80'>
+      <div className="w-80">
         <Story />
       </div>
     ),
   ],
-} satisfies Meta<typeof Cta>;
+} satisfies Meta<typeof Cta>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    text: "More",
+    text: 'More',
     icon: <ArrowRight />,
-    href: 'https://google.com'
+    href: 'https://google.com',
   },
-};
+}
 export const OnClick: Story = {
   args: {
-    text: "Contact me",
+    text: 'Contact me',
     icon: <Mail />,
-    onClick: () => { console.log("clicked") },
+    onClick: () => {
+      console.log('clicked')
+    },
   },
-};
+}

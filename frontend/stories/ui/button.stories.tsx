@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from '@/components/ui/button';
+import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from '@/components/ui/button'
 
-import { Mail } from 'lucide-react';
-import { Spinner } from '@/components/ui/spinner';
+import { Mail } from 'lucide-react'
+import { Spinner } from '@/components/ui/spinner'
 
 // Define a type for the Storybook args that includes our custom preview controls
 type ButtonStoryArgs = React.ComponentProps<typeof Button> & {
-  showIcon?: boolean;
-  showText?: boolean;
-  isLoading?: boolean;
-};
+  showIcon?: boolean
+  showText?: boolean
+  isLoading?: boolean
+}
 
 const meta: Meta<ButtonStoryArgs> = {
   title: 'UI/Button',
@@ -18,18 +18,35 @@ const meta: Meta<ButtonStoryArgs> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'outline', 'secondary', 'ghost', 'destructive', 'link', 'icon'],
+      options: [
+        'default',
+        'outline',
+        'secondary',
+        'ghost',
+        'destructive',
+        'link',
+        'icon',
+      ],
     },
     size: {
       control: 'select',
-      options: ['default', 'xs', 'sm', 'lg', 'icon', 'icon-xs', 'icon-sm', 'icon-lg'],
+      options: [
+        'default',
+        'xs',
+        'sm',
+        'lg',
+        'icon',
+        'icon-xs',
+        'icon-sm',
+        'icon-lg',
+      ],
     },
     disabled: {
       control: 'boolean',
     },
     showIcon: {
       control: 'boolean',
-      description: 'Afficher l\'icône',
+      description: "Afficher l'icône",
       table: { category: 'Test' },
     },
     showText: {
@@ -44,24 +61,22 @@ const meta: Meta<ButtonStoryArgs> = {
     },
   },
   render: (args) => {
-    const { showIcon, showText, isLoading, ...buttonArgs } = args;
+    const { showIcon, showText, isLoading, ...buttonArgs } = args
 
     return (
       <Button {...buttonArgs} disabled={args.disabled || isLoading}>
-        {isLoading && (
-          <Spinner data-icon="inline-start" />
+        {isLoading && <Spinner data-icon="inline-start" />}
+        {showText && (
+          <span className="truncate">{buttonArgs.children || 'Button'}</span>
         )}
-        {showText && <span className="truncate">{buttonArgs.children || 'Button'}</span>}
-        {!isLoading && showIcon && (
-          <Mail data-icon="inline-end" />
-        )}
+        {!isLoading && showIcon && <Mail data-icon="inline-end" />}
       </Button>
-    );
+    )
   },
-};
+}
 
-export default meta;
-type Story = StoryObj<ButtonStoryArgs>;
+export default meta
+type Story = StoryObj<ButtonStoryArgs>
 
 export const Default: Story = {
   args: {
@@ -72,7 +87,7 @@ export const Default: Story = {
     showText: true,
     isLoading: false,
   },
-};
+}
 
 export const Outline: Story = {
   args: {
@@ -80,7 +95,7 @@ export const Outline: Story = {
     variant: 'outline',
     showText: true,
   },
-};
+}
 
 export const Secondary: Story = {
   args: {
@@ -88,7 +103,7 @@ export const Secondary: Story = {
     variant: 'secondary',
     showText: true,
   },
-};
+}
 
 export const Ghost: Story = {
   args: {
@@ -96,7 +111,7 @@ export const Ghost: Story = {
     variant: 'ghost',
     showText: true,
   },
-};
+}
 
 export const Destructive: Story = {
   args: {
@@ -104,7 +119,7 @@ export const Destructive: Story = {
     variant: 'destructive',
     showText: true,
   },
-};
+}
 
 export const Link: Story = {
   args: {
@@ -112,7 +127,7 @@ export const Link: Story = {
     variant: 'link',
     showText: true,
   },
-};
+}
 
 export const Small: Story = {
   args: {
@@ -120,7 +135,7 @@ export const Small: Story = {
     size: 'sm',
     showText: true,
   },
-};
+}
 
 export const ExtraSmall: Story = {
   args: {
@@ -128,7 +143,7 @@ export const ExtraSmall: Story = {
     size: 'xs',
     showText: true,
   },
-};
+}
 
 export const Large: Story = {
   args: {
@@ -136,7 +151,7 @@ export const Large: Story = {
     size: 'lg',
     showText: true,
   },
-};
+}
 
 export const Disabled: Story = {
   args: {
@@ -144,7 +159,7 @@ export const Disabled: Story = {
     disabled: true,
     showText: true,
   },
-};
+}
 
 export const WithIcon: Story = {
   args: {
@@ -152,7 +167,7 @@ export const WithIcon: Story = {
     showText: true,
     children: 'Email Me',
   },
-};
+}
 
 export const Loading: Story = {
   args: {
@@ -160,4 +175,4 @@ export const Loading: Story = {
     showText: true,
     children: 'Chargement...',
   },
-};
+}

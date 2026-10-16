@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import {
   ChangeEvent,
@@ -8,29 +8,35 @@ import {
   useEffect,
   useId,
   useRef,
-  useState
-} from "react"
-import { cn } from "@/lib/utils"
+  useState,
+} from 'react'
+import { cn } from '@/lib/utils'
 
 import {
   Field,
   FieldDescription,
   FieldError,
   FieldLabel,
-} from "@/components/ui/field"
+} from '@/components/ui/field'
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@/components/ui/input-group"
+} from '@/components/ui/input-group'
 
-import { File as FileIcon, ImageIcon, X } from "lucide-react"
-import Image from "next/image"
+import { File as FileIcon, ImageIcon, X } from 'lucide-react'
+import Image from 'next/image'
 
 type FileFieldProps = Omit<
   ComponentProps<typeof InputGroupInput>,
-  "type" | "value" | "defaultValue" | "onChange" | "readOnly" | "accept" | "name"
+  | 'type'
+  | 'value'
+  | 'defaultValue'
+  | 'onChange'
+  | 'readOnly'
+  | 'accept'
+  | 'name'
 > & {
   label: string
   error?: string | { message: string }[]
@@ -45,7 +51,7 @@ type FileFieldProps = Omit<
 function isFileAccepted(file: File, accept?: string) {
   if (!accept) return true
   const tokens = accept
-    .split(",")
+    .split(',')
     .map((t) => t.trim().toLowerCase())
     .filter(Boolean)
   if (tokens.length === 0) return true
@@ -54,8 +60,8 @@ function isFileAccepted(file: File, accept?: string) {
   const type = file.type.toLowerCase()
 
   return tokens.some((token) => {
-    if (token.startsWith(".")) return name.endsWith(token)
-    if (token.endsWith("/*")) return type.startsWith(token.slice(0, -1))
+    if (token.startsWith('.')) return name.endsWith(token)
+    if (token.endsWith('/*')) return type.startsWith(token.slice(0, -1))
     return type === token
   })
 }
@@ -70,7 +76,7 @@ function FileField({
   onValueChange,
   accept,
   name,
-  placeholder = "Glisser/déposer une image ou sélectionner depuis votre ordinateur",
+  placeholder = 'Glisser/déposer une image ou sélectionner depuis votre ordinateur',
   className,
   ...props
 }: FileFieldProps) {
@@ -87,7 +93,7 @@ function FileField({
   // Preview URL, uniquely for images
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   useEffect(() => {
-    if (!file || !file.type.startsWith("image/")) {
+    if (!file || !file.type.startsWith('image/')) {
       setPreviewUrl(null)
       return
     }
@@ -100,7 +106,7 @@ function FileField({
 
   const update = (next: File | null) => {
     if (!isControlled) setInternalFile(next)
-      onValueChange?.(next)
+    onValueChange?.(next)
   }
 
   const openPicker = () => {
@@ -113,7 +119,7 @@ function FileField({
 
   const handleClear = () => {
     // Resets the native input so the same file can be selected again
-    if (fileInputRef.current) fileInputRef.current.value = ""
+    if (fileInputRef.current) fileInputRef.current.value = ''
     update(null)
   }
 
@@ -121,7 +127,7 @@ function FileField({
     if (disabled) return
 
     e.preventDefault()
-    e.dataTransfer.dropEffect = "copy"
+    e.dataTransfer.dropEffect = 'copy'
     setIsDragging(true)
   }
 
@@ -149,7 +155,7 @@ function FileField({
   }
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" || e.key === " ") {
+    if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
       openPicker()
     }
@@ -179,8 +185,8 @@ function FileField({
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         className={cn(
-          "border-2 border-dashed h-[6rem] placeholder:text-foreground",
-          isDragging && "border-ring ring-ring/50 bg-accent/50 ring-[3px]"
+          'placeholder:text-foreground h-[6rem] border-2 border-dashed',
+          isDragging && 'border-ring ring-ring/50 bg-accent/50 ring-[3px]'
         )}
       >
         <InputGroupAddon align="inline-start">
@@ -204,13 +210,13 @@ function FileField({
         <InputGroupInput
           id={inputId}
           readOnly
-          value={file?.name ?? ""}
-          placeholder={isDragging ? "Déposez le fichier ici" : placeholder}
+          value={file?.name ?? ''}
+          placeholder={isDragging ? 'Déposez le fichier ici' : placeholder}
           aria-invalid={hasError}
           disabled={disabled}
           onClick={openPicker}
           onKeyDown={handleKeyDown}
-          className={cn("h-full cursor-pointer", className)}
+          className={cn('h-full cursor-pointer', className)}
           {...props}
         />
 

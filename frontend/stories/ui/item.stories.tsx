@@ -1,7 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Item, ItemMedia, ItemContent, ItemTitle, ItemDescription, ItemActions, ItemGroup, ItemSeparator } from '@/components/ui/item';
-import { Button } from '@/components/ui/button';
-import { User } from 'lucide-react';
+import type { Meta, StoryObj } from '@storybook/react'
+import {
+  Item,
+  ItemMedia,
+  ItemContent,
+  ItemTitle,
+  ItemDescription,
+  ItemActions,
+  ItemGroup,
+  ItemSeparator,
+} from '@/components/ui/item'
+import { Button } from '@/components/ui/button'
+import { User } from 'lucide-react'
 
 const meta: Meta<typeof Item> = {
   title: 'UI/Item',
@@ -17,10 +26,10 @@ const meta: Meta<typeof Item> = {
       options: ['default', 'sm', 'xs'],
     },
   },
-};
+}
 
-export default meta;
-type Story = StoryObj<typeof Item>;
+export default meta
+type Story = StoryObj<typeof Item>
 
 export const Default: Story = {
   render: (args) => (
@@ -30,10 +39,14 @@ export const Default: Story = {
       </ItemMedia>
       <ItemContent>
         <ItemTitle>User Profile</ItemTitle>
-        <ItemDescription>Manage your account settings and preferences.</ItemDescription>
+        <ItemDescription>
+          Manage your account settings and preferences.
+        </ItemDescription>
       </ItemContent>
       <ItemActions>
-        <Button size="sm" variant="ghost">Edit</Button>
+        <Button size="sm" variant="ghost">
+          Edit
+        </Button>
       </ItemActions>
     </Item>
   ),
@@ -41,7 +54,7 @@ export const Default: Story = {
     variant: 'default',
     size: 'default',
   },
-};
+}
 
 export const ImageItem: Story = {
   render: (args) => (
@@ -54,7 +67,9 @@ export const ImageItem: Story = {
         <ItemDescription>Creator of the UI library.</ItemDescription>
       </ItemContent>
       <ItemActions>
-        <Button size="sm" variant="outline">View</Button>
+        <Button size="sm" variant="outline">
+          View
+        </Button>
       </ItemActions>
     </Item>
   ),
@@ -62,13 +77,15 @@ export const ImageItem: Story = {
     variant: 'outline',
     size: 'default',
   },
-};
+}
 
 export const List: Story = {
   render: () => (
     <ItemGroup>
       <Item variant="muted">
-        <ItemMedia variant="icon"><User className="size-4" /></ItemMedia>
+        <ItemMedia variant="icon">
+          <User className="size-4" />
+        </ItemMedia>
         <ItemContent>
           <ItemTitle>Item 1</ItemTitle>
           <ItemDescription>Description 1</ItemDescription>
@@ -76,7 +93,9 @@ export const List: Story = {
       </Item>
       <ItemSeparator />
       <Item>
-        <ItemMedia variant="icon"><User className="size-4" /></ItemMedia>
+        <ItemMedia variant="icon">
+          <User className="size-4" />
+        </ItemMedia>
         <ItemContent>
           <ItemTitle>Item 2</ItemTitle>
           <ItemDescription>Description 2</ItemDescription>
@@ -84,4 +103,4 @@ export const List: Story = {
       </Item>
     </ItemGroup>
   ),
-};
+}

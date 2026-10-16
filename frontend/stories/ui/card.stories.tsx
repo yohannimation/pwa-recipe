@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react'
 
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardAction,
@@ -10,9 +10,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from '@/components/ui/card'
 
-import { Heart, MapPin } from 'lucide-react';
+import { Heart, MapPin } from 'lucide-react'
 
 const meta: Meta<typeof Card> = {
   title: 'UI/Card',
@@ -30,17 +30,17 @@ const meta: Meta<typeof Card> = {
   args: {
     size: 'default',
   },
-};
+}
 
-export default meta;
-type Story = StoryObj<typeof Card>;
+export default meta
+type Story = StoryObj<typeof Card>
 
 // Common width to be legible
-const base = 'w-full max-w-sm';
+const base = 'w-full max-w-sm'
 
 // Images
 const img = (seed: string, w = 800, h = 450) =>
-  `https://picsum.photos/seed/${seed}/${w}/${h}`;
+  `https://picsum.photos/seed/${seed}/${w}/${h}`
 
 /* -------------------------------------------------------------------- */
 /*  Basics                                                              */
@@ -53,18 +53,20 @@ export const FullCard: Story = {
         <CardTitle>Card Title</CardTitle>
         <CardDescription>This is a description for the card.</CardDescription>
         <CardAction>
-          <Button variant={"ghost"} size={"xs"}>Action</Button>
+          <Button variant={'ghost'} size={'xs'}>
+            Action
+          </Button>
         </CardAction>
       </CardHeader>
       <CardContent>
         <p>Main content of the card goes here. You can put anything inside.</p>
       </CardContent>
       <CardFooter>
-        <span className="text-xs text-muted-foreground">Footer info</span>
+        <span className="text-muted-foreground text-xs">Footer info</span>
       </CardFooter>
     </Card>
   ),
-};
+}
 
 export const SmallCard: Story = {
   args: { size: 'sm' },
@@ -78,7 +80,7 @@ export const SmallCard: Story = {
       </CardContent>
     </Card>
   ),
-};
+}
 
 export const ContentOnly: Story = {
   render: (args) => (
@@ -88,7 +90,7 @@ export const ContentOnly: Story = {
       </CardContent>
     </Card>
   ),
-};
+}
 
 /* -------------------------------------------------------------------------- */
 /*  With images                                                               */
@@ -96,7 +98,7 @@ export const ContentOnly: Story = {
 
 export const WithImageHeader: Story = {
   render: (args) => (
-    <Card {...args} className={`${base} pt-0 overflow-hidden`}>
+    <Card {...args} className={`${base} overflow-hidden pt-0`}>
       <img
         src={img('mountain')}
         alt="Paysage de montagne"
@@ -104,22 +106,29 @@ export const WithImageHeader: Story = {
       />
       <CardHeader>
         <CardTitle>Aventure en montagne</CardTitle>
-        <CardDescription>Une randonnée de 3 jours dans les Pyrénées.</CardDescription>
+        <CardDescription>
+          Une randonnée de 3 jours dans les Pyrénées.
+        </CardDescription>
       </CardHeader>
       <CardContent>
-        <p>Découvrez des sentiers préservés, des lacs d'altitude et des panoramas à couper le souffle.</p>
+        <p>
+          Découvrez des sentiers préservés, des lacs d'altitude et des panoramas
+          à couper le souffle.
+        </p>
       </CardContent>
       <CardFooter className="justify-between">
-        <span className="text-xs text-muted-foreground">3 jours · Niveau moyen</span>
+        <span className="text-muted-foreground text-xs">
+          3 jours · Niveau moyen
+        </span>
         <Button size="sm">Réserver</Button>
       </CardFooter>
     </Card>
   ),
-};
+}
 
 export const ImageWithBadge: Story = {
   render: (args) => (
-    <Card {...args} className={`${base} pt-0 overflow-hidden`}>
+    <Card {...args} className={`${base} overflow-hidden pt-0`}>
       <div className="relative">
         <img
           src={img('coast')}
@@ -148,11 +157,11 @@ export const ImageWithBadge: Story = {
       </CardFooter>
     </Card>
   ),
-};
+}
 
 export const ImageFooter: Story = {
   render: (args) => (
-    <Card {...args} className={`${base} pb-0 overflow-hidden`}>
+    <Card {...args} className={`${base} overflow-hidden pb-0`}>
       <CardHeader>
         <CardTitle>Galerie</CardTitle>
         <CardDescription>L'image se place en bas de la carte.</CardDescription>
@@ -164,7 +173,7 @@ export const ImageFooter: Story = {
       />
     </Card>
   ),
-};
+}
 
 export const ImageOverlay: Story = {
   render: (args) => (
@@ -186,11 +195,14 @@ export const ImageOverlay: Story = {
       </div>
     </Card>
   ),
-};
+}
 
 export const HorizontalWithImage: Story = {
   render: (args) => (
-    <Card {...args} className="w-full max-w-xl flex-row gap-0 overflow-hidden py-0">
+    <Card
+      {...args}
+      className="w-full max-w-xl flex-row gap-0 overflow-hidden py-0"
+    >
       <img
         src={img('forest', 400, 400)}
         alt="Forêt"
@@ -202,15 +214,19 @@ export const HorizontalWithImage: Story = {
           <CardDescription>Escalade et randonnée</CardDescription>
         </CardHeader>
         <CardContent>
-          <p className="text-sm">Un terrain de jeu unique à une heure de Paris.</p>
+          <p className="text-sm">
+            Un terrain de jeu unique à une heure de Paris.
+          </p>
         </CardContent>
         <CardFooter>
-          <Button size="sm" variant="outline">En savoir plus</Button>
+          <Button size="sm" variant="outline">
+            En savoir plus
+          </Button>
         </CardFooter>
       </div>
     </Card>
   ),
-};
+}
 
 /* -------------------------------------------------------------------------- */
 /*  Cas d'usage                                                               */
@@ -221,7 +237,7 @@ export const CardGrid: Story = {
   render: (args) => (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {['alpha', 'bravo', 'charlie'].map((seed, i) => (
-        <Card key={seed} {...args} className="pt-0 overflow-hidden">
+        <Card key={seed} {...args} className="overflow-hidden pt-0">
           <img
             src={img(seed)}
             alt={`Illustration ${i + 1}`}
@@ -232,10 +248,12 @@ export const CardGrid: Story = {
             <CardDescription>Description courte de la carte.</CardDescription>
           </CardHeader>
           <CardFooter>
-            <Button size="sm" variant="outline">Voir</Button>
+            <Button size="sm" variant="outline">
+              Voir
+            </Button>
           </CardFooter>
         </Card>
       ))}
     </div>
   ),
-};
+}

@@ -1,26 +1,26 @@
-"use client"
+'use client'
 
-import { useId, useState } from "react"
-import { cn } from "@/lib/utils"
+import { useId, useState } from 'react'
+import { cn } from '@/lib/utils'
 
 import {
   Field,
   FieldDescription,
   FieldError,
   FieldLabel,
-} from "@/components/ui/field"
+} from '@/components/ui/field'
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@/components/ui/input-group"
+} from '@/components/ui/input-group'
 
-import { Minus, Plus } from "lucide-react"
+import { Minus, Plus } from 'lucide-react'
 
 type NumberFieldProps = Omit<
   React.ComponentProps<typeof InputGroupInput>,
-  "type" | "value" | "defaultValue" | "onChange" | "min" | "max" | "step"
+  'type' | 'value' | 'defaultValue' | 'onChange' | 'min' | 'max' | 'step'
 > & {
   label: string
   error?: string | { message: string }[]
@@ -34,7 +34,7 @@ type NumberFieldProps = Omit<
 }
 
 function getPrecision(number: number) {
-  const [, decimals = ""] = String(number).split(".")
+  const [, decimals = ''] = String(number).split('.')
   return decimals.length
 }
 
@@ -74,7 +74,7 @@ function NumberField({
 
   const update = (next: number | undefined) => {
     if (!isControlled) setInternalValue(next)
-      onValueChange?.(next)
+    onValueChange?.(next)
   }
 
   const stepBy = (direction: 1 | -1) => {
@@ -85,7 +85,7 @@ function NumberField({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value
-    if (raw === "") return update(undefined)
+    if (raw === '') return update(undefined)
     const parsed = Number(raw)
     if (!Number.isNaN(parsed)) update(parsed)
   }
@@ -98,7 +98,11 @@ function NumberField({
   }
 
   return (
-    <Field data-invalid={hasError} data-disabled={disabled} className="max-w-[12rem]">
+    <Field
+      data-invalid={hasError}
+      data-disabled={disabled}
+      className="max-w-[12rem]"
+    >
       <FieldLabel htmlFor={inputId}>{label}</FieldLabel>
 
       <InputGroup>
@@ -106,7 +110,7 @@ function NumberField({
           <InputGroupButton
             type="button"
             size="icon-sm"
-            variant={hasError ? "destructive" : "ghost"}
+            variant={hasError ? 'destructive' : 'ghost'}
             aria-label="Diminuer"
             disabled={disabled}
             onClick={() => stepBy(-1)}
@@ -119,7 +123,7 @@ function NumberField({
           id={inputId}
           type="number"
           inputMode="decimal"
-          value={current ?? ""}
+          value={current ?? ''}
           min={min}
           max={max}
           step={step}
@@ -127,10 +131,7 @@ function NumberField({
           disabled={disabled}
           onChange={handleChange}
           onBlur={handleBlur}
-          className={cn(
-            "text-center",
-            className
-          )}
+          className={cn('text-center', className)}
           {...props}
         />
 
@@ -138,7 +139,7 @@ function NumberField({
           <InputGroupButton
             type="button"
             size="icon-sm"
-            variant={hasError ? "destructive" : "ghost"}
+            variant={hasError ? 'destructive' : 'ghost'}
             aria-label="Augmenter"
             disabled={disabled}
             onClick={() => stepBy(1)}

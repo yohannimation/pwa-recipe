@@ -1,21 +1,21 @@
-"use client"
+'use client'
 
-import * as React from "react"
+import * as React from 'react'
 
 import {
   Field,
   FieldDescription,
   FieldError,
   FieldLabel,
-} from "@/components/ui/field"
+} from '@/components/ui/field'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { cn } from "@/lib/utils"
+} from '@/components/ui/select'
+import { cn } from '@/lib/utils'
 
 type SelectFieldOption = {
   value: string
@@ -25,7 +25,7 @@ type SelectFieldOption = {
 
 type SelectFieldProps = Omit<
   React.ComponentProps<typeof Select>,
-  "children"
+  'children'
 > & {
   label: string
   options: SelectFieldOption[]
@@ -40,7 +40,7 @@ type SelectFieldProps = Omit<
 function SelectField({
   label,
   options,
-  placeholder = "Sélectionner une option",
+  placeholder = 'Sélectionner une option',
   error,
   description,
   id,
@@ -59,16 +59,16 @@ function SelectField({
       <FieldLabel htmlFor={triggerId}>{label}</FieldLabel>
 
       <Select
-      disabled={disabled}
-      onValueChange={(value) => {
-        onValueChange?.(value)
-      }}
-      {...props}
-    >
+        disabled={disabled}
+        onValueChange={(value) => {
+          onValueChange?.(value)
+        }}
+        {...props}
+      >
         <SelectTrigger
           id={triggerId}
           aria-invalid={hasError}
-          className={cn("w-full", className)}
+          className={cn('w-full', className)}
         >
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
