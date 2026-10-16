@@ -1,5 +1,6 @@
-"use client"
+'use client'
 
+import { ReactNode, useId } from 'react'
 
 import {
   Combobox,
@@ -13,14 +14,13 @@ import {
   ComboboxList,
   ComboboxValue,
   useComboboxAnchor,
-} from "@/components/ui/combobox"
+} from '@/components/ui/combobox'
 import {
   Field,
   FieldDescription,
   FieldError,
   FieldLabel,
-} from "@/components/ui/field"
-import { ReactNode, useId } from "react"
+} from '@/components/ui/field'
 
 type ComboboxFieldOption = {
   value: string
@@ -62,8 +62,8 @@ function ComboboxField(props: ComboboxFieldProps) {
   const {
     label,
     options,
-    placeholder = "Rechercher une option",
-    emptyText = "Aucun résultat",
+    placeholder = 'Rechercher une option',
+    emptyText = 'Aucun résultat',
     showClear = false,
     error,
     description,

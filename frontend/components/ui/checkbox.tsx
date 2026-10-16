@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import { cn } from "cn"
-import { Checkbox as CheckboxPrimitive } from "radix-ui"
-import { CheckIcon } from "lucide-react"
+import * as React from 'react'
+import { cn } from 'cn'
+import { Checkbox as CheckboxPrimitive } from 'radix-ui'
+import { CheckIcon } from 'lucide-react'
 
 function Checkbox({
   className,
@@ -13,9 +13,9 @@ function Checkbox({
     <CheckboxPrimitive.Root
       data-slot="checkbox"
       className={cn(
-        "peer relative flex size-4 shrink-0 items-center justify-center rounded-xs border-2 border-input transition-colors outline-none group-has-disabled/field:opacity-50 group-has-[:focus-visible]/field-label:ring-0 group-has-[:focus-visible]/field-label:not-data-checked:border-input after:absolute after:-inset-x-3 after:-inset-y-2  disabled:cursor-not-allowed disabled:opacity-50  dark:bg-input/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground group-has-[:focus-visible]/field-label:data-checked:border-primary dark:data-checked:bg-primary",
-        "focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50",
-        "aria-invalid:border-destructive aria-invalid:focus-visible:ring-3 aria-invalid:focus-visible:ring-destructive/20 aria-invalid:aria-checked:border-destructive aria-invalid:aria-checked:bg-destructive",
+        'peer border-input group-has-[:focus-visible]/field-label:not-data-checked:border-input dark:bg-input/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground group-has-[:focus-visible]/field-label:data-checked:border-primary dark:data-checked:bg-primary relative flex size-4 shrink-0 items-center justify-center rounded-xs border-2 transition-colors outline-none group-has-disabled/field:opacity-50 group-has-[:focus-visible]/field-label:ring-0 after:absolute after:-inset-x-3 after:-inset-y-2 disabled:cursor-not-allowed disabled:opacity-50',
+        'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-3',
+        'aria-invalid:border-destructive aria-invalid:focus-visible:ring-destructive/20 aria-invalid:aria-checked:border-destructive aria-invalid:aria-checked:bg-destructive aria-invalid:focus-visible:ring-3',
         className
       )}
       {...props}

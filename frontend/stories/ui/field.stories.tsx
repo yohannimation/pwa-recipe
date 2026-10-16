@@ -1,16 +1,16 @@
-import * as React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Input } from '@/components/ui/input';
+import * as React from 'react'
+import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Input } from '@/components/ui/input'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
+} from '@/components/ui/select'
+import { Textarea } from '@/components/ui/textarea'
 import {
   Field,
   FieldContent,
@@ -21,7 +21,7 @@ import {
   FieldLegend,
   FieldSeparator,
   FieldSet,
-} from '@/components/ui/field';
+} from '@/components/ui/field'
 
 // NB : tous les `id` sont uniques à travers le fichier, car la page autodocs
 // affiche toutes les stories en même temps dans le même document.
@@ -53,10 +53,10 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof Field>;
+} satisfies Meta<typeof Field>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: { orientation: 'vertical' },
@@ -66,7 +66,7 @@ export const Default: Story = {
       <Input id="field-default" placeholder="Jean Dupont" />
     </Field>
   ),
-};
+}
 
 export const WithDescription: Story = {
   render: () => (
@@ -78,7 +78,7 @@ export const WithDescription: Story = {
       </FieldDescription>
     </Field>
   ),
-};
+}
 
 export const WithTextarea: Story = {
   render: () => (
@@ -88,7 +88,7 @@ export const WithTextarea: Story = {
       <FieldDescription>Quelques lignes suffisent.</FieldDescription>
     </Field>
   ),
-};
+}
 
 export const WithSelect: Story = {
   render: () => (
@@ -106,7 +106,7 @@ export const WithSelect: Story = {
       </Select>
     </Field>
   ),
-};
+}
 
 export const WithCheckbox: Story = {
   render: () => (
@@ -121,7 +121,7 @@ export const WithCheckbox: Story = {
       </FieldContent>
     </Field>
   ),
-};
+}
 
 export const WithCheckboxGroup: Story = {
   render: () => (
@@ -129,7 +129,7 @@ export const WithCheckboxGroup: Story = {
       <FieldLegend variant="label">Centres d'intérêt</FieldLegend>
       <FieldGroup>
         {['Design', 'Développement', 'Marketing'].map((label) => {
-          const id = `field-interest-${label.toLowerCase()}`;
+          const id = `field-interest-${label.toLowerCase()}`
           return (
             <Field key={id} orientation="horizontal">
               <Checkbox id={id} />
@@ -137,12 +137,12 @@ export const WithCheckboxGroup: Story = {
                 {label}
               </FieldLabel>
             </Field>
-          );
+          )
         })}
       </FieldGroup>
     </FieldSet>
   ),
-};
+}
 
 /* -------------------------------------------------------------------------- */
 /*  États                                                                      */
@@ -161,7 +161,7 @@ export const Invalid: Story = {
       <FieldError>Adresse e-mail invalide.</FieldError>
     </Field>
   ),
-};
+}
 
 export const WithMultipleErrors: Story = {
   render: () => (
@@ -181,7 +181,7 @@ export const WithMultipleErrors: Story = {
       />
     </Field>
   ),
-};
+}
 
 export const Disabled: Story = {
   render: () => (
@@ -191,7 +191,7 @@ export const Disabled: Story = {
       <FieldDescription>Ce champ ne peut pas être modifié.</FieldDescription>
     </Field>
   ),
-};
+}
 
 /* -------------------------------------------------------------------------- */
 /*  Formulaire complet                                                         */
@@ -200,14 +200,14 @@ export const Disabled: Story = {
 export const FullForm: Story = {
   parameters: { layout: 'padded' },
   render: function FormRender() {
-    const [submitted, setSubmitted] = React.useState(false);
+    const [submitted, setSubmitted] = React.useState(false)
 
     return (
       <form
         className="mx-auto w-full max-w-md"
         onSubmit={(e) => {
-          e.preventDefault();
-          setSubmitted(true);
+          e.preventDefault()
+          setSubmitted(true)
         }}
       >
         <FieldGroup>
@@ -219,7 +219,11 @@ export const FullForm: Story = {
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="field-form-name">Nom complet</FieldLabel>
-                <Input id="field-form-name" placeholder="Jean Dupont" required />
+                <Input
+                  id="field-form-name"
+                  placeholder="Jean Dupont"
+                  required
+                />
               </Field>
               <Field>
                 <FieldLabel htmlFor="field-form-email">E-mail</FieldLabel>
@@ -229,26 +233,33 @@ export const FullForm: Story = {
                   placeholder="email@exemple.com"
                   required
                 />
-                <FieldDescription>Nous ne le partagerons jamais.</FieldDescription>
+                <FieldDescription>
+                  Nous ne le partagerons jamais.
+                </FieldDescription>
               </Field>
             </FieldGroup>
           </FieldSet>
 
           <FieldSeparator>Préférences</FieldSeparator>
 
-
           <Field orientation="horizontal">
             <Button type="submit">Enregistrer</Button>
-            <Button type="reset" variant="outline" onClick={() => setSubmitted(false)}>
+            <Button
+              type="reset"
+              variant="outline"
+              onClick={() => setSubmitted(false)}
+            >
               Annuler
             </Button>
           </Field>
 
           {submitted && (
-            <p className="text-muted-foreground text-sm">Formulaire envoyé ✅</p>
+            <p className="text-muted-foreground text-sm">
+              Formulaire envoyé ✅
+            </p>
           )}
         </FieldGroup>
       </form>
-    );
+    )
   },
-};
+}

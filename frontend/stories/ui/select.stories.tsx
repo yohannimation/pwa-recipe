@@ -1,5 +1,5 @@
-import * as React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import * as React from 'react'
+import type { Meta, StoryObj } from '@storybook/react'
 import {
   Select,
   SelectContent,
@@ -9,7 +9,7 @@ import {
   SelectSeparator,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/components/ui/select'
 
 const meta = {
   title: 'UI/Select',
@@ -20,7 +20,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Liste déroulante basée sur Radix UI Select. Se compose de `SelectTrigger`, `SelectValue`, `SelectContent`, `SelectItem`, `SelectGroup`, `SelectLabel` et `SelectSeparator`.",
+          'Liste déroulante basée sur Radix UI Select. Se compose de `SelectTrigger`, `SelectValue`, `SelectContent`, `SelectItem`, `SelectGroup`, `SelectLabel` et `SelectSeparator`.',
       },
     },
   },
@@ -42,10 +42,10 @@ const meta = {
       description: "Appelé quand l'utilisateur choisit une option",
     },
   },
-} satisfies Meta<typeof Select>;
+} satisfies Meta<typeof Select>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 /* -------------------------------------------------------------------------- */
 /*  Basique                                                                    */
@@ -69,7 +69,7 @@ export const Default: Story = {
       </SelectContent>
     </Select>
   ),
-};
+}
 
 export const WithDefaultValue: Story = {
   args: { defaultValue: 'banana' },
@@ -85,7 +85,7 @@ export const WithDefaultValue: Story = {
       </SelectContent>
     </Select>
   ),
-};
+}
 
 /* -------------------------------------------------------------------------- */
 /*  Tailles                                                                    */
@@ -107,7 +107,7 @@ export const Sizes: Story = {
       ))}
     </div>
   ),
-};
+}
 
 /* -------------------------------------------------------------------------- */
 /*  États                                                                      */
@@ -125,7 +125,7 @@ export const Disabled: Story = {
       </SelectContent>
     </Select>
   ),
-};
+}
 
 export const WithDisabledItems: Story = {
   render: (args) => (
@@ -142,7 +142,7 @@ export const WithDisabledItems: Story = {
       </SelectContent>
     </Select>
   ),
-};
+}
 
 export const Invalid: Story = {
   render: (args) => (
@@ -156,7 +156,7 @@ export const Invalid: Story = {
       </SelectContent>
     </Select>
   ),
-};
+}
 
 /* -------------------------------------------------------------------------- */
 /*  Contenu                                                                    */
@@ -183,7 +183,7 @@ export const WithGroups: Story = {
       </SelectContent>
     </Select>
   ),
-};
+}
 
 const TIMEZONES = [
   'Europe/Paris',
@@ -200,7 +200,7 @@ const TIMEZONES = [
   'Asia/Dubai',
   'Australia/Sydney',
   'Pacific/Auckland',
-];
+]
 
 export const LongList: Story = {
   render: (args) => (
@@ -217,4 +217,4 @@ export const LongList: Story = {
       </SelectContent>
     </Select>
   ),
-};
+}

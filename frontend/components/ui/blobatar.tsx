@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import type * as React from "react";
+import type * as React from 'react'
 /**
  * Aliased, because the component this file exports is also called `Blobatar` —
  * `BlobatarAvatar` says blob-avatar-avatar, and the name a shadcn project wants
@@ -11,10 +11,10 @@ import type * as React from "react";
  * `name` *and* a `src` and renders an Avatar that falls back to the picture. A
  * project that imports both wants the aliasing to be deliberate.
  */
-import { Blobatar as Generated } from "@blobatar/react";
-import "blobatar/motion.css";
+import { Blobatar as Generated } from '@blobatar/react'
+import 'blobatar/motion.css'
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 /**
  * Distributive, and that is not pedantry. The generated blobatar's props are a
@@ -22,20 +22,25 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
  * `Omit` over a union collapses it to the keys the arms share, silently
  * dropping `animate` and everything gated behind it.
  */
-type DistributiveOmit<T, K extends PropertyKey> = T extends unknown ? Omit<T, K> : never;
+type DistributiveOmit<T, K extends PropertyKey> = T extends unknown
+  ? Omit<T, K>
+  : never
 
-type GeneratedOptions = DistributiveOmit<React.ComponentProps<typeof Generated>, "name">;
+type GeneratedOptions = DistributiveOmit<
+  React.ComponentProps<typeof Generated>,
+  'name'
+>
 
 export type BlobatarProps = React.ComponentProps<typeof Avatar> & {
   /**
    * Who the avatar is for. A username, a display name, an email, an id — any
    * string, and the same string always renders the same blobatar.
    */
-  name: string;
+  name: string
   /** A real profile image, when there is one. The blobatar is the fallback. */
-  src?: string;
+  src?: string
   /** Defaults to `name`. Ignored when there is no `src`. */
-  alt?: string;
+  alt?: string
   /**
    * Anything else the blobatar takes: `palette`, `animate`, `expression`, …
    *
@@ -44,10 +49,16 @@ export type BlobatarProps = React.ComponentProps<typeof Avatar> & {
    * default when the name is already written next to the avatar, and the wrong
    * one when the avatar stands alone. Pass `{ title: name }` in that case.
    */
-  blobatar?: GeneratedOptions;
-};
+  blobatar?: GeneratedOptions
+}
 
-export function Blobatar({ name, src, alt, blobatar, ...props }: BlobatarProps) {
+export function Blobatar({
+  name,
+  src,
+  alt,
+  blobatar,
+  ...props
+}: BlobatarProps) {
   return (
     <Avatar {...props}>
       {src ? <AvatarImage src={src} alt={alt ?? name} /> : null}
@@ -66,5 +77,5 @@ export function Blobatar({ name, src, alt, blobatar, ...props }: BlobatarProps) 
         <Generated {...blobatar} name={name} className="size-full" />
       </AvatarFallback>
     </Avatar>
-  );
+  )
 }

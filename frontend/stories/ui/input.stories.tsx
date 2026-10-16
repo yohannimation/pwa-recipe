@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import type { Meta, StoryObj } from '@storybook/react'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 
 const meta: Meta<typeof Input> = {
   title: 'UI/Input',
@@ -12,31 +12,31 @@ const meta: Meta<typeof Input> = {
       options: ['text', 'password', 'email', 'number'],
     },
   },
-};
+}
 
-export default meta;
-type Story = StoryObj<typeof Input>;
+export default meta
+type Story = StoryObj<typeof Input>
 
 export const Default: Story = {
   args: {
     placeholder: 'Enter text...',
     type: 'text',
   },
-};
+}
 
 export const Password: Story = {
   args: {
     placeholder: 'Enter password...',
     type: 'password',
   },
-};
+}
 
 export const Disabled: Story = {
   args: {
     placeholder: 'Disabled input',
     disabled: true,
   },
-};
+}
 
 export const WithLabel: Story = {
   render: (args) => (
@@ -45,11 +45,11 @@ export const WithLabel: Story = {
       <Input {...args} />
     </div>
   ),
-};
+}
 
 export const Error: Story = {
   args: {
     placeholder: 'Invalid input',
     'aria-invalid': true,
-  }
+  },
 }

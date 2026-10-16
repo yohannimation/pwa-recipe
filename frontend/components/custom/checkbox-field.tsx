@@ -1,19 +1,19 @@
-"use client"
+'use client'
 
-import { ReactNode, useId } from "react"
+import { ReactNode, useId } from 'react'
 
-import { Checkbox } from "@/components/ui/checkbox"
+import { Checkbox } from '@/components/ui/checkbox'
 import {
   Field,
   FieldContent,
   FieldDescription,
   FieldError,
   FieldLabel,
-} from "@/components/ui/field"
+} from '@/components/ui/field'
 
 type CheckboxFieldProps = Omit<
   React.ComponentProps<typeof Checkbox>,
-  "onCheckedChange"
+  'onCheckedChange'
 > & {
   /** Text ou JSX (ex: text with link) */
   label: ReactNode
@@ -47,7 +47,7 @@ function CheckboxField({
         aria-invalid={hasError}
         disabled={disabled}
         {...props}
-        onCheckedChange={(checked: boolean | "indeterminate") =>
+        onCheckedChange={(checked: boolean | 'indeterminate') =>
           onCheckedChange?.(checked === true)
         }
       />

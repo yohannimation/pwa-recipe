@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
-import { useState } from 'react';
+} from '@/components/ui/accordion'
+import { useState } from 'react'
 
 /* -------------------------------------------------------------------------- */
 /*  Data                                                                      */
@@ -29,7 +29,7 @@ const faq = [
     answer:
       "Oui. L'ouverture et la fermeture sont animées par défaut, et l'animation peut être désactivée.",
   },
-];
+]
 
 /* -------------------------------------------------------------------------- */
 /*  Helpers de rendu                                                          */
@@ -50,7 +50,7 @@ function FaqItems({ disabledValue }: { disabledValue?: string }) {
         </AccordionItem>
       ))}
     </>
-  );
+  )
 }
 
 /* -------------------------------------------------------------------------- */
@@ -58,7 +58,7 @@ function FaqItems({ disabledValue }: { disabledValue?: string }) {
 /* -------------------------------------------------------------------------- */
 
 function ControlledExample() {
-  const [value, setValue] = useState<string>('item-2');
+  const [value, setValue] = useState<string>('item-2')
 
   return (
     <div className="flex flex-col gap-3">
@@ -71,11 +71,11 @@ function ControlledExample() {
       >
         <FaqItems />
       </Accordion>
-      <p className="text-sm text-muted-foreground">
+      <p className="text-muted-foreground text-sm">
         Valeur : <code>{value || '""'}</code>
       </p>
     </div>
-  );
+  )
 }
 
 /* -------------------------------------------------------------------------- */
@@ -134,10 +134,10 @@ const meta = {
       description: "Appelé quand l'utilisateur ouvre ou ferme un item",
     },
   },
-} satisfies Meta<typeof Accordion>;
+} satisfies Meta<typeof Accordion>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 /* -------------------------------------------------------------------------- */
 /*  Basique                                                                   */
@@ -149,7 +149,7 @@ export const Default: Story = {
       <FaqItems />
     </Accordion>
   ),
-};
+}
 
 export const WithDefaultValue: Story = {
   args: { type: 'single', defaultValue: 'item-2' },
@@ -158,7 +158,7 @@ export const WithDefaultValue: Story = {
       <FaqItems />
     </Accordion>
   ),
-};
+}
 
 export const NotCollapsible: Story = {
   args: { type: 'single', collapsible: false, defaultValue: 'item-1' },
@@ -167,7 +167,7 @@ export const NotCollapsible: Story = {
       <FaqItems />
     </Accordion>
   ),
-};
+}
 
 export const Multiple: Story = {
   args: { type: 'multiple', defaultValue: ['item-1', 'item-3'] },
@@ -176,11 +176,11 @@ export const Multiple: Story = {
       <FaqItems />
     </Accordion>
   ),
-};
+}
 
 export const Controlled: Story = {
   render: () => <ControlledExample />,
-};
+}
 
 /* -------------------------------------------------------------------------- */
 /*  États                                                                     */
@@ -193,7 +193,7 @@ export const Disabled: Story = {
       <FaqItems />
     </Accordion>
   ),
-};
+}
 
 export const WithDisabledItem: Story = {
   render: (args) => (
@@ -201,7 +201,7 @@ export const WithDisabledItem: Story = {
       <FaqItems disabledValue="item-2" />
     </Accordion>
   ),
-};
+}
 
 /* -------------------------------------------------------------------------- */
 /*  Contenu                                                                   */
@@ -229,4 +229,4 @@ export const WithRichContent: Story = {
       </AccordionItem>
     </Accordion>
   ),
-};
+}

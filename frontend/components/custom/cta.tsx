@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
 
 type CtaProps = {
   text: string
@@ -11,29 +11,23 @@ type CtaProps = {
   onClick?: () => void
 }
 
-function Cta({
-  text,
-  icon,
-  href,
-  target,
-  onClick
-}: CtaProps) {
+function Cta({ text, icon, href, target, onClick }: CtaProps) {
   const className =
-    "group relative h-auto rounded-none border-none bg-transparent pl-5 pr-3.75 py-2 hover:bg-transparent"
+    'group relative h-auto rounded-none border-none bg-transparent pl-5 pr-3.75 py-2 hover:bg-transparent'
 
   const content = (
     <>
       {/* Background */}
       <span
         aria-hidden
-        className="absolute inset-y-0 right-0 w-11.5 group-hover:w-full bg-primary group-hover:bg-secondary rounded-xl duration-300 ease-out"
+        className="bg-primary group-hover:bg-secondary absolute inset-y-0 right-0 w-11.5 rounded-xl duration-300 ease-out group-hover:w-full"
       />
 
-      <span className="relative text-foreground group-hover:text-white transition-colors duration-150">
-        { text }
+      <span className="text-foreground relative transition-colors duration-150 group-hover:text-white">
+        {text}
       </span>
-      <span className="relative ml-4 group-hover:ml-2 text-white z-1 transition-[margin] duration-200">
-        { icon }
+      <span className="relative z-1 ml-4 text-white transition-[margin] duration-200 group-hover:ml-2">
+        {icon}
       </span>
     </>
   )
@@ -42,7 +36,9 @@ function Cta({
   if (href) {
     return (
       <Button variant="ghost" size="lg" className={className} asChild>
-        <Link href={href} target={target} title={text}>{content}</Link>
+        <Link href={href} target={target} title={text}>
+          {content}
+        </Link>
       </Button>
     )
   }

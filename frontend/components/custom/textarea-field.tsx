@@ -1,19 +1,19 @@
-"use client"
+'use client'
 
-import { ChangeEventHandler, useId, useState } from "react"
+import { ChangeEventHandler, useId, useState } from 'react'
 
 import {
   Field,
   FieldDescription,
   FieldError,
   FieldLabel,
-} from "@/components/ui/field"
+} from '@/components/ui/field'
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
   InputGroupTextarea,
-} from "@/components/ui/input-group"
+} from '@/components/ui/input-group'
 
 type TextareaFieldProps = React.ComponentProps<typeof InputGroupTextarea> & {
   label: string
@@ -43,7 +43,7 @@ function TextareaField({
   const hasError = Array.isArray(error) ? error.length > 0 : !!error
 
   const [internalLength, setInternalLength] = useState(
-    String(defaultValue ?? "").length
+    String(defaultValue ?? '').length
   )
   const length = value !== undefined ? String(value).length : internalLength
 

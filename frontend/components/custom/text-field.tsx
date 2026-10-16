@@ -1,27 +1,27 @@
-"use client"
+'use client'
 
-import { ReactNode, useId } from "react"
+import { ReactNode, useId } from 'react'
 
 import {
   Field,
   FieldDescription,
   FieldError,
   FieldLabel,
-} from "@/components/ui/field"
+} from '@/components/ui/field'
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from "@/components/ui/input-group"
+} from '@/components/ui/input-group'
 
 type TextFieldProps = Omit<
   React.ComponentProps<typeof InputGroupInput>,
-  "type"
+  'type'
 > & {
   label: string
   error?: string | { message: string }[]
   description?: string
-  type?: "text" | "email" | "tel" | "url" | "search"
+  type?: 'text' | 'email' | 'tel' | 'url' | 'search'
   startAddon?: ReactNode
   endAddon?: ReactNode
   onValueChange?: (value: string) => void
@@ -33,7 +33,7 @@ function TextField({
   description,
   id,
   disabled,
-  type = "text",
+  type = 'text',
   startAddon,
   endAddon,
   onValueChange,
@@ -49,10 +49,9 @@ function TextField({
       <FieldLabel htmlFor={inputId}>{label}</FieldLabel>
 
       <InputGroup>
-        {startAddon ? 
+        {startAddon ? (
           <InputGroupAddon align="inline-start">{startAddon}</InputGroupAddon>
-          : null
-        }
+        ) : null}
 
         <InputGroupInput
           id={inputId}
@@ -63,10 +62,9 @@ function TextField({
           onChange={(e) => onValueChange?.(e.target.value)}
         />
 
-        {endAddon ?
+        {endAddon ? (
           <InputGroupAddon align="inline-end">{endAddon}</InputGroupAddon>
-          : null
-        }
+        ) : null}
       </InputGroup>
 
       {hasError && Array.isArray(error) ? (
