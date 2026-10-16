@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\""
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
@@ -42,6 +43,8 @@
     "eslint-config-next": "16.3.6",
     "eslint-plugin-storybook": "^10.6.1",
     "playwright": "latest",
+    "prettier": "^3.9.10",
+    "prettier-plugin-tailwindcss": "^0.8.1",
     "storybook": "^10.6.1",
     "tailwindcss": "^4",
     "typescript": "^5",
