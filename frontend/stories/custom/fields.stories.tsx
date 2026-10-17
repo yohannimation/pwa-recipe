@@ -3,16 +3,16 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Field } from '@/components/ui/field'
 
 // Custom fields
-import { NumberField } from '@/components/custom/number-field'
-import { PasswordField } from '@/components/custom/password-field'
-import { FileField } from '@/components/custom/file-field'
-import { SelectField } from '@/components/custom/select-field'
-import { ComboboxField } from '@/components/custom/combobox-field'
-import { TextField } from '@/components/custom/text-field'
+import { NumberField } from '@/components/custom/fields/number-field'
+import { PasswordField } from '@/components/custom/fields/password-field'
+import { FileField } from '@/components/custom/fields/file-field'
+import { SelectField } from '@/components/custom/fields/select-field'
+import { ComboboxField } from '@/components/custom/fields/combobox-field'
+import { TextField } from '@/components/custom/fields/text-field'
 
 import { Mail } from 'lucide-react'
-import { TextareaField } from '@/components/custom/textarea-field'
-import { CheckboxField } from '@/components/custom/checkbox-field'
+import { TextareaField } from '@/components/custom/fields/textarea-field'
+import { CheckboxField } from '@/components/custom/fields/checkbox-field'
 
 const triggerLog = (componentName: string, value: unknown) => {
   console.log(componentName, value)
