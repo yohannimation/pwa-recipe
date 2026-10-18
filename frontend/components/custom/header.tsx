@@ -1,88 +1,81 @@
 'use client'
 
+import { motion } from "framer-motion"
+import { ArrowDown, ChefHat, Plus } from "lucide-react"
 import Image from "next/image"
 
 import { SearchField } from "@/components/custom/fields/search-field"
-import { ArrowDown, ChefHat, Plus } from "lucide-react"
-import { useState } from "react"
 import { Button } from "../ui/button"
+import { useHeader } from "@/lib/useHeader"
 
 type HeaderProps = {
   scrollable?: boolean
 }
 
 function Header({ scrollable = false }: HeaderProps) {
-  const [scrolled, setScrolled] = useState<boolean>(!scrollable)
-
-  if (!scrollable) {
-    return (
-      <header className="relative text-white flex-1 flex flex-col justify-center items-center px-8 my-8">
-        <div className="relative flex items-center gap-4 w-full">
-          <div className="mb-0">
-            {/* App logo */}
-            <div className="relative w-35 aspect-[2.69/1]">
-              <Image src={"/on-mange-quoooi-logo.svg"} fill alt="" />
-            </div>
-  
-            <p className="mt-0 text-center hidden opacity-0">Toujours une idée dans l'assiette</p>
-          </div>
-  
-          {/* Search bar */}
-          <div className="relative flex gap-4 w-full">
-            <SearchField />
-
-            <div className="flex gap-4">
-              <Button variant={"icon"} size={"icon"} className="rounded-full">
-                <Plus />
-              </Button>
-              <Button variant={"icon"} size={"icon"} className="rounded-full">
-                <ChefHat />
-              </Button>
-            </div>
-          </div>
-        </div>
-  
-        {/* Scroll CTA */}
-        <span className="hidden opacity-0 absolute bottom-10 p-1 bg-white rounded-full shadow-(--shadow) animate-bounce">
-          <ArrowDown size={38} className="bg-muted rounded-full p-1.5" />
-        </span>
-      </header>
-    )
-  }
+  const {
+    scrolled,
+    headerStyle,
+    containerStyle,
+    logoStyle,
+    taglineStyle,
+    searchStyle,
+    actionsStyle,
+    ctaStyle
+  } = useHeader(scrollable)
 
   return (
-    <header className="relative text-white flex-1 flex flex-col justify-center items-center px-8 my-0 min-h-screen">
-      <div className="relative mx-8 w-full sm:w-[50vw] w-[33vw] max-w-[640px]">
-        <div className="mb-25">
+    <>
+      {/* Spacer */}
+      <div className={scrolled ? "h-[6.75rem]" : "h-screen"} aria-hidden />
+
+      <motion.header
+        style={headerStyle}
+        className={[
+          scrollable ? "fixed top-0 inset-x-0 z-50" : "fixed w-full",
+          "max-w-[1920px] mx-auto px-8 text-white flex justify-center items-center box-border",
+          "[--full-w:100%] sm:[--full-w:80%] md:[--full-w:50%] lg:[--full-w:33%]",
+        ].join(" ")}
+      >
+        <motion.div style={containerStyle} className="relative h-full">
           {/* App logo */}
-          <div className="relative w-full aspect-[2.69/1]">
-            <Image src={"/on-mange-quoooi-logo.svg"} fill alt="" />
-          </div>
+          <motion.div style={logoStyle} className="absolute left-0 min-w-27 aspect-[2.69/1]">
+            <Image src={"/on-mange-quoooi-logo.svg"} fill alt="Logo de 'On mange quoi ?'" />
+          </motion.div>
 
-          <p className="mt-10 text-center">Toujours une idée dans l'assiette</p>
-        </div>
+          {!scrolled && (
+            <motion.p style={taglineStyle} className="absolute inset-x-0 text-center">
+              Toujours une idée dans l&apos;assiette
+            </motion.p>
+          )}
 
-        {/* Search bar */}
-        <div className="relative flex gap-4">
-          <SearchField />
+          {/* Search bar */}
+          <motion.div style={searchStyle} className="absolute">
+            <SearchField />
+          </motion.div>
 
-          <div className="absolute right-0 flex gap-4">
+          {/* Actions */}
+          <motion.div style={actionsStyle} className="absolute inset-x-0 flex flex-row-reverse gap-4 -z-1">
             <Button variant={"icon"} size={"icon"} className="rounded-full">
               <Plus />
             </Button>
             <Button variant={"icon"} size={"icon"} className="rounded-full">
               <ChefHat />
             </Button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-      </div>
-
-      {/* Scroll CTA */}
-      <span className="absolute bottom-10 p-1 bg-white rounded-full shadow-(--shadow) animate-bounce">
-        <ArrowDown size={38} className="bg-muted rounded-full p-1.5" />
-      </span>
-    </header>
+        {/* Scroll CTA */}
+        {!scrolled && (
+          <motion.span
+            style={ctaStyle}
+            className="absolute bottom-10 p-1 bg-white rounded-full shadow-(--shadow) animate-bounce"
+          >
+            <ArrowDown size={38} className="bg-muted rounded-full p-1.5" />
+          </motion.span>
+        )}
+      </motion.header>
+    </>
   )
 }
 
