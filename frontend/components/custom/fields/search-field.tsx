@@ -37,9 +37,9 @@ function SearchField({ onValueChange }: SearchFieldProps) {
   }
 
   return (
-    <Field className='z-1'>
+    <Field>
       <form onSubmit={handleSubmit}>
-        <InputGroup className='bg-white rounded-full text-foreground shadow-(--shadow) border-white'>
+        <InputGroup className='bg-white rounded-full text-foreground shadow-(--shadow) border-0'>
           <InputGroupInput
             id={inputId}
             type="search"
