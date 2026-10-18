@@ -15,6 +15,7 @@ type HeaderProps = {
 function Header({ scrollable = false }: HeaderProps) {
   const {
     scrolled,
+    triggerTotalScroll,
     headerStyle,
     containerStyle,
     logoStyle,
@@ -56,10 +57,10 @@ function Header({ scrollable = false }: HeaderProps) {
 
           {/* Actions */}
           <motion.div style={actionsStyle} className="absolute inset-x-0 flex flex-row-reverse gap-4 -z-1">
-            <Button variant={"icon"} size={"icon"} className="rounded-full">
+            <Button variant={"icon"} size={"icon"}>
               <Plus />
             </Button>
-            <Button variant={"icon"} size={"icon"} className="rounded-full">
+            <Button variant={"icon"} size={"icon"}>
               <ChefHat />
             </Button>
           </motion.div>
@@ -67,12 +68,18 @@ function Header({ scrollable = false }: HeaderProps) {
 
         {/* Scroll CTA */}
         {!scrolled && (
-          <motion.span
-            style={ctaStyle}
-            className="absolute bottom-10 p-1 bg-white rounded-full shadow-(--shadow) animate-bounce"
-          >
-            <ArrowDown size={38} className="bg-muted rounded-full p-1.5" />
-          </motion.span>
+          
+          <Button
+            variant={"icon"}
+            size={"icon-lg"}
+            className='absolute bottom-10 animate-bounce'
+            onClick={triggerTotalScroll}
+            title="Voir les recettes"
+            >
+            <motion.span style={ctaStyle}>
+              <ArrowDown />
+            </motion.span>
+          </Button>
         )}
       </motion.header>
     </>
