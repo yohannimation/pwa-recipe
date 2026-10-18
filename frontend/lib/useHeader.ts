@@ -68,11 +68,12 @@ function useHeader(scrollable: boolean) {
     const snap = () => {
       if (touching) return
       const progress = scrollProgress.get()
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
       if (progress >= SNAP_THRESHOLD && progress < 1) {
-        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
         window.scrollTo({ top: range.get(), behavior: reduceMotion ? "auto" : "smooth" })
       } else if (progress > 0 && progress < SNAP_THRESHOLD) {
-        window.scrollTo({ top: 0, behavior: "smooth" })
+        window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" })
       }
     }
     // Every scroll event (wheel, keyboard, touch momentum, our own smooth scroll) re-arms the timer,
@@ -102,6 +103,11 @@ function useHeader(scrollable: boolean) {
       window.removeEventListener("touchcancel", onTouchEnd)
     }
   }, [scrollable, scrolled, scrollProgress, range])
+
+  const triggerTotalScroll = () => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    window.scrollTo({ top: range.get(), behavior: reduceMotion ? "auto" : "smooth" })
+  }
 
 
   /**
@@ -150,6 +156,7 @@ function useHeader(scrollable: boolean) {
 
   return {
     scrolled,
+    triggerTotalScroll,
     headerStyle: { height: headerHeight, paddingTop: headerPaddingY, paddingBottom: headerPaddingY },
     containerStyle: { width: containerWidth },
     logoStyle: { top: logoTop, y: logoY, width: logoWidth },
