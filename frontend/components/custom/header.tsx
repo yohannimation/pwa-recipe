@@ -81,17 +81,19 @@ function Header({ scrollable = false }: HeaderProps) {
 
         {/* Scroll CTA */}
         {!scrolled && (
-          <Button
-            variant={'icon'}
-            size={'icon-lg'}
+          <motion.span
             className="absolute bottom-10 animate-bounce"
-            onClick={triggerTotalScroll}
-            title="Voir les recettes"
+            style={ctaStyle}
           >
-            <motion.span style={ctaStyle}>
+            <Button
+              variant={'icon'}
+              size={'icon-lg'}
+              onClick={triggerTotalScroll}
+              title="Voir les recettes"
+            >
               <ArrowDown />
-            </motion.span>
-          </Button>
+            </Button>
+          </motion.span>
         )}
       </motion.header>
     </>
