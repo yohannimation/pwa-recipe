@@ -27,7 +27,7 @@ type SelectFieldProps = Omit<
   React.ComponentProps<typeof Select>,
   'children'
 > & {
-  label: string
+  label?: string
   options: SelectFieldOption[]
   placeholder?: string
   error?: string | { message: string }[]
@@ -56,7 +56,9 @@ function SelectField({
 
   return (
     <Field data-invalid={hasError} data-disabled={disabled}>
-      <FieldLabel htmlFor={triggerId}>{label}</FieldLabel>
+      { label && (
+        <FieldLabel htmlFor={triggerId}>{label}</FieldLabel>
+      )}
 
       <Select
         disabled={disabled}
@@ -68,7 +70,7 @@ function SelectField({
         <SelectTrigger
           id={triggerId}
           aria-invalid={hasError}
-          className={cn('w-full', className)}
+          className={className}
         >
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
