@@ -1,10 +1,12 @@
+import { FilterBar } from '@/components/custom/filter-bar'
 import { Header } from '@/components/custom/header'
 
 export default function Home() {
   return (
     <>
       <Header scrollable />
-      <main className="h-full overflow-scroll">
+      <main className="mx-5 sm:mx-10 lg:mx-20 h-full">
+        <FilterBar />
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo
         accusantium consequatur totam, molestiae aperiam nisi odit quo nobis
         tenetur! Ipsam nesciunt qui culpa facere! Nulla nihil, repudiandae ut
