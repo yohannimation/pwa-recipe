@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from "react"
+import { useState } from 'react'
 
-import { SelectField } from "@/components/custom/fields/select-field"
-import { FilterList } from "@/components/custom/filter-list"
+import { SelectField } from '@/components/custom/fields/select-field'
+import { FilterList } from '@/components/custom/filter-list'
 
 function FilterBar() {
-  const [sortValue, setSortValue] = useState<string>("alphabetical")
+  const [sortValue, setSortValue] = useState<string>('alphabetical')
 
   const sortValuesList = [
     { value: 'alphabetical', label: 'Tri par ordre alphabétique' },
@@ -15,11 +15,11 @@ function FilterBar() {
 
   const sortTrigger = (value: string) => {
     setSortValue(value)
-    console.log("sort value :", value)
+    console.log('sort value :', value)
   }
 
   return (
-    <aside className="relative bg-white mt-2 md:mt-10 mb-5 p-2 rounded-xl shadow-(--shadow) flex justify-between items-center gap-2 flex-wrap">
+    <aside className="relative mt-2 mb-5 flex flex-wrap items-center justify-between gap-2 rounded-xl bg-white p-2 shadow-(--shadow) md:mt-10">
       <FilterList />
 
       <SelectField

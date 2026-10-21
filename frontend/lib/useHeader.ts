@@ -12,13 +12,12 @@ import {
   useTransform,
 } from 'framer-motion'
 
-
 const LOGO_EASE = cubicBezier(0.22, 1, 0.9, 1)
 const SNAP_THRESHOLD = 0.2
 const SNAP_DELAY = 150
 
 function useHeader(scrollable: boolean) {
-  const isDesktop = useMediaQuery("(min-width: 768px)")
+  const isDesktop = useMediaQuery('(min-width: 768px)')
 
   const compactHeightRem = isDesktop ? 6.75 : 11
   const compactHeightPx = compactHeightRem * 16
@@ -139,7 +138,11 @@ function useHeader(scrollable: boolean) {
    */
 
   // Header
-  const headerHeight = useTransform(p, [0, 1], ['100vh', isDesktop ? '0vh' : '15vh'])
+  const headerHeight = useTransform(
+    p,
+    [0, 1],
+    ['100vh', isDesktop ? '0vh' : '15vh']
+  )
   const headerPaddingY = useTransform(p, [0, 1], ['0rem', '2rem'])
 
   // Inner container: from --full-w (responsive) to 100%
@@ -165,13 +168,30 @@ function useHeader(scrollable: boolean) {
   const taglineOpacity = useTransform(p, [0, 0.3], [1, 0])
 
   // Search bar
-  const searchTop = useTransform(p, [0.5, 1], ['60%', isDesktop ? '0%' : '100%'], { ease: easeIn })
+  const searchTop = useTransform(
+    p,
+    [0.5, 1],
+    ['60%', isDesktop ? '0%' : '100%'],
+    { ease: easeIn }
+  )
   const searchY = useTransform(p, [0.5, 1], ['-50%', '0%'])
-  const searchLeft = useTransform(p, [0, 0.75], ['0rem', isDesktop ? '9.5rem' : '0rem'])
-  const searchRight = useTransform(p, [0, 0.75], ['0rem', isDesktop ? '8rem' : '7.5rem'])
+  const searchLeft = useTransform(
+    p,
+    [0, 0.75],
+    ['0rem', isDesktop ? '9.5rem' : '0rem']
+  )
+  const searchRight = useTransform(
+    p,
+    [0, 0.75],
+    ['0rem', isDesktop ? '8rem' : '7.5rem']
+  )
 
   // Actions
-  const actionsTop = useTransform(p, [0.5, 1], ['60%', isDesktop ? '0%' : '100%'])
+  const actionsTop = useTransform(
+    p,
+    [0.5, 1],
+    ['60%', isDesktop ? '0%' : '100%']
+  )
   const actionsOpacity = useTransform(p, [0.95, 1], [0, 1])
   const actionsPointerEvents = useTransform(p, (v) =>
     v < 0.6 ? 'none' : 'auto'

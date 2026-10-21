@@ -31,11 +31,7 @@ function Header({ scrollable = false }: HeaderProps) {
       {/* Spacer */}
       <div
         className={
-          scrolled ? (
-            isDesktop ? 'h-[6.75rem]' : 'h-[11rem]'
-          ) : (
-            'h-screen'
-          )
+          scrolled ? (isDesktop ? 'h-[6.75rem]' : 'h-[11rem]') : 'h-screen'
         }
         aria-hidden
       />
@@ -44,7 +40,7 @@ function Header({ scrollable = false }: HeaderProps) {
         style={headerStyle}
         className={[
           scrollable ? 'fixed inset-x-0 top-0 z-50' : 'fixed w-full',
-          'mx-auto box-border flex min-h-[8rem] max-w-[1920px] items-center justify-center px-4 md:px-8 text-white',
+          'mx-auto box-border flex min-h-[8rem] max-w-[1920px] items-center justify-center px-4 text-white md:px-8',
           '[--full-w:100%] sm:[--full-w:80%] md:[--full-w:50%] lg:[--full-w:33%]',
         ].join(' ')}
       >

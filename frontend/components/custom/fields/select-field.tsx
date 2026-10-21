@@ -56,9 +56,7 @@ function SelectField({
 
   return (
     <Field data-invalid={hasError} data-disabled={disabled}>
-      { label && (
-        <FieldLabel htmlFor={triggerId}>{label}</FieldLabel>
-      )}
+      {label && <FieldLabel htmlFor={triggerId}>{label}</FieldLabel>}
 
       <Select
         disabled={disabled}
