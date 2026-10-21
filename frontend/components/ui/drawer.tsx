@@ -55,12 +55,12 @@ function DrawerContent({
       <DrawerPrimitive.Content
         data-slot="drawer-content"
         className={cn(
-          'group/drawer-content bg-popover text-popover-foreground fixed z-50 flex h-auto flex-col gap-4 px-4 shadow-[var(--shadow)] data-[vaul-drawer-direction=bottom]:inset-x-4 data-[vaul-drawer-direction=bottom]:bottom-0 data-[vaul-drawer-direction=bottom]:mt-24 data-[vaul-drawer-direction=bottom]:max-h-[80vh] data-[vaul-drawer-direction=bottom]:rounded-t-2xl data-[vaul-drawer-direction=bottom]:border-x data-[vaul-drawer-direction=bottom]:border-t data-[vaul-drawer-direction=left]:inset-y-4 data-[vaul-drawer-direction=left]:left-0 data-[vaul-drawer-direction=left]:w-3/4 data-[vaul-drawer-direction=left]:rounded-2xl data-[vaul-drawer-direction=left]:border-y data-[vaul-drawer-direction=left]:border-r data-[vaul-drawer-direction=right]:inset-y-4 data-[vaul-drawer-direction=right]:right-0 data-[vaul-drawer-direction=right]:w-3/4 data-[vaul-drawer-direction=right]:rounded-2xl data-[vaul-drawer-direction=right]:border-x data-[vaul-drawer-direction=right]:border-y data-[vaul-drawer-direction=right]:border-l data-[vaul-drawer-direction=top]:inset-x-4 data-[vaul-drawer-direction=top]:top-0 data-[vaul-drawer-direction=top]:mb-24 data-[vaul-drawer-direction=top]:max-h-[80vh] data-[vaul-drawer-direction=top]:rounded-2xl data-[vaul-drawer-direction=top]:border-b data-[vaul-drawer-direction=left]:sm:max-w-sm data-[vaul-drawer-direction=right]:sm:max-w-sm',
+          'group/drawer-content bg-popover text-popover-foreground fixed z-50 flex h-auto flex-col gap-4 px-4 shadow-[var(--shadow)] data-[vaul-drawer-direction=bottom]:inset-x-2 data-[vaul-drawer-direction=bottom]:bottom-0 data-[vaul-drawer-direction=bottom]:mt-24 data-[vaul-drawer-direction=bottom]:max-h-[80vh] data-[vaul-drawer-direction=bottom]:rounded-t-2xl data-[vaul-drawer-direction=bottom]:border-x data-[vaul-drawer-direction=bottom]:border-t data-[vaul-drawer-direction=left]:inset-y-4 data-[vaul-drawer-direction=left]:left-0 data-[vaul-drawer-direction=left]:w-3/4 data-[vaul-drawer-direction=left]:rounded-2xl data-[vaul-drawer-direction=left]:border-y data-[vaul-drawer-direction=left]:border-r data-[vaul-drawer-direction=right]:inset-y-4 data-[vaul-drawer-direction=right]:right-0 data-[vaul-drawer-direction=right]:w-3/4 data-[vaul-drawer-direction=right]:rounded-2xl data-[vaul-drawer-direction=right]:border-x data-[vaul-drawer-direction=right]:border-y data-[vaul-drawer-direction=right]:border-l data-[vaul-drawer-direction=top]:inset-x-4 data-[vaul-drawer-direction=top]:top-0 data-[vaul-drawer-direction=top]:mb-24 data-[vaul-drawer-direction=top]:max-h-[80vh] data-[vaul-drawer-direction=top]:rounded-2xl data-[vaul-drawer-direction=top]:border-b data-[vaul-drawer-direction=left]:sm:max-w-sm data-[vaul-drawer-direction=right]:sm:max-w-sm',
           className
         )}
         {...props}
       >
-        <div className="bg-muted mx-auto mt-4 hidden h-1 w-[100px] shrink-0 cursor-grab rounded-full group-data-[vaul-drawer-direction=bottom]/drawer-content:block" />
+        <div className="bg-primary mx-auto mt-4 hidden h-1 w-[100px] shrink-0 cursor-grab rounded-full group-data-[vaul-drawer-direction=bottom]/drawer-content:block" />
         {children}
       </DrawerPrimitive.Content>
     </DrawerPortal>
@@ -98,7 +98,7 @@ function DrawerTitle({
     <DrawerPrimitive.Title
       data-slot="drawer-title"
       className={cn(
-        'font-heading text-foreground text-lg font-medium',
+        'font-heading text-xl',
         className
       )}
       {...props}
