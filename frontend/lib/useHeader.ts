@@ -1,5 +1,8 @@
 'use client'
 
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useMediaQuery } from '@/lib/useMediaQuery'
+
 import {
   cubicBezier,
   easeIn,
@@ -8,17 +11,18 @@ import {
   useScroll,
   useTransform,
 } from 'framer-motion'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
-// Compact header height (2.75rem of content + 2*2rem of vertical padding)
-export const COMPACT_HEIGHT_REM = 6.75
-const COMPACT_HEIGHT_PX = COMPACT_HEIGHT_REM * 16
 
 const LOGO_EASE = cubicBezier(0.22, 1, 0.9, 1)
 const SNAP_THRESHOLD = 0.2
 const SNAP_DELAY = 150
 
 function useHeader(scrollable: boolean) {
+  const isDesktop = useMediaQuery("(min-width: 768px)")
+
+  const compactHeightRem = isDesktop ? 6.75 : 11
+  const compactHeightPx = compactHeightRem * 16
+
   /**
    *  |--------------------------------------------------|
    *  |  Scroll treatment                                |
@@ -36,11 +40,11 @@ function useHeader(scrollable: boolean) {
   const range = useMotionValue<number>(600)
   useEffect(() => {
     const update = () =>
-      range.set(Math.max(window.innerHeight - COMPACT_HEIGHT_PX, 1))
+      range.set(Math.max(window.innerHeight - compactHeightPx, 1))
     update()
     window.addEventListener('resize', update)
     return () => window.removeEventListener('resize', update)
-  }, [range])
+  }, [range, compactHeightPx])
 
   // 0 = full screen, 1 = compact
   const scrollProgress = useTransform([scrollY, range], ([y, r]: number[]) =>
@@ -135,7 +139,7 @@ function useHeader(scrollable: boolean) {
    */
 
   // Header
-  const headerHeight = useTransform(p, [0, 1], ['100vh', '0vh'])
+  const headerHeight = useTransform(p, [0, 1], ['100vh', isDesktop ? '0vh' : '15vh'])
   const headerPaddingY = useTransform(p, [0, 1], ['0rem', '2rem'])
 
   // Inner container: from --full-w (responsive) to 100%
@@ -152,7 +156,7 @@ function useHeader(scrollable: boolean) {
   })
   const logoWidth = useTransform(
     logoWidthProgress,
-    (t) => `calc(${(1 - t) * 100}% + ${t * 7.5}rem)`
+    (t) => `calc(${(1 - t) * 100}% + ${t * 7}rem)`
   )
 
   // Tagline
@@ -161,12 +165,13 @@ function useHeader(scrollable: boolean) {
   const taglineOpacity = useTransform(p, [0, 0.3], [1, 0])
 
   // Search bar
-  const searchTop = useTransform(p, [0.5, 1], ['60%', '0%'], { ease: easeIn })
+  const searchTop = useTransform(p, [0.5, 1], ['60%', isDesktop ? '0%' : '100%'], { ease: easeIn })
   const searchY = useTransform(p, [0.5, 1], ['-50%', '0%'])
-  const searchLeft = useTransform(p, [0, 0.75], ['0rem', '9.5rem'])
-  const searchRight = useTransform(p, [0, 0.75], ['0rem', '8rem'])
+  const searchLeft = useTransform(p, [0, 0.75], ['0rem', isDesktop ? '9.5rem' : '0rem'])
+  const searchRight = useTransform(p, [0, 0.75], ['0rem', isDesktop ? '8rem' : '7.5rem'])
 
   // Actions
+  const actionsTop = useTransform(p, [0.5, 1], ['60%', isDesktop ? '0%' : '100%'])
   const actionsOpacity = useTransform(p, [0.95, 1], [0, 1])
   const actionsPointerEvents = useTransform(p, (v) =>
     v < 0.6 ? 'none' : 'auto'
@@ -184,6 +189,7 @@ function useHeader(scrollable: boolean) {
   return {
     scrolled,
     triggerTotalScroll,
+    isDesktop,
     headerStyle: {
       height: headerHeight,
       paddingTop: headerPaddingY,
@@ -199,6 +205,7 @@ function useHeader(scrollable: boolean) {
       right: searchRight,
     },
     actionsStyle: {
+      top: actionsTop,
       opacity: actionsOpacity,
       pointerEvents: actionsPointerEvents,
     },

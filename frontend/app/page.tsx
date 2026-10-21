@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <Header scrollable />
-      <main className="mx-5 sm:mx-10 lg:mx-20 h-full">
+      <main className="mx-5 md:mx-10 lg:mx-20 h-full">
         <FilterBar />
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo
         accusantium consequatur totam, molestiae aperiam nisi odit quo nobis

@@ -1,25 +1,18 @@
-"use client";
-
-import { useSyncExternalStore } from "react";
+import { useCallback, useSyncExternalStore } from "react"
 
 export function useMediaQuery(query: string) {
-  const subscribe = (callback: () => void) => {
-    const mediaQuery = window.matchMedia(query);
-
-    mediaQuery.addEventListener("change", callback);
-
-    return () => {
-      mediaQuery.removeEventListener("change", callback);
-    };
-  };
-
-  const getSnapshot = () => window.matchMedia(query).matches;
-
-  const getServerSnapshot = () => false;
+  const subscribe = useCallback(
+    (callback: () => void) => {
+      const mql = window.matchMedia(query)
+      mql.addEventListener("change", callback)
+      return () => mql.removeEventListener("change", callback)
+    },
+    [query]
+  )
 
   return useSyncExternalStore(
     subscribe,
-    getSnapshot,
-    getServerSnapshot
-  );
+    () => window.matchMedia(query).matches,
+    () => false
+  )
 }
