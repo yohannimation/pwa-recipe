@@ -1,0 +1,110 @@
+'use client'
+
+import { motion } from 'framer-motion'
+import { ArrowDown, ChefHat, Plus } from 'lucide-react'
+import Image from 'next/image'
+
+import { SearchField } from '@/components/custom/fields/search-field'
+import { Button } from '../ui/button'
+import { useHeader } from '@/lib/useHeader'
+
+type HeaderProps = {
+  scrollable?: boolean
+}
+
+function Header({ scrollable = false }: HeaderProps) {
+  const {
+    scrolled,
+    triggerTotalScroll,
+    isDesktop,
+    headerStyle,
+    containerStyle,
+    logoStyle,
+    taglineStyle,
+    searchStyle,
+    actionsStyle,
+    ctaStyle,
+  } = useHeader(scrollable)
+
+  return (
+    <>
+      {/* Spacer */}
+      <div
+        className={
+          scrolled ? (isDesktop ? 'h-[6.75rem]' : 'h-[11rem]') : 'h-screen'
+        }
+        aria-hidden
+      />
+
+      <motion.header
+        style={headerStyle}
+        className={[
+          scrollable ? 'fixed inset-x-0 top-0 z-50' : 'fixed w-full',
+          'mx-auto box-border flex min-h-[8rem] max-w-[1920px] items-center justify-center px-4 text-white md:px-8',
+          '[--full-w:100%] sm:[--full-w:80%] md:[--full-w:50%] lg:[--full-w:33%]',
+        ].join(' ')}
+      >
+        <motion.div style={containerStyle} className="relative h-full">
+          {/* App logo */}
+          <motion.div
+            style={logoStyle}
+            className="absolute left-0 aspect-[2.69/1] min-w-27"
+          >
+            <Image
+              src={'/on-mange-quoooi-logo.svg'}
+              fill
+              alt="Logo de 'On mange quoi ?'"
+            />
+          </motion.div>
+
+          {!scrolled && (
+            <motion.p
+              style={taglineStyle}
+              className="absolute inset-x-0 text-center"
+            >
+              Toujours une idée dans l&apos;assiette
+            </motion.p>
+          )}
+
+          {/* Search bar */}
+          <motion.div style={searchStyle} className="absolute">
+            <SearchField />
+          </motion.div>
+
+          {/* Actions */}
+          <motion.div
+            style={actionsStyle}
+            className="absolute inset-x-0 -z-1 flex flex-row-reverse gap-4"
+          >
+            <Button variant={'icon'} size={'icon'}>
+              <Plus />
+            </Button>
+            <Button variant={'icon'} size={'icon'}>
+              <ChefHat />
+            </Button>
+          </motion.div>
+        </motion.div>
+
+        {/* Scroll CTA */}
+        {!scrolled && (
+          <motion.span
+            className="absolute bottom-10 animate-bounce"
+            style={ctaStyle}
+          >
+            <Button
+              variant={'icon'}
+              size={'icon-lg'}
+              onClick={triggerTotalScroll}
+              title="Voir les recettes"
+            >
+              <ArrowDown />
+            </Button>
+          </motion.span>
+        )}
+      </motion.header>
+    </>
+  )
+}
+
+export { Header }
+export type { HeaderProps }
