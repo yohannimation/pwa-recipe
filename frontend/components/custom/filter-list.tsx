@@ -5,7 +5,7 @@ import { useState } from "react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
 import { CheckboxField } from "@/components/custom/fields/checkbox-field"
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Drawer, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer"
 
 import { Settings2 } from "lucide-react"
@@ -25,7 +25,7 @@ function FilterList() {
         { name: "Plat" },
         { name: "Dessert" },
         { name: "Petit-déjeuner" },
-      ]
+      ],
     },
     {
       name: "Type de cuisine",
@@ -69,33 +69,81 @@ function FilterList() {
   ]
 
   const trigger = (
-    <Button>
-      <Settings2 /> Filtres
-    </Button>
+    <div>
+      <Button className="hidden sm:flex">
+        <Settings2 /> Filtres
+      </Button>
+      <Button size={"icon"} className="block sm:hidden p-2 rounded-lg">
+        <Settings2 />
+      </Button>
+    </div>
   )
   const title = <>Filtres</>
   const main = (
     <div className="no-scrollbar overflow-y-auto">
-      <Accordion type="multiple">
-        {categories.map((category) => {
-          return (
-            <AccordionItem key={category.value} value={category.value}>
-              <AccordionTrigger>{category.name}</AccordionTrigger>
-              <AccordionContent>
-                <ul className="flex flex-col gap-1.5">
-                  {category.children.map((child) => {
-                    return (
-                      <li key={child.name}>
-                        <CheckboxField label={child.name}  />
-                      </li>
-                    )
-                  })}
-                </ul>
-              </AccordionContent>
-            </AccordionItem>
-          )
-        })}
-      </Accordion>
+      <div className="flex flex-col lg:flex-row gap-x-8 items-start">
+
+        {isDesktop ? (
+          <>
+            {/* Colonne 1 : Index pairs (0, 2, 4...) */}
+            <Accordion type="multiple" defaultValue={["plat"]} className="flex-1 w-full">
+              {categories.filter((_, i) => i % 2 === 0).map((category) => (
+                <AccordionItem key={category.value} value={category.value}>
+                  <AccordionTrigger>{category.name}</AccordionTrigger>
+                  <AccordionContent>
+                    <ul className="flex flex-col gap-1.5">
+                      {category.children.map((child) => (
+                        <li key={child.name}>
+                          <CheckboxField label={child.name} />
+                        </li>
+                      ))}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+
+            {/* Colonne 2 : Index impairs (1, 3, 5...) */}
+            <Accordion type="multiple" className="flex-1 w-full">
+              {categories.filter((_, i) => i % 2 !== 0).map((category) => (
+                <AccordionItem key={category.value} value={category.value}>
+                  <AccordionTrigger>{category.name}</AccordionTrigger>
+                  <AccordionContent>
+                    <ul className="flex flex-col gap-1.5">
+                      {category.children.map((child) => (
+                        <li key={child.name}>
+                          <CheckboxField label={child.name} />
+                        </li>
+                      ))}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </>
+        ) : (
+          <Accordion type="multiple">
+            {categories.map((category) => {
+              return (
+                <AccordionItem key={category.value} value={category.value}>
+                  <AccordionTrigger>{category.name}</AccordionTrigger>
+                  <AccordionContent>
+                    <ul className="flex flex-col gap-1.5">
+                      {category.children.map((child) => {
+                        return (
+                          <li key={child.name}>
+                            <CheckboxField label={child.name}  />
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              )
+            })}
+          </Accordion>
+        )}
+      </div>
     </div>
   )
   const footer = (

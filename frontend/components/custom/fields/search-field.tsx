@@ -47,13 +47,13 @@ function SearchField({ onValueChange }: SearchFieldProps) {
             onChange={(e) => setSearchValue(e.target.value)}
           />
 
-          <InputGroupAddon align="inline-end">
+          <InputGroupAddon align="inline-end" className='has-[>button]:pr-0'>
             <Button
-              variant={'secondary'}
-              size={'icon-sm'}
+              variant={'icon'}
+              size={'icon'}
               type="submit"
               title="Rechercher"
-              className="bg-muted hover:bg-primary hover:text-white"
+              className="shadow-none"
             >
               <Search />
             </Button>

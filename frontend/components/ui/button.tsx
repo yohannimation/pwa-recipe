@@ -13,17 +13,17 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-white hover:bg-secondary border-border',
+        default: 'bg-primary text-white border-border hover:bg-secondary hover:border-secondary aria-expanded:bg-primary aria-expanded:border-secondary',
         outline:
-          'bg-white hover:bg-muted hover:text-foreground border-border aria-expanded:bg-muted aria-expanded:text-foreground',
+          'bg-white border-border hover:bg-muted hover:text-foreground hover:border-muted aria-expanded:bg-muted aria-expanded:text-foreground aria-expanded:border-muted',
         secondary:
-          'bg-secondary text-white hover:bg-muted hover:text-secondary-foreground aria-expanded:bg-secondary aria-expanded:text-secondary-foreground',
+          'bg-secondary text-white border-secondary hover:bg-muted hover:text-secondary-foreground hover:border-muted aria-expanded:bg-secondary aria-expanded:text-white aria-expanded:border-muted',
         ghost:
-          'hover:bg-muted hover:text-foreground hover:border-muted aria-expanded:bg-muted aria-expanded:border-muted aria-expanded:text-foreground',
+          'hover:bg-muted hover:text-foreground hover:border-muted aria-expanded:bg-muted aria-expanded:border-muted',
         destructive:
-          'bg-destructive text-white hover:bg-destructive/50 focus-visible:border-destructive/40 focus-visible:ring-destructive/20',
+          'bg-destructive text-white border-destructive hover:bg-destructive/50 focus-visible:border-destructive/40 focus-visible:ring-destructive/20',
         link: 'text-secondary underline underline-offset-6 hover:text-secondary-foreground hover:underline-offset-4',
-        icon: 'bg-muted text-white border-0 ring-4 ring-inset ring-white shadow-(--shadow) hover:bg-primary',
+        icon: 'bg-muted text-white border-0 ring-3 ring-inset ring-white shadow-(--shadow) hover:bg-primary',
       },
       size: {
         default:

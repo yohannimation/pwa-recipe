@@ -15,7 +15,7 @@ type CheckboxFieldProps = Omit<
   React.ComponentProps<typeof Checkbox>,
   'onCheckedChange'
 > & {
-  /** Text ou JSX (ex: text with link) */
+  /** Text or JSX (ex: text with link) */
   label: ReactNode
   error?: string | { message: string }[]
   description?: string
