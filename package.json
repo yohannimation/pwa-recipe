@@ -1,0 +1,16 @@
+{
+  "name": "pwa-recipe-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:frontend": "npm run dev -w pwa-recipe-frontend",
+    "build:frontend": "npm run build -w pwa-recipe-frontend",
+    "start:frontend": "npm run start -w pwa-recipe-frontend",
+    "lint:frontend": "npm run lint -w pwa-recipe-frontend",
+    "dev:backend": "npm run dev -w pwa-recipe-backend",
+    "watch:backend": "npm run watch -w pwa-recipe-backend",
+    "build:backend": "npm run build -w pwa-recipe-backend"
+  }
+}

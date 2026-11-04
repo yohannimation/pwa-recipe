@@ -1,0 +1,15 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy dependencies file first (Docker cache)
+COPY package*.json ./
+
+RUN if [ -f package.json ]; then npm install; fi
+
+# Code copy (overwritten by the volume in dev)
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm", "run", "dev"]

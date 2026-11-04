@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"name": "Frontend (Next.js)",
+			"path": "apps/frontend"
+		},
+		{
+			"name": "Backend (Nest.js)",
+			"path": "apps/backend"
+		},
+		{
+			"name": "Root",
+			"path": "."
+		}
+	]
+}
