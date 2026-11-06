@@ -9,7 +9,7 @@ export default function Home() {
     {
       id: 1,
       name: 'Recipe 1',
-      image: 'cake',
+      image: 'https://picsum.photos',
       preparationTime: 5,
       cookingTime: 60,
       likedBy: [],
@@ -19,7 +19,7 @@ export default function Home() {
     {
       id: 2,
       name: 'Recipe 2',
-      image: 'pizza',
+      image: 'https://picsum.photos',
       preparationTime: 10,
       cookingTime: 8,
       likedBy: ['Yohann', 'Louise'],
@@ -42,7 +42,7 @@ export default function Home() {
     {
       id: 3,
       name: 'Recipe 3',
-      image: 'salade',
+      image: 'https://picsum.photos/536/354',
       preparationTime: 20,
       cookingTime: 0,
       likedBy: ['Yohann', 'Louise', 'User 3', 'User 4', 'User 5', 'User 6'],
@@ -52,7 +52,7 @@ export default function Home() {
     {
       id: 1,
       name: 'Recipe 1',
-      image: 'cake',
+      image: 'https://picsum.photos',
       preparationTime: 5,
       cookingTime: 60,
       likedBy: [],
@@ -75,7 +75,7 @@ export default function Home() {
     {
       id: 2,
       name: 'Recipe 2',
-      image: 'pizza',
+      image: 'https://picsum.photos',
       preparationTime: 10,
       cookingTime: 8,
       likedBy: [],
@@ -85,7 +85,7 @@ export default function Home() {
     {
       id: 3,
       name: 'Recipe 3',
-      image: 'salade',
+      image: 'https://picsum.photos',
       preparationTime: 20,
       cookingTime: 0,
       likedBy: ['Yohann', 'Louise'],
@@ -95,7 +95,7 @@ export default function Home() {
     {
       id: 1,
       name: 'Recipe 1',
-      image: 'cake',
+      image: 'https://picsum.photos',
       preparationTime: 5,
       cookingTime: 60,
       likedBy: [],
@@ -118,7 +118,7 @@ export default function Home() {
     {
       id: 2,
       name: 'Recipe 2',
-      image: 'pizza',
+      image: 'https://picsum.photos',
       preparationTime: 10,
       cookingTime: 8,
       likedBy: [],
@@ -128,7 +128,7 @@ export default function Home() {
     {
       id: 3,
       name: 'Recipe 3',
-      image: 'salade',
+      image: 'https://picsum.photos',
       preparationTime: 20,
       cookingTime: 0,
       likedBy: ['Yohann', 'Louise'],
@@ -138,7 +138,7 @@ export default function Home() {
     {
       id: 1,
       name: 'Recipe 1',
-      image: 'cake',
+      image: 'https://picsum.photos',
       preparationTime: 5,
       cookingTime: 60,
       likedBy: [],
@@ -161,7 +161,7 @@ export default function Home() {
     {
       id: 2,
       name: 'Recipe 2',
-      image: 'pizza',
+      image: 'https://picsum.photos',
       preparationTime: 10,
       cookingTime: 8,
       likedBy: [],
@@ -171,7 +171,7 @@ export default function Home() {
     {
       id: 3,
       name: 'Recipe 3',
-      image: 'salade',
+      image: 'https://picsum.photos',
       preparationTime: 20,
       cookingTime: 0,
       likedBy: ['Yohann', 'Louise'],
@@ -181,7 +181,7 @@ export default function Home() {
     {
       id: 1,
       name: 'Recipe 1',
-      image: 'cake',
+      image: 'https://picsum.photos',
       preparationTime: 5,
       cookingTime: 60,
       likedBy: [],
@@ -204,7 +204,7 @@ export default function Home() {
     {
       id: 2,
       name: 'Recipe 2',
-      image: 'pizza',
+      image: 'https://picsum.photos',
       preparationTime: 10,
       cookingTime: 8,
       likedBy: [],
@@ -214,7 +214,7 @@ export default function Home() {
     {
       id: 3,
       name: 'Recipe 3',
-      image: 'salade',
+      image: 'https://picsum.photos',
       preparationTime: 20,
       cookingTime: 0,
       likedBy: ['Yohann', 'Louise'],
@@ -224,7 +224,7 @@ export default function Home() {
     {
       id: 1,
       name: 'Recipe 1',
-      image: 'cake',
+      image: 'https://picsum.photos',
       preparationTime: 5,
       cookingTime: 60,
       likedBy: [],
@@ -247,7 +247,7 @@ export default function Home() {
     {
       id: 2,
       name: 'Recipe 2',
-      image: 'pizza',
+      image: 'https://picsum.photos',
       preparationTime: 10,
       cookingTime: 8,
       likedBy: [],
@@ -257,7 +257,7 @@ export default function Home() {
     {
       id: 3,
       name: 'Recipe 3',
-      image: 'salade',
+      image: 'https://picsum.photos',
       preparationTime: 20,
       cookingTime: 0,
       likedBy: ['Yohann', 'Louise'],
@@ -267,7 +267,7 @@ export default function Home() {
     {
       id: 1,
       name: 'Recipe 1',
-      image: 'cake',
+      image: 'https://picsum.photos',
       preparationTime: 5,
       cookingTime: 60,
       likedBy: [],
@@ -290,7 +290,7 @@ export default function Home() {
     {
       id: 2,
       name: 'Recipe 2',
-      image: 'pizza',
+      image: 'https://picsum.photos',
       preparationTime: 10,
       cookingTime: 8,
       likedBy: [],
@@ -300,7 +300,7 @@ export default function Home() {
     {
       id: 3,
       name: 'Recipe 3',
-      image: 'salade',
+      image: 'https://picsum.photos',
       preparationTime: 20,
       cookingTime: 0,
       likedBy: ['Yohann', 'Louise'],
@@ -310,7 +310,7 @@ export default function Home() {
     {
       id: 1,
       name: 'Recipe 1',
-      image: 'cake',
+      image: 'https://picsum.photos',
       preparationTime: 5,
       cookingTime: 60,
       likedBy: [],
@@ -333,7 +333,7 @@ export default function Home() {
     {
       id: 2,
       name: 'Recipe 2',
-      image: 'pizza',
+      image: 'https://picsum.photos',
       preparationTime: 10,
       cookingTime: 8,
       likedBy: [],
@@ -343,7 +343,7 @@ export default function Home() {
     {
       id: 3,
       name: 'Recipe 3',
-      image: 'salade',
+      image: 'https://picsum.photos',
       preparationTime: 20,
       cookingTime: 0,
       likedBy: ['Yohann', 'Louise'],
@@ -353,7 +353,7 @@ export default function Home() {
     {
       id: 1,
       name: 'Recipe 1',
-      image: 'cake',
+      image: 'https://picsum.photos',
       preparationTime: 5,
       cookingTime: 60,
       likedBy: [],
@@ -376,7 +376,7 @@ export default function Home() {
     {
       id: 2,
       name: 'Recipe 2',
-      image: 'pizza',
+      image: 'https://picsum.photos',
       preparationTime: 10,
       cookingTime: 8,
       likedBy: [],
@@ -386,7 +386,7 @@ export default function Home() {
     {
       id: 3,
       name: 'Recipe 3',
-      image: 'salade',
+      image: 'https://picsum.photos',
       preparationTime: 20,
       cookingTime: 0,
       likedBy: ['Yohann', 'Louise'],
@@ -396,7 +396,7 @@ export default function Home() {
     {
       id: 1,
       name: 'Recipe 1',
-      image: 'cake',
+      image: 'https://picsum.photos',
       preparationTime: 5,
       cookingTime: 60,
       likedBy: [],
@@ -419,7 +419,7 @@ export default function Home() {
     {
       id: 2,
       name: 'Recipe 2',
-      image: 'pizza',
+      image: 'https://picsum.photos',
       preparationTime: 10,
       cookingTime: 8,
       likedBy: [],
@@ -429,7 +429,7 @@ export default function Home() {
     {
       id: 3,
       name: 'Recipe 3',
-      image: 'salade',
+      image: 'https://picsum.photos',
       preparationTime: 20,
       cookingTime: 0,
       likedBy: ['Yohann', 'Louise'],
@@ -439,7 +439,7 @@ export default function Home() {
     {
       id: 1,
       name: 'Recipe 1',
-      image: 'cake',
+      image: 'https://picsum.photos',
       preparationTime: 5,
       cookingTime: 60,
       likedBy: [],
@@ -462,7 +462,7 @@ export default function Home() {
     {
       id: 2,
       name: 'Recipe 2',
-      image: 'pizza',
+      image: 'https://picsum.photos',
       preparationTime: 10,
       cookingTime: 8,
       likedBy: [],
@@ -472,7 +472,7 @@ export default function Home() {
     {
       id: 3,
       name: 'Recipe 3',
-      image: 'salade',
+      image: 'https://picsum.photos',
       preparationTime: 20,
       cookingTime: 0,
       likedBy: ['Yohann', 'Louise'],
@@ -482,7 +482,7 @@ export default function Home() {
     {
       id: 1,
       name: 'Recipe 1',
-      image: 'cake',
+      image: 'https://picsum.photos',
       preparationTime: 5,
       cookingTime: 60,
       likedBy: [],
@@ -505,7 +505,7 @@ export default function Home() {
     {
       id: 2,
       name: 'Recipe 2',
-      image: 'pizza',
+      image: 'https://picsum.photos',
       preparationTime: 10,
       cookingTime: 8,
       likedBy: [],
@@ -515,7 +515,7 @@ export default function Home() {
     {
       id: 3,
       name: 'Recipe 3',
-      image: 'salade',
+      image: 'https://picsum.photos',
       preparationTime: 20,
       cookingTime: 0,
       likedBy: ['Yohann', 'Louise'],
@@ -525,7 +525,7 @@ export default function Home() {
     {
       id: 1,
       name: 'Recipe 1',
-      image: 'cake',
+      image: 'https://picsum.photos',
       preparationTime: 5,
       cookingTime: 60,
       likedBy: [],
@@ -548,7 +548,7 @@ export default function Home() {
     {
       id: 2,
       name: 'Recipe 2',
-      image: 'pizza',
+      image: 'https://picsum.photos',
       preparationTime: 10,
       cookingTime: 8,
       likedBy: [],
@@ -558,7 +558,7 @@ export default function Home() {
     {
       id: 3,
       name: 'Recipe 3',
-      image: 'salade',
+      image: 'https://picsum.photos',
       preparationTime: 20,
       cookingTime: 0,
       likedBy: ['Yohann', 'Louise'],
