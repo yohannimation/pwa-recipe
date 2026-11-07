@@ -569,7 +569,7 @@ export default function Home() {
 
   return (
     <>
-      <Header scrollable />
+      <Header />
       <main className="mx-5 md:mx-10 lg:mx-20">
         <FilterBar />
         <RecipeList recipes={recipes} />
