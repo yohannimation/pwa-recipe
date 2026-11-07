@@ -8,7 +8,7 @@ type RecipeCardContentProps = {
   tags: string[]
 }
 
-function RecipeCardContent({ tags }: RecipeCardContentProps ) {
+function RecipeCardContent({ tags }: RecipeCardContentProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [edges, setEdges] = useState({ start: false, end: false })
 
@@ -40,7 +40,7 @@ function RecipeCardContent({ tags }: RecipeCardContentProps ) {
         <div
           data-start={edges.start}
           data-end={edges.end}
-          className='relative before:pointer-events-none before:absolute before:inset-y-0 before:left-0 before:z-10 before:w-7 before:bg-gradient-to-r before:from-white before:to-transparent before:opacity-0 before:transition-opacity before:content-[""] after:pointer-events-none after:absolute after:inset-y-0 after:right-0 after:z-10 after:w-7 after:bg-gradient-to-l after:from-white after:to-transparent after:opacity-0 after:transition-opacity after:content-[""] data-[end=true]:after:opacity-100 data-[start=true]:before:opacity-100'
+          className='relative before:pointer-events-none before:absolute before:inset-y-0 before:left-0 before:z-1 before:w-7 before:bg-gradient-to-r before:from-white before:to-transparent before:opacity-0 before:transition-opacity before:content-[""] after:pointer-events-none after:absolute after:inset-y-0 after:right-0 after:z-1 after:w-7 after:bg-gradient-to-l after:from-white after:to-transparent after:opacity-0 after:transition-opacity after:content-[""] data-[end=true]:after:opacity-100 data-[start=true]:before:opacity-100'
         >
           <div
             ref={scrollRef}

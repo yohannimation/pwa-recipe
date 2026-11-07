@@ -14,11 +14,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html
-      lang="fr"
-      className={`${outfitSans.variable} h-full antialiased`}
-    >
-      <body className="mx-auto flex max-w-[1920px] flex-col">{children}</body>
+    <html lang="fr" className={`${outfitSans.variable} h-full antialiased`}>
+      <body className="mx-auto max-w-[1920px]">{children}</body>
     </html>
   )
 }

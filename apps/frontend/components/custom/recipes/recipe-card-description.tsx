@@ -9,7 +9,11 @@ type RecipeCardDescriptionProps = {
   likedBy: string[]
 }
 
-function RecipeCardDescription({ preparationTime, cookingTime, likedBy }: RecipeCardDescriptionProps ) {
+function RecipeCardDescription({
+  preparationTime,
+  cookingTime,
+  likedBy,
+}: RecipeCardDescriptionProps) {
   const preparationTimeContent = (
     <Badge variant={'ghost'} className="rounded-none border-none">
       <Timer /> {preparationTime}min

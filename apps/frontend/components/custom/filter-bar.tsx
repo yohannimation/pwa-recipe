@@ -19,7 +19,7 @@ function FilterBar() {
   }
 
   return (
-    <aside className="relative mt-2 mb-5 flex flex-wrap items-center justify-between gap-2 rounded-xl bg-white p-2 shadow-(--shadow) md:mt-10">
+    <aside className="relative z-10 flex flex-wrap items-center justify-between gap-2 rounded-xl bg-white p-2 shadow-(--shadow)">
       <FilterList />
 
       <SelectField

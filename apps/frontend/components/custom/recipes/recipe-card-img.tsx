@@ -11,20 +11,18 @@ type RecipeCardImageProps = {
   alt: string
 }
 
-function RecipeCardImage({ image, alt }: RecipeCardImageProps ) {
+function RecipeCardImage({ image, alt }: RecipeCardImageProps) {
   const [imgLoaded, setImgLoaded] = useState<boolean>(false)
   const [imgLoadError, setImgLoadError] = useState<boolean>(false)
 
   return (
     <div className="relative aspect-video w-full">
-      {!imgLoaded &&
-        <Skeleton className='absolute inset-0 rounded-none' />
-      }
-      {imgLoadError &&
-        <div className='absolute inset-0 flex justify-center items-center bg-muted/50'>
+      {!imgLoaded && <Skeleton className="absolute inset-0 rounded-none" />}
+      {imgLoadError && (
+        <div className="bg-muted/50 absolute inset-0 flex items-center justify-center">
           <ImageIcon size={32} />
         </div>
-      }
+      )}
       <Image
         src={image}
         fill

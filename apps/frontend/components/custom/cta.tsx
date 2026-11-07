@@ -75,11 +75,7 @@ function Cta({ text, icon, size = 'md', href, target, onClick }: CtaProps) {
   }
 
   return (
-    <Button
-      {...buttonProps}
-      type="button"
-      onClick={onClick}
-    >
+    <Button {...buttonProps} type="button" onClick={onClick}>
       {content}
     </Button>
   )

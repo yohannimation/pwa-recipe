@@ -8,9 +8,9 @@ import { Button } from '../ui/button'
 
 function Header() {
   return (
-    <header className="sticky top-4 md:top-8 mx-4 md:mx-8 my-4 md:my-8 h-30 md:h-15 max-w-[1920px] flex flex-col md:flex-row items-center gap-5 text-white z-10">
+    <header className="z-10 flex h-30 max-w-[1920px] flex-col items-center gap-5 text-white md:h-15 md:flex-row">
       {/* App logo */}
-      <div className='relative aspect-[2.69/1] h-full'>
+      <div className="relative aspect-[2.69/1] h-full">
         <Image
           src={'/on-mange-quoooi-logo.svg'}
           fill
@@ -18,19 +18,17 @@ function Header() {
         />
       </div>
 
-      <div className='flex items-center gap-5 w-full'>
+      <div className="flex w-full items-center gap-5">
         {/* Search bar */}
-        <div className='w-full'>
+        <div className="w-full">
           <SearchField />
         </div>
 
         {/* Actions */}
-        <div
-          className="flex gap-4"
-        >
-        <Button variant={'icon'} size={'icon'}>
-          <ChefHat />
-        </Button>
+        <div className="flex gap-4">
+          <Button variant={'icon'} size={'icon'}>
+            <ChefHat />
+          </Button>
           <Button variant={'icon'} size={'icon'}>
             <Plus />
           </Button>

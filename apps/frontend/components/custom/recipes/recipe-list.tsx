@@ -2,11 +2,14 @@
 
 import { useState } from 'react'
 
-import { RecipeCard, type RecipeProps } from '@/components/custom/recipes/recipe-card'
+import {
+  RecipeCard,
+  type RecipeProps,
+} from '@/components/custom/recipes/recipe-card'
 import { RecipeCardLoading } from '@/components/custom/recipes/recipe-card-loading'
 
 function RecipeList({ recipes }: { recipes: RecipeProps[] }) {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false)
+  const [isLoaded, setIsLoaded] = useState<boolean>(true)
 
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
