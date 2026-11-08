@@ -1,7 +1,7 @@
 # Compiled output
-/dist
-/node_modules
-/build
+dist
+node_modules
+build
 
 # Compiled output Next.js
 .next/

@@ -33,6 +33,11 @@ export class User {
   @ApiProperty({ enum: Role, example: Role.CHEF })
   role: Role;
 
+  // JWT token version, ensures that the current token is the correct one
+  @Column({ default: 0 })
+  @Exclude()
+  tokenVersion: number;
+
   @CreateDateColumn()
   @ApiProperty()
   createdAt: Date;

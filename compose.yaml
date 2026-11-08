@@ -31,7 +31,9 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: ${DB_NAME}
       JWT_SECRET: ${JWT_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
       JWT_EXPIRES_IN: ${JWT_EXPIRES_IN}
+      APP_ORIGIN: ${APP_ORIGIN}
       SPOONACULAR_API_KEY: ${SPOONACULAR_API_KEY}
     volumes:
       - ./apps/backend:/app

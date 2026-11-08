@@ -49,6 +49,10 @@ export class UsersService {
     return user;
   }
 
+  async incrementTokenVersion(id: string) {
+    await this.userRepository.increment({ id }, 'tokenVersion', 1);
+  }
+
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
     const user = await this.findOne(id);
 
