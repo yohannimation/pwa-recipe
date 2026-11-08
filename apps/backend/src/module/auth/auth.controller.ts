@@ -5,12 +5,15 @@ import {
   Res,
   Req,
   UnauthorizedException,
+  Get,
+  UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import { LoginDto } from './dto/login.dto';
+import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -99,5 +102,11 @@ export class AuthController {
   logout(@Res({ passthrough: true }) res: FastifyReply) {
     this.clearAuthCookies(res);
     return { ok: true };
+  }
+
+  @Get('me')
+  @UseGuards(JwtAuthGuard)
+  me(@Req() req: any) {
+    return req.user;
   }
 }
