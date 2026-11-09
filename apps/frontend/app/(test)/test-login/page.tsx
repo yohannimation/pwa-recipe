@@ -1,6 +1,5 @@
 'use client';
 
-// app/debug-auth/page.tsx
 // Page de test TEMPORAIRE : à supprimer avant la mise en production.
 
 import { useState } from 'react';

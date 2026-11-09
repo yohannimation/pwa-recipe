@@ -9,6 +9,7 @@ services:
       - /app/node_modules
       - /app/.next
     environment:
+      INTERNAL_API_URL: ${INTERNAL_API_URL}
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-/api}
       NEXT_SERVER_HOST: ${NEXT_SERVER_HOST}
       NODE_ENV: ${NODE_ENV:-development}
