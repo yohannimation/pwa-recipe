@@ -12,47 +12,38 @@ import { RecipeCardContent } from '@/components/custom/recipes/recipe-card-conte
 import { RecipeCardDescription } from '@/components/custom/recipes/recipe-card-description'
 import { RecipeCardImage } from '@/components/custom/recipes/recipe-card-img'
 
+import type { RecipeInterface } from '@/types/recipes'
+
 import { ArrowRight } from 'lucide-react'
 
-type RecipeProps = {
-  id: number
-  name: string
-  image: string
-  preparationTime: number
-  cookingTime: number
-  likedBy: string[]
-  tags: string[]
-  url: string
-}
-
-function RecipeCard({ recipe }: { recipe: RecipeProps }) {
-  const { id, name, image, preparationTime, cookingTime, likedBy, tags, url } =
+function RecipeCard({ recipe }: { recipe: RecipeInterface }) {
+  const {id, name, imageName, preparationTime, cookTime, numberPeople, categories, user } =
     recipe
 
   return (
     <Card className="overflow-hidden pt-0">
-      <RecipeCardImage image={image} alt={name} />
+      <RecipeCardImage image={imageName} alt={name} />
 
       <CardHeader>
         <CardTitle>{name}</CardTitle>
         <CardDescription>
           <RecipeCardDescription
             preparationTime={preparationTime}
-            cookingTime={cookingTime}
-            likedBy={likedBy}
+            cookingTime={cookTime}
+            likedBy={["Yohann", "Louise", "Test 3", "Test 4", "Test 5"]}
           />
         </CardDescription>
       </CardHeader>
 
       <CardContent>
-        <RecipeCardContent tags={tags} />
+        <RecipeCardContent categories={categories} />
       </CardContent>
 
       <CardFooter className="justify-end">
         <Cta
           text="Voir la recette"
           icon={<ArrowRight />}
-          href={url}
+          href={`/test-${id}`}
           size="md"
         />
       </CardFooter>
@@ -61,4 +52,3 @@ function RecipeCard({ recipe }: { recipe: RecipeProps }) {
 }
 
 export { RecipeCard }
-export type { RecipeProps }

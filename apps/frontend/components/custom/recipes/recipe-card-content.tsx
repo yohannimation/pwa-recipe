@@ -5,10 +5,10 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Badge } from '@/components/ui/badge'
 
 type RecipeCardContentProps = {
-  tags: string[]
+  categories: undefined[]
 }
 
-function RecipeCardContent({ tags }: RecipeCardContentProps) {
+function RecipeCardContent({ categories }: RecipeCardContentProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [edges, setEdges] = useState({ start: false, end: false })
 
@@ -32,11 +32,11 @@ function RecipeCardContent({ tags }: RecipeCardContentProps) {
     observer.observe(element)
     if (element.firstElementChild) observer.observe(element.firstElementChild)
     return () => observer.disconnect()
-  }, [updateEdges, tags])
+  }, [updateEdges, categories])
 
   return (
     <>
-      {tags.length > 0 ? (
+      {categories?.length > 0 ? (
         <div
           data-start={edges.start}
           data-end={edges.end}
@@ -48,9 +48,9 @@ function RecipeCardContent({ tags }: RecipeCardContentProps) {
             className="[scrollbar-width:none] overflow-x-auto [&::-webkit-scrollbar]:hidden"
           >
             <ul className="flex flex-nowrap gap-1">
-              {tags.map((tag) => (
-                <li key={tag}>
-                  <Badge variant="outline">{tag}</Badge>
+              {categories.map((category) => (
+                <li key={category.id}>
+                  <Badge variant="outline">{category.name}</Badge>
                 </li>
               ))}
             </ul>
