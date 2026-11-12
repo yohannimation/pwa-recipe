@@ -27,61 +27,15 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 
-import { Settings2 } from 'lucide-react'
 import { useMediaQuery } from '@/lib/useMediaQuery'
 
-function FilterList() {
+import type { CategoryInterface } from '@/types/categories'
+
+import { Settings2 } from 'lucide-react'
+
+function FilterList({ categories }: { categories: CategoryInterface[] }) {
   const [open, setOpen] = useState<boolean>(false)
   const isDesktop = useMediaQuery('(min-width: 768px)')
-
-  const categories = [
-    {
-      name: 'Type de plat',
-      value: 'plat',
-      children: [
-        { name: 'Apéritif' },
-        { name: 'Entrée' },
-        { name: 'Plat' },
-        { name: 'Dessert' },
-        { name: 'Petit-déjeuner' },
-      ],
-    },
-    {
-      name: 'Type de cuisine',
-      value: 'cuisine',
-      children: [
-        { name: 'Chinois' },
-        { name: 'Européen' },
-        { name: 'Américain' },
-      ],
-    },
-    {
-      name: 'Temps de préparation',
-      value: 'preparation',
-      children: [
-        { name: '10min' },
-        { name: '20min' },
-        { name: '30min' },
-        { name: '40min' },
-        { name: '50min' },
-      ],
-    },
-    {
-      name: 'Goût',
-      value: 'gout',
-      children: [
-        { name: 'Salé' },
-        { name: 'Sucré' },
-        { name: 'Épicé' },
-        { name: 'Acide' },
-      ],
-    },
-    {
-      name: 'Ingrédient principal',
-      value: 'ingredient',
-      children: [{ name: 'Viande' }, { name: 'Legume' }, { name: 'Fruit' }],
-    },
-  ]
 
   const trigger = (
     <div>
@@ -102,17 +56,17 @@ function FilterList() {
             {/* Colonne 1 : Index pairs (0, 2, 4...) */}
             <Accordion
               type="multiple"
-              defaultValue={['plat']}
+              defaultValue={[categories[0].name]}
               className="w-full flex-1"
             >
               {categories
                 .filter((_, i) => i % 2 === 0)
-                .map((category) => (
-                  <AccordionItem key={category.value} value={category.value}>
+                .map((category: CategoryInterface) => (
+                  <AccordionItem key={category.name} value={category.name}>
                     <AccordionTrigger>{category.name}</AccordionTrigger>
                     <AccordionContent>
                       <ul className="flex flex-col gap-1.5">
-                        {category.children.map((child) => (
+                        {category.children.map((child: CategoryInterface) => (
                           <li key={child.name}>
                             <CheckboxField label={child.name} />
                           </li>
@@ -127,12 +81,12 @@ function FilterList() {
             <Accordion type="multiple" className="w-full flex-1">
               {categories
                 .filter((_, i) => i % 2 !== 0)
-                .map((category) => (
-                  <AccordionItem key={category.value} value={category.value}>
+                .map((category: CategoryInterface) => (
+                  <AccordionItem key={category.name} value={category.name}>
                     <AccordionTrigger>{category.name}</AccordionTrigger>
                     <AccordionContent>
                       <ul className="flex flex-col gap-1.5">
-                        {category.children.map((child) => (
+                        {category.children.map((child: CategoryInterface) => (
                           <li key={child.name}>
                             <CheckboxField label={child.name} />
                           </li>
@@ -147,7 +101,7 @@ function FilterList() {
           <Accordion type="multiple">
             {categories.map((category) => {
               return (
-                <AccordionItem key={category.value} value={category.value}>
+                <AccordionItem key={category.name} value={category.name}>
                   <AccordionTrigger>{category.name}</AccordionTrigger>
                   <AccordionContent>
                     <ul className="flex flex-col gap-1.5">

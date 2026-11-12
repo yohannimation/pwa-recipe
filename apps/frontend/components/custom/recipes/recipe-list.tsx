@@ -2,13 +2,12 @@
 
 import { useState } from 'react'
 
-import {
-  RecipeCard,
-  type RecipeProps,
-} from '@/components/custom/recipes/recipe-card'
+import { RecipeCard } from '@/components/custom/recipes/recipe-card'
 import { RecipeCardLoading } from '@/components/custom/recipes/recipe-card-loading'
 
-function RecipeList({ recipes }: { recipes: RecipeProps[] }) {
+import type { RecipeInterface } from '@/types/recipes'
+
+function RecipeList({ recipes }: { recipes: RecipeInterface[] }) {
   const [isLoaded, setIsLoaded] = useState<boolean>(true)
 
   return (

@@ -4,8 +4,10 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { Badge } from '@/components/ui/badge'
 
+import type { CategoryInterface } from "@/types/categories"
+
 type RecipeCardContentProps = {
-  categories: undefined[]
+  categories: CategoryInterface[]
 }
 
 function RecipeCardContent({ categories }: RecipeCardContentProps) {
@@ -36,7 +38,7 @@ function RecipeCardContent({ categories }: RecipeCardContentProps) {
 
   return (
     <>
-      {categories?.length > 0 ? (
+      {categories.length > 0 ? (
         <div
           data-start={edges.start}
           data-end={edges.end}
