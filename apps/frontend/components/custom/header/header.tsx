@@ -1,10 +1,9 @@
 'use client'
 
-import { ChefHat, Plus } from 'lucide-react'
 import Image from 'next/image'
 
+import { HeaderCta } from '@/components/custom/header/header-cta'
 import { SearchField } from '@/components/custom/fields/search-field'
-import { Button } from '../ui/button'
 
 function Header() {
   return (
@@ -25,14 +24,7 @@ function Header() {
         </div>
 
         {/* Actions */}
-        <div className="flex gap-4">
-          <Button variant={'icon'} size={'icon'}>
-            <ChefHat />
-          </Button>
-          <Button variant={'icon'} size={'icon'}>
-            <Plus />
-          </Button>
-        </div>
+        <HeaderCta />
       </div>
     </header>
   )

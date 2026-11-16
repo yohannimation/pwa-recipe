@@ -1,4 +1,5 @@
 import { CategoryInterface } from "@/types/categories"
+import { UserInterface } from "@/types/users"
 
 export type RecipeInterface = {
   id: number
@@ -10,7 +11,7 @@ export type RecipeInterface = {
   categories: CategoryInterface[]
   steps: undefined
   ingredients: undefined
-  user: undefined
+  user: UserInterface
   createdAt: string
   updatedAt: string
 }

@@ -1,0 +1,91 @@
+'use client'
+
+import Link from 'next/link'
+import { useAuth } from '@/providers/auth-provider'
+
+import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Spinner } from '../../ui/spinner'
+
+import { BookBookmark, ChefHat, LogIn, LogOut, User, UserPlus } from 'lucide-react'
+
+function HeaderCtaProfile() {
+  const { user, isLoading, logout } = useAuth();
+
+  const triggerLogout = () => logout()
+
+  const loadingContent = <>
+    <DropdownMenuGroup>
+      <DropdownMenuItem className='p-2 focus:bg-white focus:text-foreground not-data-[variant=destructive]:focus:**:text-foreground'>
+        <Spinner /> Chargement
+      </DropdownMenuItem>
+    </DropdownMenuGroup>
+  </>
+
+  const loggedOutContent = <>
+    <DropdownMenuGroup>
+      <Link href={"/test-login"}>
+        <DropdownMenuItem className='p-2'>
+            <LogIn /> Connexion
+        </DropdownMenuItem>
+      </Link>
+      <Link href={""}>
+        <DropdownMenuItem className='p-2'>
+          <UserPlus /> Inscription
+        </DropdownMenuItem>
+      </Link>
+    </DropdownMenuGroup>
+  </>
+
+  const loggedContent = <>
+    <DropdownMenuGroup>
+      <Link href={""}>
+        <DropdownMenuItem className='p-2'>
+          <BookBookmark /> Mes recettes
+        </DropdownMenuItem>
+      </Link>
+      <Link href={""}>
+        <DropdownMenuItem className='p-2'>
+          <User /> Mon profil
+        </DropdownMenuItem>
+      </Link>
+    </DropdownMenuGroup>
+    <DropdownMenuSeparator />
+    <DropdownMenuGroup>
+      <DropdownMenuItem
+        variant="destructive"
+        className='p-2'
+        onClick={triggerLogout}
+      >
+        <LogOut /> Deconnexion
+      </DropdownMenuItem>
+    </DropdownMenuGroup>
+  </>
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant={'icon'} size={'icon'}>
+          <ChefHat />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align='center'>
+        {
+          isLoading ?
+            (loadingContent)
+          :
+            (user ? loggedContent : loggedOutContent)
+        }
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
+export { HeaderCtaProfile }

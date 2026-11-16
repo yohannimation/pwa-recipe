@@ -1,7 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { api, ApiError } from './client';
+import { api, ApiError } from '@/lib/api/client';
 
-export type User = { id: number; username: string; role: string };
+import type { UserInterface } from '@/types/users';
+
 export const meKey = ['auth', 'me'] as const;
 
 export function useMe() {
@@ -9,7 +10,7 @@ export function useMe() {
     queryKey: meKey,
     queryFn: async () => {
       try {
-        return await api<User>('/auth/me');
+        return await api<UserInterface>('/auth/me');
       } catch (e) {
         if (e instanceof ApiError && e.status === 401) return null;
         throw e;
@@ -31,8 +32,8 @@ export function useLogin() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (body: { username: string; password: string }) =>
-      api<{ user: User }>('/auth/login', { method: 'POST', body: body }),
-    onSuccess: ({ user }: { user: User }) => queryClient.setQueryData(meKey, user),
+      api<{ user: UserInterface }>('/auth/login', { method: 'POST', body: body }),
+    onSuccess: ({ user }: { user: UserInterface }) => queryClient.setQueryData(meKey, user),
   });
 }
 

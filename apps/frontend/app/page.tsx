@@ -1,5 +1,5 @@
 import { FilterBar } from '@/components/custom/filter-bar'
-import { Header } from '@/components/custom/header'
+import { Header } from '@/components/custom/header/header'
 import { RecipeList } from '@/components/custom/recipes/recipe-list'
 
 import { serverApi } from '@/lib/api/server'

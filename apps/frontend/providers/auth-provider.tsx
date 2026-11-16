@@ -2,10 +2,12 @@
 
 import { createContext, useContext, useMemo } from 'react';
 
-import { useLogin, useLogout, useMe, type User } from '@/lib/api/auth';
+import { useLogin, useLogout, useMe } from '@/lib/api/auth';
+
+import type { UserInterface } from '@/types/users';
 
 type Ctx = {
-  user: User | null;
+  user: UserInterface | null;
   isLoading: boolean;
   login: ReturnType<typeof useLogin>['mutateAsync'];
   logout: ReturnType<typeof useLogout>['mutateAsync'];
