@@ -36,7 +36,7 @@ function HeaderCtaProfile() {
             <LogIn /> Connexion
         </DropdownMenuItem>
       </Link>
-      <Link href={""}>
+      <Link href={"/auth/register"}>
         <DropdownMenuItem className='p-2'>
           <UserPlus /> Inscription
         </DropdownMenuItem>

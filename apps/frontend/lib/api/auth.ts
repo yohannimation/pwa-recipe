@@ -24,7 +24,7 @@ export function useMe() {
 export function useRegister() {
   return useMutation({
     mutationFn: (body: { username: string; password: string }) =>
-      api('/auth/register', { method: 'POST', body: body }),
+      api<UserInterface>('/auth/register', { method: 'POST', body: body }),
   });
 }
 

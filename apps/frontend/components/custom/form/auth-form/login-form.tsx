@@ -2,6 +2,9 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+
+import { useAuth } from '@/providers/auth-provider'
 
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -13,9 +16,7 @@ import { FieldError, FieldGroup } from '@/components/ui/field'
 import { PasswordField } from '@/components/custom/fields/password-field'
 import { TextField } from '@/components/custom/fields/text-field'
 import { Spinner } from '@/components/ui/spinner'
-import { useAuth } from '@/providers/auth-provider'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import Link from 'next/link'
 
 const loginSchema = yup.object({
   username: yup
