@@ -31,7 +31,7 @@ function HeaderCtaProfile() {
 
   const loggedOutContent = <>
     <DropdownMenuGroup>
-      <Link href={"/test-login"}>
+      <Link href={"/auth/login"}>
         <DropdownMenuItem className='p-2'>
             <LogIn /> Connexion
         </DropdownMenuItem>
