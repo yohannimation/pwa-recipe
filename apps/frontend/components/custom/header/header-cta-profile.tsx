@@ -46,12 +46,12 @@ function HeaderCtaProfile() {
 
   const loggedContent = <>
     <DropdownMenuGroup>
-      <Link href={""}>
+      <Link href={"/chief/recipes"}>
         <DropdownMenuItem className='p-2'>
           <BookBookmark /> Mes recettes
         </DropdownMenuItem>
       </Link>
-      <Link href={""}>
+      <Link href={"/chief/profile"}>
         <DropdownMenuItem className='p-2'>
           <User /> Mon profil
         </DropdownMenuItem>

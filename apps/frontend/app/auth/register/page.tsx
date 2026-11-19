@@ -1,5 +1,5 @@
 import { RegisterForm } from "@/components/custom/form/auth-form/register-form";
 
-export default async function Register() {
+export default function Register() {
   return <RegisterForm />
 }

@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link';
+
 import { Button } from '@/components/ui/button'
 import { HeaderCtaProfile } from '@/components/custom/header/header-cta-profile';
 
@@ -9,8 +11,10 @@ function HeaderCta() {
   return (
     <div className="flex gap-4">
       <HeaderCtaProfile />
-      <Button variant={'icon'} size={'icon'}>
-        <Plus />
+      <Button variant={'icon'} size={'icon'} asChild>
+        <Link href={"/chief/recipes/add"}>
+          <Plus />
+        </Link>
       </Button>
     </div>
   )
