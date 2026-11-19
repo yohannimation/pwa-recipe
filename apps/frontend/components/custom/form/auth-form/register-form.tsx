@@ -27,6 +27,9 @@ const registerSchema = yup.object({
   password: yup
     .string()
     .min(8, 'Le mot de passe doit contenir au moins 8 caractères')
+    .matches(/[A-Z]/, 'Le mot de passe doit contenir au moins une majuscule')
+    .matches(/[0-9]/, 'Le mot de passe doit contenir au moins un chiffre')
+    .matches(/[!@#$%^&*(),.?":{}|<>_\-+=/\\[\]~`;' ]/, 'Le mot de passe doit contenir au moins un caractère spécial')
     .required('Le mot de passe est requis'),
   confirmPassword: yup
     .string()
@@ -104,6 +107,7 @@ function RegisterForm() {
               <PasswordField
                 ref={field.ref}
                 name={field.name}
+                description='Doit contenir au minimum : 8 caractères, 1 majuscule, 1 chiffre, 1 caractère spécial'
                 value={field.value}
                 onBlur={field.onBlur}
                 onValueChange={field.onChange}
