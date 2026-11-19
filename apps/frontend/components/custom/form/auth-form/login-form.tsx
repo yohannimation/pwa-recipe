@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 
 import { useAuth } from '@/providers/auth-provider'
@@ -9,7 +9,6 @@ import { useAuth } from '@/providers/auth-provider'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-
 
 import { Button } from '@/components/ui/button'
 import { FieldError, FieldGroup } from '@/components/ui/field'
@@ -33,6 +32,9 @@ type LoginFormValues = yup.InferType<typeof loginSchema>
 
 function LoginForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const nextPage = searchParams.get('next')
+
   const { user, isLoading, login } = useAuth()
   const form = useForm<LoginFormValues>({
     resolver: yupResolver(loginSchema),
@@ -43,8 +45,8 @@ function LoginForm() {
   })
 
   useEffect(() => {
-    if (user) router.replace('/')
-  }, [user, router])
+    if (user) router.replace(nextPage ?? '/')
+  }, [user, router, nextPage])
 
   async function onSubmit(values: LoginFormValues) {
     try {
