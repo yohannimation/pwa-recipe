@@ -18,7 +18,7 @@ import { RecipeInterface } from '@/types/recipes'
 import { ComboboxField } from '../../fields/combobox-field'
 import { CategoryInterface } from '@/types/categories'
 
-const MAX_SIZE = 5 * 1024 * 1024
+const MAX_SIZE = 2 * 1024 * 1024
 const positiveInt = (label: string) => 
   yup
     .number()
