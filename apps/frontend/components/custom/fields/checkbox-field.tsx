@@ -29,6 +29,7 @@ function CheckboxField({
   id,
   disabled,
   onCheckedChange,
+  className,
   ...props
 }: CheckboxFieldProps) {
   const generatedId = useId()
@@ -41,6 +42,7 @@ function CheckboxField({
       orientation="horizontal"
       data-invalid={hasError}
       data-disabled={disabled}
+      className={className}
     >
       <Checkbox
         id={inputId}

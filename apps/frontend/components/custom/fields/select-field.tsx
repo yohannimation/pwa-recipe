@@ -15,7 +15,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { cn } from '@/lib/utils'
 
 type SelectFieldOption = {
   value: string
@@ -33,7 +32,6 @@ type SelectFieldProps = Omit<
   error?: string | { message: string }[]
   description?: string
   id?: string
-  className?: string
   onValueChange?: (value: string) => void
 }
 

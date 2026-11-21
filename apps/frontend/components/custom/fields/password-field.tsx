@@ -34,6 +34,7 @@ function PasswordField({
   id,
   disabled,
   onValueChange,
+  className,
   ...props
 }: PasswordFieldProps) {
   const generatedId = useId()
@@ -43,7 +44,7 @@ function PasswordField({
   const hasError = Array.isArray(error) ? error.length > 0 : !!error
 
   return (
-    <Field data-invalid={hasError} data-disabled={disabled}>
+    <Field data-invalid={hasError} data-disabled={disabled} className={className}>
       <FieldLabel htmlFor={inputId}>{label}</FieldLabel>
 
       <InputGroup>

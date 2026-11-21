@@ -101,7 +101,7 @@ function NumberField({
     <Field
       data-invalid={hasError}
       data-disabled={disabled}
-      className="max-w-[12rem]"
+      className={className}
     >
       <FieldLabel htmlFor={inputId}>{label}</FieldLabel>
 
@@ -131,7 +131,7 @@ function NumberField({
           disabled={disabled}
           onChange={handleChange}
           onBlur={handleBlur}
-          className={cn('text-center', className)}
+          className='text-center'
           {...props}
         />
 

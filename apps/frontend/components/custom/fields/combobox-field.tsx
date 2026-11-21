@@ -7,10 +7,13 @@ import {
   ComboboxChip,
   ComboboxChips,
   ComboboxChipsInput,
+  ComboboxCollection,
   ComboboxContent,
   ComboboxEmpty,
+  ComboboxGroup,
   ComboboxInput,
   ComboboxItem,
+  ComboboxLabel,
   ComboboxList,
   ComboboxValue,
   useComboboxAnchor,
@@ -27,10 +30,15 @@ type ComboboxFieldOption = {
   label: string
   disabled?: boolean
 }
+type ComboboxFieldGroup = {
+  value: string
+  items: ComboboxFieldOption[]
+}
 
 type ComboboxFieldBaseProps = {
   label: string
-  options: ComboboxFieldOption[]
+  options?: ComboboxFieldOption[]
+  groups?: ComboboxFieldGroup[]
   placeholder?: string
   emptyText?: string
   showClear?: boolean
@@ -61,7 +69,8 @@ type ComboboxFieldProps = ComboboxFieldSingleProps | ComboboxFieldMultipleProps
 function ComboboxField(props: ComboboxFieldProps) {
   const {
     label,
-    options,
+    options = [],
+    groups,
     placeholder = 'Rechercher une option',
     emptyText = 'Aucun résultat',
     showClear = false,
@@ -79,9 +88,10 @@ function ComboboxField(props: ComboboxFieldProps) {
 
   const hasError = Array.isArray(error) ? error.length > 0 : !!error
 
+  const flatOptions = groups ? groups.flatMap((group) => group.items) : options
   // Le Combobox travaille avec l'objet option complet, pas seulement sa valeur
   const findOption = (value: string | null | undefined) =>
-    options.find((option) => option.value === value) ?? null
+    flatOptions.find((option) => option.value === value) ?? null
   const findOptions = (values: string[] | undefined) =>
     (values ?? []).flatMap((value) => {
       const option = findOption(value)
@@ -89,7 +99,7 @@ function ComboboxField(props: ComboboxFieldProps) {
     })
 
   const sharedProps = {
-    items: options,
+    items: groups ?? options,
     name,
     disabled,
     isItemEqualToValue: (a: ComboboxFieldOption, b: ComboboxFieldOption) =>
@@ -97,19 +107,24 @@ function ComboboxField(props: ComboboxFieldProps) {
     itemToStringValue: (item: ComboboxFieldOption) => item.value,
   }
 
+  const renderItem = (option: ComboboxFieldOption) => (
+    <ComboboxItem key={option.value} value={option} disabled={option.disabled}>
+      {option.label}
+    </ComboboxItem>
+  )
+
   const list = (
     <>
       <ComboboxEmpty>{emptyText}</ComboboxEmpty>
       <ComboboxList>
-        {(option: ComboboxFieldOption) => (
-          <ComboboxItem
-            key={option.value}
-            value={option}
-            disabled={option.disabled}
-          >
-            {option.label}
-          </ComboboxItem>
-        )}
+        {groups
+        ? (group: ComboboxFieldGroup) => (
+            <ComboboxGroup key={group.value} items={group.items}>
+              <ComboboxLabel>{group.value}</ComboboxLabel>
+              <ComboboxCollection>{renderItem}</ComboboxCollection>
+            </ComboboxGroup>
+          )
+        : renderItem}
       </ComboboxList>
     </>
   )
@@ -135,7 +150,6 @@ function ComboboxField(props: ComboboxFieldProps) {
         <ComboboxChips
           ref={anchor}
           aria-invalid={hasError}
-          className={className}
         >
           <ComboboxValue>
             {(selected: ComboboxFieldOption[]) => (
@@ -185,7 +199,7 @@ function ComboboxField(props: ComboboxFieldProps) {
   }
 
   return (
-    <Field data-invalid={hasError} data-disabled={disabled}>
+    <Field data-invalid={hasError} data-disabled={disabled} className={className}>
       <FieldLabel htmlFor={inputId}>{label}</FieldLabel>
 
       {control}

@@ -37,6 +37,7 @@ function TextField({
   startAddon,
   endAddon,
   onValueChange,
+  className,
   ...props
 }: TextFieldProps) {
   const generatedId = useId()
@@ -45,7 +46,7 @@ function TextField({
   const hasError = Array.isArray(error) ? error.length > 0 : !!error
 
   return (
-    <Field data-invalid={hasError} data-disabled={disabled}>
+    <Field data-invalid={hasError} data-disabled={disabled} className={className}>
       <FieldLabel htmlFor={inputId}>{label}</FieldLabel>
 
       <InputGroup>

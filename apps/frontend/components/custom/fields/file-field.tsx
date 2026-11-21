@@ -162,7 +162,7 @@ function FileField({
   }
 
   return (
-    <Field data-invalid={hasError} data-disabled={disabled}>
+    <Field data-invalid={hasError} data-disabled={disabled} className={className}>
       <FieldLabel htmlFor={inputId}>{label}</FieldLabel>
 
       {/* Real input file hidden. The visible field below control it */}
@@ -185,7 +185,7 @@ function FileField({
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         className={cn(
-          'placeholder:text-foreground h-[6rem] border-2 border-dashed',
+          'placeholder:text-foreground h-full border-2 border-dashed',
           isDragging && 'border-ring ring-ring/50 bg-accent/50 ring-[3px]'
         )}
       >
@@ -216,7 +216,7 @@ function FileField({
           disabled={disabled}
           onClick={openPicker}
           onKeyDown={handleKeyDown}
-          className={cn('h-full cursor-pointer', className)}
+          className='h-full cursor-pointer'
           {...props}
         />
 
