@@ -26,7 +26,7 @@ function RecipeCardImage({ image, alt }: RecipeCardImageProps) {
       )}
       {hasImgUrl &&
         <Image
-          src={image}
+          src={`/uploads/recipes/${image}`}
           fill
           loading="lazy"
           alt={alt}

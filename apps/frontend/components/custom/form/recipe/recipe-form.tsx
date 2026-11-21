@@ -1,8 +1,11 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+
+import { api } from '@/lib/api/client'
 
 import { Button } from '@/components/ui/button'
 import { FieldError, FieldGroup } from '@/components/ui/field'
@@ -67,6 +70,7 @@ type RecipeFormProps =
   }
 
 function RecipeForm({ edit, recipe, categories }: RecipeFormProps) {
+  const router = useRouter()
   const form = useForm<RecipeFormValues>({
     resolver: yupResolver(recipeSchema),
     defaultValues: {
@@ -88,15 +92,31 @@ function RecipeForm({ edit, recipe, categories }: RecipeFormProps) {
   }))
 
   async function onSubmit(values: RecipeFormValues) {
-    console.log(values)
+    const { image, ...recipeData } = values;
 
     try {
-      /**
-       * TODO Step 1 : Send the image to the backend and get the imageName
-       * TODO Step 2 : Add the imageName to other data to create the recipe
-       */
+      if (edit) {
+        // Update API call
+      } else {
+        const created = await api<RecipeInterface>('/recipes', {
+          method: 'POST',
+          body: recipeData
+        })
+
+        if (image instanceof File) {
+          const formData = new FormData();
+          formData.append('file', image);
+    
+          await api(`/recipes/${created.id}/image`, {
+            method: 'POST',
+            body: formData,
+          });
+        }
+
+        router.replace('/')
+      }
     } catch {
-      form.setError('root', { message: '' })
+      form.setError('root', { message: "La création de recette s'est mal passé" })
     }
   }
 

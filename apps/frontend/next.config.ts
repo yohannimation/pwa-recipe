@@ -1,15 +1,13 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  images: {
-    remotePatterns: [
+  async rewrites() {
+    return [
       {
-        protocol: 'https',
-        hostname: 'picsum.photos',
-        port: '',
-        pathname: '/**',
+        source: '/uploads/:path*',
+        destination: 'http://backend:3000/uploads/:path*',
       },
-    ],
+    ];
   },
 }
 
