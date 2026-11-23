@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
@@ -41,6 +41,7 @@ type RegisterFormValues = yup.InferType<typeof registerSchema>
 
 function RegisterForm() {
   const router = useRouter()
+  const [isPending, startTransition] = useTransition()
   const register = useRegister()
   const form = useForm<RegisterFormValues>({
     resolver: yupResolver(registerSchema),
@@ -53,7 +54,11 @@ function RegisterForm() {
   const [user, setUser] = useState<UserInterface|null>(null)
 
   useEffect(() => {
-    if (user) router.replace('/auth/login')
+    if (user)
+      startTransition(() => {
+        router.push('/auth/login')
+      })
+
   }, [user, router])
 
   async function onSubmit(values: RegisterFormValues) {

@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useEffect, useTransition } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 
 import { useAuth } from '@/providers/auth-provider'
@@ -34,6 +34,7 @@ function LoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const nextPage = searchParams.get('next')
+  const [isPending, startTransition] = useTransition()
 
   const { user, isLoading, login } = useAuth()
   const form = useForm<LoginFormValues>({
@@ -45,7 +46,11 @@ function LoginForm() {
   })
 
   useEffect(() => {
-    if (user) router.replace(nextPage ?? '/')
+    if (user)
+      startTransition(() => {
+        router.push(nextPage ?? '/')
+      })
+
   }, [user, router, nextPage])
 
   async function onSubmit(values: LoginFormValues) {
