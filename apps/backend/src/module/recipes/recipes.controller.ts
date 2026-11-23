@@ -33,6 +33,7 @@ import {
   ApiBody,
 } from '@nestjs/swagger';
 import type { FastifyRequest } from 'fastify';
+import type { SortInterface } from 'src/common/types/sort';
 
 @ApiTags('Recipes')
 @Controller('recipes')
@@ -62,8 +63,12 @@ export class RecipesController {
     description: 'Filter by category',
   })
   @ApiResponse({ status: 200, type: [Recipe] })
-  findAll(@Query('name') name?: string, @Query('category') category?: string) {
-    return this.recipesService.findAll({ name, category });
+  findAll(
+    @Query('name') name?: string,
+    @Query('category') category?: string,
+    @Query('sort') sort?: SortInterface,
+  ) {
+    return this.recipesService.findAll({ name, category, sort });
   }
 
   @Get(':id')

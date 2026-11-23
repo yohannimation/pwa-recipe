@@ -20,6 +20,9 @@ import { StepsService } from '../steps/steps.service';
 import { IngredientsService } from '../ingredients/ingredients.service';
 import { UploadService } from '../upload/upload.service';
 
+// Interfaces
+import type { SortInterface } from 'src/common/types/sort';
+
 @Injectable()
 export class RecipesService {
   constructor(
@@ -73,16 +76,30 @@ export class RecipesService {
     return this.findOne(+savedRecipe.id);
   }
 
-  async findAll(query: { name?: string; category?: string }) {
-    const { name, category } = query;
+  async findAll(query: {
+    name?: string;
+    category?: string;
+    sort?: SortInterface;
+  }) {
+    const { name, category, sort } = query;
 
     const where: FindManyOptions<Recipe>['where'] = {};
 
     if (name) where.name = ILike(`%${name}%`);
     if (category) where.categories = { name: ILike(`%${category}%`) };
 
+    const SORT_MAP: Record<SortInterface, FindManyOptions<Recipe>['order']> = {
+      'name-asc': { name: 'ASC' },
+      'name-desc': { name: 'DESC' },
+      'creation-asc': { createdAt: 'ASC' },
+      'creation-desc': { createdAt: 'DESC' },
+    };
+    const order =
+      SORT_MAP[sort ?? 'creation-desc'] ?? SORT_MAP['creation-desc'];
+
     return await this.recipeRepository.find({
       where,
+      order,
       relations: ['user', 'categories', 'ingredients', 'steps'],
       select: {
         user: {
