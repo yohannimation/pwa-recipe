@@ -29,13 +29,16 @@ function RecipeCard({ recipe }: { recipe: RecipeInterface }) {
             preparationTime={preparationTime}
             cookingTime={cookTime}
             user={user}
-            likedBy={['Yohann', 'Louise', 'Test 3', 'Test 4', 'Test 5']}
           />
         </CardDescription>
       </CardHeader>
 
       <CardContent>
-        <RecipeCardContent categories={categories} numberPeople={numberPeople} />
+        <RecipeCardContent
+          categories={categories}
+          numberPeople={numberPeople}
+          likedBy={['Yohann', 'Louise', 'Test 3', 'Test 4', 'Test 5']}
+        />
       </CardContent>
 
       <CardFooter className="justify-end">

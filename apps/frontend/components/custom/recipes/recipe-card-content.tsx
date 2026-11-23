@@ -2,18 +2,23 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+import { AvatarGroup, AvatarGroupCount } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
+import { Blobatar } from '@/components/ui/blobatar'
 
 import type { CategoryInterface } from '@/types/categories'
 
 type RecipeCardContentProps = {
   categories: CategoryInterface[]
   numberPeople: number
+  likedBy: string[]
 }
 
-function RecipeCardContent({ categories, numberPeople }: RecipeCardContentProps) {
+function RecipeCardContent({ categories, numberPeople, likedBy }: RecipeCardContentProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [edges, setEdges] = useState({ start: false, end: false })
+
+  const likeCount = 3
 
   const updateEdges = useCallback(() => {
     const element = scrollRef.current
@@ -38,7 +43,8 @@ function RecipeCardContent({ categories, numberPeople }: RecipeCardContentProps)
   }, [updateEdges, categories])
 
   return (
-    <>
+    <div className="flex flex-col gap-2">
+      {/* Categories part */}
       {categories.length > 0 ? (
         <div
           data-start={edges.start}
@@ -68,7 +74,29 @@ function RecipeCardContent({ categories, numberPeople }: RecipeCardContentProps)
       ) : (
         <span className="text-foreground/40">Pas de catégorie</span>
       )}
-    </>
+
+      {/* Liked by part */}
+      {likedBy.length > 0 && (
+        <Badge variant={'ghost'} className="h-8 overflow-visible rounded-none border-none">
+          Aimé par
+          <AvatarGroup>
+            {/* Display X Blobatar */}
+            {likedBy.slice(0, likeCount).map((user) => (
+              <Blobatar
+                key={user}
+                name={user}
+                blobatar={{ background: 'circle', animate: 'always' }}
+                title={user}
+              />
+            ))}
+
+            {likedBy.length > likeCount && (
+              <AvatarGroupCount>+{likedBy.length - likeCount}</AvatarGroupCount>
+            )}
+          </AvatarGroup>
+        </Badge>
+      )}
+    </div>
   )
 }
 
