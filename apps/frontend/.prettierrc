@@ -2,7 +2,32 @@
     "semi": false,
     "singleQuote": true,
     "trailingComma": "es5",
-    "printWidth": 80,
+    "printWidth": 100,
     "tabWidth": 2,
-    "plugins": ["prettier-plugin-tailwindcss"]
+    "plugins": [
+        "@trivago/prettier-plugin-sort-imports",
+        "prettier-plugin-organize-attributes",
+        "prettier-plugin-tailwindcss"
+    ],
+    "importOrder": [
+        "^next$",
+        "^react$",
+        "<SEPARATOR>",
+        "<BUILTIN_MODULES>",
+        "<SEPARATOR>",
+        "<THIRD_PARTY_MODULES>",
+        "<SEPARATOR>",
+        "^@/components/(.*)$",
+        "<SEPARATOR>",
+        "^@/lib/(.*)$",
+        "<SEPARATOR>",
+        "^@/types/(.*)$",
+        "<SEPARATOR>",
+        "^@/(.*)$",
+        "<SEPARATOR>",
+        "^[./]"
+    ],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true,
+    "tailwindStylesheet": "./app/globals.css"
 }
