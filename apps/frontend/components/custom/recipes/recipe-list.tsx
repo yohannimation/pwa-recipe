@@ -1,30 +1,23 @@
-'use client'
-
-import { useState } from 'react'
-
 import { RecipeCard } from '@/components/custom/recipes/recipe-card'
-import { RecipeCardLoading } from '@/components/custom/recipes/recipe-card-loading'
+import { serverApi } from '@/lib/api/server'
 
 import type { RecipeInterface } from '@/types/recipes'
+import type { SortInterface } from '@/types/sort'
 
-function RecipeList({ recipes }: { recipes: RecipeInterface[] }) {
-  const [isLoaded, setIsLoaded] = useState<boolean>(true)
+async function RecipeList({ currentSort }: { currentSort: SortInterface }) {
+  const recipes = (await serverApi<RecipeInterface[]>(`/recipes?sort=${currentSort}`)) ?? []
 
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-      {isLoaded ? (
-        recipes.length > 0 ? (
-          recipes.map((recipe, index) => {
-            return <RecipeCard key={index} recipe={recipe} />
-          })
-        ) : (
-          <>Aucune recette trouvée</>
-        )
-      ) : (
-        Array.from({ length: 6 }).map((_, index) => (
-          <RecipeCardLoading key={index} />
-        ))
-      )}
+        {
+          recipes.length > 0 ? (
+            recipes.map((recipe, index) => {
+              return <RecipeCard key={index} recipe={recipe} />
+            })
+          ) : (
+            <>Aucune recette trouvée</>
+          )
+        }
     </div>
   )
 }

@@ -1,22 +1,31 @@
+import { Suspense } from 'react'
+
 import { FilterBar } from '@/components/custom/filter-bar'
 import { RecipeList } from '@/components/custom/recipes/recipe-list'
+import { RecipeListSkeleton } from '@/components/custom/recipes/recipe-list-skeleton'
 
 import { serverApi } from '@/lib/api/server'
 
 import type { CategoryInterface } from '@/types/categories'
-import type { RecipeInterface } from '@/types/recipes'
+import type { SortInterface } from '@/types/sort'
 
-export default async function Home() {
-  const recipes = (await serverApi<RecipeInterface[]>('/recipes')) ?? []
-  const categories = (await serverApi<CategoryInterface[]>('/categories')) ?? []
+interface HomeProps { searchParams: Promise<{ sort?: SortInterface }> }
+
+export default async function Home({ searchParams }: HomeProps) {
+  const { sort } = await searchParams
+  const currentSort = sort ?? 'creation-asc'
+
+  const categories = await await serverApi<CategoryInterface[]>('/categories') ?? []
 
   return (
     <>
       <div className='bg-primary after:from-primary sticky top-35 md:top-30 z-10 after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:z-1 after:h-4 after:bg-gradient-to-b after:from-40% after:to-transparent after:content-[""] after:md:h-8'>
-        <FilterBar categories={categories} />
+        <FilterBar categories={categories} currentSort={currentSort} />
       </div>
       <div className="px-2.5 py-4 md:px-5 md:py-8 lg:px-7.5">
-        <RecipeList recipes={recipes} />
+        <Suspense key={currentSort} fallback={<RecipeListSkeleton />}>
+          <RecipeList currentSort={currentSort} />
+        </Suspense>
       </div>
     </>
   )

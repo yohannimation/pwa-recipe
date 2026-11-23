@@ -1,23 +1,39 @@
 'use client'
 
-import { useState } from 'react'
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
+import { useTransition } from 'react'
 
 import { SelectField } from '@/components/custom/fields/select-field'
 import { FilterList } from '@/components/custom/filter-list'
 
 import type { CategoryInterface } from '@/types/categories'
+import type { SortInterface } from '@/types/sort'
 
-function FilterBar({ categories }: { categories: CategoryInterface[] }) {
-  const [sortValue, setSortValue] = useState<string>('alphabetical')
+interface FilterBarProps {
+  categories: CategoryInterface[],
+  currentSort: SortInterface
+}
+
+function FilterBar({ categories, currentSort }: FilterBarProps) {
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const [isPending, startTransition] = useTransition()
 
   const sortValuesList = [
-    { value: 'alphabetical', label: 'Tri par ordre alphabétique' },
-    { value: 'creation', label: 'Tri par date de création' },
+    { value: 'creation-asc', label: 'Date de création A-Z' },
+    { value: 'creation-desc', label: 'Date de création Z-A' },
+    { value: 'name-asc', label: 'Alphabétique A-Z' },
+    { value: 'name-desc', label: 'Alphabétique Z-A' },
   ]
 
   const sortTrigger = (value: string) => {
-    setSortValue(value)
-    console.log('sort value :', value)
+    const params = new URLSearchParams(searchParams.toString())
+    params.set('sort', value)
+
+    startTransition(() => {
+      router.push(`${pathname}?${params.toString()}`, { scroll: false })
+    })
   }
 
   return (
@@ -26,7 +42,7 @@ function FilterBar({ categories }: { categories: CategoryInterface[] }) {
 
       <SelectField
         options={sortValuesList}
-        defaultValue={sortValue}
+        defaultValue={currentSort}
         onValueChange={sortTrigger}
       />
     </aside>
