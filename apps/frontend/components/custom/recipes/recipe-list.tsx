@@ -2,11 +2,14 @@ import { RecipeCard } from '@/components/custom/recipes/recipe-card'
 
 import { serverApi } from '@/lib/api/server'
 
-import type { RecipeInterface } from '@/types/recipes'
-import type { SortInterface } from '@/types/sort'
+import type { RecipeFilterInterface, RecipeInterface } from '@/types/recipes'
 
-async function RecipeList({ currentSort }: { currentSort: SortInterface }) {
-  const recipes = (await serverApi<RecipeInterface[]>(`/recipes?sort=${currentSort}`)) ?? []
+async function RecipeList({ filters }: { filters: RecipeFilterInterface }) {
+  const params = new URLSearchParams()
+  params.set('sort', filters.sort)
+  if (filters.name) params.set('name', filters.name)
+
+  const recipes = (await serverApi<RecipeInterface[]>(`/recipes?${params}`)) ?? []
 
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">

@@ -1,11 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 
-// Icons
 import { Search } from 'lucide-react'
+import { useRouter, useSearchParams } from 'next/navigation'
 
-// Components
 import { Button } from '@/components/ui/button'
 import { Field } from '@/components/ui/field'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
@@ -15,19 +14,33 @@ type SearchFieldProps = {
   onValueChange?: (value: string) => void
 }
 
-function SearchField({ onValueChange }: SearchFieldProps) {
-  const inputId = 'search-bar'
-  const [searchValue, setSearchValue] = useState<string>('')
+function SearchField() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const [isPending, startTransition] = useTransition()
 
-  const triggerSearch = (searchValue: string) => {
-    if (searchValue !== '') {
-      console.log(searchValue)
-    }
+  const urlQueryName = searchParams.get('name') ?? ''
+  const [searchValue, setSearchValue] = useState<string>(urlQueryName)
+
+  useEffect(() => {
+    setSearchValue(urlQueryName)
+  }, [urlQueryName, setSearchValue])
+
+  const applySearch = (name: string) => {
+    const params = new URLSearchParams(searchParams.toString())
+    const trimmed = name.trim()
+
+    if (trimmed) params.set('name', trimmed)
+    else params.delete('name')
+
+    startTransition(() => {
+      router.push(`/?${params.toString()}`)
+    })
   }
 
   const handleSubmit = (e: React.SubmitEvent) => {
     e.preventDefault()
-    triggerSearch(searchValue)
+    applySearch(searchValue)
   }
 
   return (
@@ -35,11 +48,12 @@ function SearchField({ onValueChange }: SearchFieldProps) {
       <form onSubmit={handleSubmit}>
         <InputGroup className="rounded-full border-0 bg-white text-foreground shadow-(--shadow)">
           <InputGroupInput
-            id={inputId}
+            id="search-bar"
             type="search"
             placeholder="Rechercher une recette"
             autoComplete="off"
             className="py-2 pl-4"
+            value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
           />
 

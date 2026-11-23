@@ -1,4 +1,5 @@
 import { CategoryInterface } from '@/types/categories'
+import { SortInterface } from '@/types/sort'
 import { UserInterface } from '@/types/users'
 
 export type RecipeInterface = {
@@ -14,4 +15,9 @@ export type RecipeInterface = {
   user: UserInterface
   createdAt: string
   updatedAt: string
+}
+
+export type RecipeFilterInterface = {
+  sort: SortInterface
+  name?: string
 }
