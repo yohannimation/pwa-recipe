@@ -8,9 +8,10 @@ import type { CategoryInterface } from "@/types/categories"
 
 type RecipeCardContentProps = {
   categories: CategoryInterface[]
+  numberPeople: number
 }
 
-function RecipeCardContent({ categories }: RecipeCardContentProps) {
+function RecipeCardContent({ categories, numberPeople }: RecipeCardContentProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [edges, setEdges] = useState({ start: false, end: false })
 
@@ -50,6 +51,10 @@ function RecipeCardContent({ categories }: RecipeCardContentProps) {
             className="[scrollbar-width:none] overflow-x-auto [&::-webkit-scrollbar]:hidden"
           >
             <ul className="flex flex-nowrap gap-1">
+              <li key={`number-people-${numberPeople}`}>
+                <Badge variant="outline">{numberPeople} personne{numberPeople > 1 && 's'}</Badge>
+              </li>
+
               {categories.map((category) => (
                 <li key={category.id}>
                   <Badge variant="outline">{category.name}</Badge>

@@ -1,17 +1,22 @@
-import { CookingPot, Timer } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { AvatarGroup, AvatarGroupCount } from '@/components/ui/avatar'
 import { Blobatar } from '@/components/ui/blobatar'
 
+import { ChefHat, CookingPot, Heart, Timer } from 'lucide-react'
+
+import type { UserInterface } from '@/types/users'
+
 type RecipeCardDescriptionProps = {
   preparationTime: number
   cookingTime: number
+  user: UserInterface
   likedBy: string[]
 }
 
 function RecipeCardDescription({
   preparationTime,
   cookingTime,
+  user,
   likedBy,
 }: RecipeCardDescriptionProps) {
   const preparationTimeContent = (
@@ -29,31 +34,50 @@ function RecipeCardDescription({
     </>
   )
 
+  const createdByContent = (
+    <>
+      {' | '}
+      <Badge variant={'ghost'} className="rounded-none border-none overflow-visible" title={`Créée par ${user.username}`}>
+        <ChefHat />
+        <Blobatar
+          key={user.id}
+          name={user.username}
+          blobatar={{ background: 'circle', animate: 'always' }}
+        />
+      </Badge>
+    </>
+  )
+
+  const likeCount = 3
   const likedByContent = (
     <>
       {' | '}
-      <AvatarGroup>
-        {/* Display 3 Blobatar */}
-        {likedBy.slice(0, 3).map((user) => (
-          <Blobatar
-            key={user}
-            name={user}
-            blobatar={{ background: 'circle', animate: 'always' }}
-            title={`Aimé par ${user}`}
-          />
-        ))}
+      <Badge variant={'ghost'} className="rounded-none border-none overflow-visible">
+        <Heart />
+        <AvatarGroup>
+          {/* Display X Blobatar */}
+          {likedBy.slice(0, likeCount).map((user) => (
+            <Blobatar
+              key={user}
+              name={user}
+              blobatar={{ background: 'circle', animate: 'always' }}
+              title={`Aimé par ${user}`}
+            />
+          ))}
 
-        {likedBy.length > 3 && (
-          <AvatarGroupCount>+{likedBy.length - 3}</AvatarGroupCount>
-        )}
-      </AvatarGroup>
+          {likedBy.length > likeCount && (
+            <AvatarGroupCount>+{likedBy.length - likeCount}</AvatarGroupCount>
+          )}
+        </AvatarGroup>
+      </Badge>
     </>
   )
 
   return (
-    <div className="flex h-8 items-center gap-2">
+    <div className="flex flex-wrap items-center gap-2">
       {preparationTimeContent}
       {cookingTime > 0 && <>{cookingTimeContent}</>}
+      {createdByContent}
       {likedBy.length > 0 && <>{likedByContent}</>}
     </div>
   )
