@@ -1,16 +1,9 @@
 import * as React from 'react'
+
 import type { Meta, StoryObj } from '@storybook/react'
+
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Input } from '@/components/ui/input'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import { Textarea } from '@/components/ui/textarea'
 import {
   Field,
   FieldContent,
@@ -22,6 +15,15 @@ import {
   FieldSeparator,
   FieldSet,
 } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Textarea } from '@/components/ui/textarea'
 
 // NB : tous les `id` sont uniques à travers le fichier, car la page autodocs
 // affiche toutes les stories en même temps dans le même document.
@@ -73,9 +75,7 @@ export const WithDescription: Story = {
     <Field>
       <FieldLabel htmlFor="field-username">Nom d'utilisateur</FieldLabel>
       <Input id="field-username" placeholder="jdupont" />
-      <FieldDescription>
-        Visible publiquement. Entre 3 et 20 caractères.
-      </FieldDescription>
+      <FieldDescription>Visible publiquement. Entre 3 et 20 caractères.</FieldDescription>
     </Field>
   ),
 }
@@ -115,8 +115,7 @@ export const WithCheckbox: Story = {
       <FieldContent>
         <FieldLabel htmlFor="field-terms">Accepter les conditions</FieldLabel>
         <FieldDescription>
-          Tu acceptes nos conditions d'utilisation et notre politique de
-          confidentialité.
+          Tu acceptes nos conditions d'utilisation et notre politique de confidentialité.
         </FieldDescription>
       </FieldContent>
     </Field>
@@ -167,17 +166,9 @@ export const WithMultipleErrors: Story = {
   render: () => (
     <Field data-invalid="true">
       <FieldLabel htmlFor="field-invalid-password">Mot de passe</FieldLabel>
-      <Input
-        id="field-invalid-password"
-        type="password"
-        defaultValue="abc"
-        aria-invalid="true"
-      />
+      <Input id="field-invalid-password" type="password" defaultValue="abc" aria-invalid="true" />
       <FieldError
-        errors={[
-          { message: 'Au moins 8 caractères.' },
-          { message: 'Au moins un chiffre.' },
-        ]}
+        errors={[{ message: 'Au moins 8 caractères.' }, { message: 'Au moins un chiffre.' }]}
       />
     </Field>
   ),
@@ -213,17 +204,11 @@ export const FullForm: Story = {
         <FieldGroup>
           <FieldSet>
             <FieldLegend>Profil</FieldLegend>
-            <FieldDescription>
-              Ces informations apparaissent sur ta page publique.
-            </FieldDescription>
+            <FieldDescription>Ces informations apparaissent sur ta page publique.</FieldDescription>
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="field-form-name">Nom complet</FieldLabel>
-                <Input
-                  id="field-form-name"
-                  placeholder="Jean Dupont"
-                  required
-                />
+                <Input id="field-form-name" placeholder="Jean Dupont" required />
               </Field>
               <Field>
                 <FieldLabel htmlFor="field-form-email">E-mail</FieldLabel>
@@ -233,9 +218,7 @@ export const FullForm: Story = {
                   placeholder="email@exemple.com"
                   required
                 />
-                <FieldDescription>
-                  Nous ne le partagerons jamais.
-                </FieldDescription>
+                <FieldDescription>Nous ne le partagerons jamais.</FieldDescription>
               </Field>
             </FieldGroup>
           </FieldSet>
@@ -244,20 +227,12 @@ export const FullForm: Story = {
 
           <Field orientation="horizontal">
             <Button type="submit">Enregistrer</Button>
-            <Button
-              type="reset"
-              variant="outline"
-              onClick={() => setSubmitted(false)}
-            >
+            <Button type="reset" variant="outline" onClick={() => setSubmitted(false)}>
               Annuler
             </Button>
           </Field>
 
-          {submitted && (
-            <p className="text-muted-foreground text-sm">
-              Formulaire envoyé ✅
-            </p>
-          )}
+          {submitted && <p className="text-sm text-muted-foreground">Formulaire envoyé ✅</p>}
         </FieldGroup>
       </form>
     )

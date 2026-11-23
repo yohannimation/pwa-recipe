@@ -2,12 +2,9 @@
 
 import { useId, useState } from 'react'
 
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldLabel,
-} from '@/components/ui/field'
+import { Eye, EyeOff } from 'lucide-react'
+
+import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field'
 import {
   InputGroup,
   InputGroupAddon,
@@ -15,12 +12,7 @@ import {
   InputGroupInput,
 } from '@/components/ui/input-group'
 
-import { Eye, EyeOff } from 'lucide-react'
-
-type PasswordFieldProps = Omit<
-  React.ComponentProps<typeof InputGroupInput>,
-  'type'
-> & {
+type PasswordFieldProps = Omit<React.ComponentProps<typeof InputGroupInput>, 'type'> & {
   label: string
   error?: string | { message: string }[]
   description?: string
@@ -63,9 +55,7 @@ function PasswordField({
             size="icon-sm"
             variant="ghost"
             disabled={disabled}
-            aria-label={
-              visible ? 'Masquer le mot de passe' : 'Afficher le mot de passe'
-            }
+            aria-label={visible ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
             aria-pressed={visible}
             onClick={() => setVisible((v) => !v)}
           >

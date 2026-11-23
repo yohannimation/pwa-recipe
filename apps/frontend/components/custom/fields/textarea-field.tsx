@@ -2,12 +2,7 @@
 
 import { ChangeEventHandler, useId, useState } from 'react'
 
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldLabel,
-} from '@/components/ui/field'
+import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field'
 import {
   InputGroup,
   InputGroupAddon,
@@ -42,9 +37,7 @@ function TextareaField({
 
   const hasError = Array.isArray(error) ? error.length > 0 : !!error
 
-  const [internalLength, setInternalLength] = useState(
-    String(defaultValue ?? '').length
-  )
+  const [internalLength, setInternalLength] = useState(String(defaultValue ?? '').length)
   const length = value !== undefined ? String(value).length : internalLength
 
   const handleChange: ChangeEventHandler<HTMLTextAreaElement> = (event) => {

@@ -1,7 +1,7 @@
 'use client'
 
+import { BookBookmark, ChefHat, LogIn, LogOut, User, UserPlus } from 'lucide-react'
 import Link from 'next/link'
-import { useAuth } from '@/providers/auth-provider'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -11,63 +11,66 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from '@/components/ui/dropdown-menu'
+
+import { useAuth } from '@/providers/auth-provider'
+
 import { Spinner } from '../../ui/spinner'
 
-import { BookBookmark, ChefHat, LogIn, LogOut, User, UserPlus } from 'lucide-react'
-
 function HeaderCtaProfile() {
-  const { user, isLoading, logout } = useAuth();
+  const { user, isLoading, logout } = useAuth()
 
   const triggerLogout = () => logout()
 
-  const loadingContent = <>
-    <DropdownMenuGroup>
-      <DropdownMenuItem className='p-2 focus:bg-white focus:text-foreground not-data-[variant=destructive]:focus:**:text-foreground'>
-        <Spinner /> Chargement
-      </DropdownMenuItem>
-    </DropdownMenuGroup>
-  </>
+  const loadingContent = (
+    <>
+      <DropdownMenuGroup>
+        <DropdownMenuItem className="p-2 focus:bg-white focus:text-foreground not-data-[variant=destructive]:focus:**:text-foreground">
+          <Spinner /> Chargement
+        </DropdownMenuItem>
+      </DropdownMenuGroup>
+    </>
+  )
 
-  const loggedOutContent = <>
-    <DropdownMenuGroup>
-      <Link href={"/auth/login"}>
-        <DropdownMenuItem className='p-2'>
+  const loggedOutContent = (
+    <>
+      <DropdownMenuGroup>
+        <Link href={'/auth/login'}>
+          <DropdownMenuItem className="p-2">
             <LogIn /> Connexion
-        </DropdownMenuItem>
-      </Link>
-      <Link href={"/auth/register"}>
-        <DropdownMenuItem className='p-2'>
-          <UserPlus /> Inscription
-        </DropdownMenuItem>
-      </Link>
-    </DropdownMenuGroup>
-  </>
+          </DropdownMenuItem>
+        </Link>
+        <Link href={'/auth/register'}>
+          <DropdownMenuItem className="p-2">
+            <UserPlus /> Inscription
+          </DropdownMenuItem>
+        </Link>
+      </DropdownMenuGroup>
+    </>
+  )
 
-  const loggedContent = <>
-    <DropdownMenuGroup>
-      <Link href={"/chief/recipes"}>
-        <DropdownMenuItem className='p-2'>
-          <BookBookmark /> Mes recettes
+  const loggedContent = (
+    <>
+      <DropdownMenuGroup>
+        <Link href={'/chief/recipes'}>
+          <DropdownMenuItem className="p-2">
+            <BookBookmark /> Mes recettes
+          </DropdownMenuItem>
+        </Link>
+        <Link href={'/chief/profile'}>
+          <DropdownMenuItem className="p-2">
+            <User /> Mon profil
+          </DropdownMenuItem>
+        </Link>
+      </DropdownMenuGroup>
+      <DropdownMenuSeparator />
+      <DropdownMenuGroup>
+        <DropdownMenuItem variant="destructive" className="p-2" onClick={triggerLogout}>
+          <LogOut /> Deconnexion
         </DropdownMenuItem>
-      </Link>
-      <Link href={"/chief/profile"}>
-        <DropdownMenuItem className='p-2'>
-          <User /> Mon profil
-        </DropdownMenuItem>
-      </Link>
-    </DropdownMenuGroup>
-    <DropdownMenuSeparator />
-    <DropdownMenuGroup>
-      <DropdownMenuItem
-        variant="destructive"
-        className='p-2'
-        onClick={triggerLogout}
-      >
-        <LogOut /> Deconnexion
-      </DropdownMenuItem>
-    </DropdownMenuGroup>
-  </>
+      </DropdownMenuGroup>
+    </>
+  )
 
   return (
     <DropdownMenu>
@@ -76,13 +79,8 @@ function HeaderCtaProfile() {
           <ChefHat />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='center'>
-        {
-          isLoading ?
-            (loadingContent)
-          :
-            (user ? loggedContent : loggedOutContent)
-        }
+      <DropdownMenuContent align="center">
+        {isLoading ? loadingContent : user ? loggedContent : loggedOutContent}
       </DropdownMenuContent>
     </DropdownMenu>
   )

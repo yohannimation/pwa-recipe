@@ -1,5 +1,5 @@
-import { CategoryInterface } from "@/types/categories"
-import { UserInterface } from "@/types/users"
+import { CategoryInterface } from '@/types/categories'
+import { UserInterface } from '@/types/users'
 
 export type RecipeInterface = {
   id: number

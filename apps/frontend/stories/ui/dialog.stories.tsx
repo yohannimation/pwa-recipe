@@ -1,14 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react'
+
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
-  DialogTrigger,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
   DialogDescription,
   DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
 
 const meta: Meta<typeof Dialog> = {
   title: 'UI/Dialog',
@@ -33,8 +34,8 @@ export const Default: Story = {
           </DialogDescription>
         </DialogHeader>
         <p>
-          This is where the content of the dialog goes. You can verify your
-          popover colors and rounded corners here.
+          This is where the content of the dialog goes. You can verify your popover colors and
+          rounded corners here.
         </p>
         <DialogFooter>
           <Button variant="outline">Cancel</Button>

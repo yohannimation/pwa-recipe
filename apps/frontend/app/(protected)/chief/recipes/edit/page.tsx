@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation'
 
 export default function RecipesEdit404() {
   const router = useRouter()

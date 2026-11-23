@@ -1,49 +1,50 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { api, ApiError } from '@/lib/api/client';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import type { UserInterface } from '@/types/users';
+import { ApiError, api } from '@/lib/api/client'
 
-export const meKey = ['auth', 'me'] as const;
+import type { UserInterface } from '@/types/users'
+
+export const meKey = ['auth', 'me'] as const
 
 export function useMe() {
   return useQuery({
     queryKey: meKey,
     queryFn: async () => {
       try {
-        return await api<UserInterface>('/auth/me');
+        return await api<UserInterface>('/auth/me')
       } catch (e) {
-        if (e instanceof ApiError && e.status === 401) return null;
-        throw e;
+        if (e instanceof ApiError && e.status === 401) return null
+        throw e
       }
     },
     staleTime: 5 * 60_000,
     retry: false,
-  });
+  })
 }
 
 export function useRegister() {
   return useMutation({
     mutationFn: (body: { username: string; password: string }) =>
       api<UserInterface>('/auth/register', { method: 'POST', body: body }),
-  });
+  })
 }
 
 export function useLogin() {
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   return useMutation({
     mutationFn: (body: { username: string; password: string }) =>
       api<{ user: UserInterface }>('/auth/login', { method: 'POST', body: body }),
     onSuccess: ({ user }: { user: UserInterface }) => queryClient.setQueryData(meKey, user),
-  });
+  })
 }
 
 export function useLogout() {
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   return useMutation({
     mutationFn: () => api('/auth/logout', { method: 'POST' }),
     onSettled: () => {
-      queryClient.clear(); // Clears the entire cache (data from the previous user)
-      queryClient.setQueryData(meKey, null);
+      queryClient.clear() // Clears the entire cache (data from the previous user)
+      queryClient.setQueryData(meKey, null)
     },
-  });
+  })
 }

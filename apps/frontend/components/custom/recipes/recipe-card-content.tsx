@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { Badge } from '@/components/ui/badge'
 
-import type { CategoryInterface } from "@/types/categories"
+import type { CategoryInterface } from '@/types/categories'
 
 type RecipeCardContentProps = {
   categories: CategoryInterface[]
@@ -52,7 +52,9 @@ function RecipeCardContent({ categories, numberPeople }: RecipeCardContentProps)
           >
             <ul className="flex flex-nowrap gap-1">
               <li key={`number-people-${numberPeople}`}>
-                <Badge variant="outline">{numberPeople} personne{numberPeople > 1 && 's'}</Badge>
+                <Badge variant="outline">
+                  {numberPeople} personne{numberPeople > 1 && 's'}
+                </Badge>
               </li>
 
               {categories.map((category) => (

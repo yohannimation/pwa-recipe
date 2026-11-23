@@ -10,14 +10,11 @@ import {
   useRef,
   useState,
 } from 'react'
-import { cn } from '@/lib/utils'
 
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldLabel,
-} from '@/components/ui/field'
+import { File as FileIcon, ImageIcon, X } from 'lucide-react'
+import Image from 'next/image'
+
+import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field'
 import {
   InputGroup,
   InputGroupAddon,
@@ -25,18 +22,11 @@ import {
   InputGroupInput,
 } from '@/components/ui/input-group'
 
-import { File as FileIcon, ImageIcon, X } from 'lucide-react'
-import Image from 'next/image'
+import { cn } from '@/lib/utils'
 
 type FileFieldProps = Omit<
   ComponentProps<typeof InputGroupInput>,
-  | 'type'
-  | 'value'
-  | 'defaultValue'
-  | 'onChange'
-  | 'readOnly'
-  | 'accept'
-  | 'name'
+  'type' | 'value' | 'defaultValue' | 'onChange' | 'readOnly' | 'accept' | 'name'
 > & {
   label: string
   error?: string | { message: string }[]
@@ -185,20 +175,15 @@ function FileField({
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         className={cn(
-          'placeholder:text-foreground h-full border-2 border-dashed',
-          isDragging && 'border-ring ring-ring/50 bg-accent/50 ring-[3px]'
+          'h-full border-2 border-dashed placeholder:text-foreground',
+          isDragging && 'border-ring bg-accent/50 ring-[3px] ring-ring/50'
         )}
       >
         <InputGroupAddon align="inline-start">
           {previewUrl ? (
             // eslint-disable-next-line @next/next/no-img-element
             <div className="relative size-7 overflow-hidden rounded-md">
-              <Image
-                src={previewUrl}
-                fill
-                alt=""
-                className="size-full object-cover"
-              />
+              <Image src={previewUrl} fill alt="" className="size-full object-cover" />
             </div>
           ) : file ? (
             <FileIcon className="size-4" />
@@ -216,7 +201,7 @@ function FileField({
           disabled={disabled}
           onClick={openPicker}
           onKeyDown={handleKeyDown}
-          className='h-full cursor-pointer'
+          className="h-full cursor-pointer"
           {...props}
         />
 

@@ -2,17 +2,13 @@
 
 import { useState } from 'react'
 
+// Icons
+import { Search } from 'lucide-react'
+
 // Components
 import { Button } from '@/components/ui/button'
 import { Field } from '@/components/ui/field'
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from '@/components/ui/input-group'
-
-// Icons
-import { Search } from 'lucide-react'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 
 // Type
 type SearchFieldProps = {
@@ -37,7 +33,7 @@ function SearchField({ onValueChange }: SearchFieldProps) {
   return (
     <Field>
       <form onSubmit={handleSubmit}>
-        <InputGroup className="text-foreground rounded-full border-0 bg-white shadow-(--shadow)">
+        <InputGroup className="rounded-full border-0 bg-white text-foreground shadow-(--shadow)">
           <InputGroupInput
             id={inputId}
             type="search"

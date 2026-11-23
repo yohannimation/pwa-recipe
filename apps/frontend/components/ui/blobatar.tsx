@@ -1,6 +1,7 @@
 'use client'
 
 import type * as React from 'react'
+
 /**
  * Aliased, because the component this file exports is also called `Blobatar` —
  * `BlobatarAvatar` says blob-avatar-avatar, and the name a shadcn project wants
@@ -22,14 +23,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
  * `Omit` over a union collapses it to the keys the arms share, silently
  * dropping `animate` and everything gated behind it.
  */
-type DistributiveOmit<T, K extends PropertyKey> = T extends unknown
-  ? Omit<T, K>
-  : never
+type DistributiveOmit<T, K extends PropertyKey> = T extends unknown ? Omit<T, K> : never
 
-type GeneratedOptions = DistributiveOmit<
-  React.ComponentProps<typeof Generated>,
-  'name'
->
+type GeneratedOptions = DistributiveOmit<React.ComponentProps<typeof Generated>, 'name'>
 
 export type BlobatarProps = React.ComponentProps<typeof Avatar> & {
   /**
@@ -52,13 +48,7 @@ export type BlobatarProps = React.ComponentProps<typeof Avatar> & {
   blobatar?: GeneratedOptions
 }
 
-export function Blobatar({
-  name,
-  src,
-  alt,
-  blobatar,
-  ...props
-}: BlobatarProps) {
+export function Blobatar({ name, src, alt, blobatar, ...props }: BlobatarProps) {
   return (
     <Avatar {...props}>
       {src ? <AvatarImage src={src} alt={alt ?? name} /> : null}

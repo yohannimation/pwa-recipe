@@ -1,15 +1,8 @@
 import * as React from 'react'
+
 import type { Meta, StoryObj } from '@storybook/react'
-import {
-  AtSign,
-  Check,
-  Copy,
-  Eye,
-  EyeOff,
-  Loader2,
-  Mail,
-  Search,
-} from 'lucide-react'
+import { AtSign, Check, Copy, Eye, EyeOff, Loader2, Mail, Search } from 'lucide-react'
+
 import {
   InputGroup,
   InputGroupAddon,
@@ -168,9 +161,7 @@ export const PasswordToggle: Story = {
         />
         <InputGroupAddon align="inline-end">
           <InputGroupButton
-            aria-label={
-              visible ? 'Masquer le mot de passe' : 'Afficher le mot de passe'
-            }
+            aria-label={visible ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
             size="icon-sm"
             onClick={() => setVisible((v) => !v)}
           >
@@ -185,10 +176,7 @@ export const PasswordToggle: Story = {
 export const Loading: Story = {
   render: () => (
     <InputGroup>
-      <InputGroupInput
-        placeholder="Recherche en cours…"
-        defaultValue="storybook"
-      />
+      <InputGroupInput placeholder="Recherche en cours…" defaultValue="storybook" />
       <InputGroupAddon align="inline-end">
         <Loader2 className="animate-spin" />
       </InputGroupAddon>
@@ -215,7 +203,7 @@ export const WithTextarea: Story = {
           onChange={(e) => setText(e.target.value)}
         />
         <InputGroupAddon align="block-end">
-          <InputGroupText className="text-muted-foreground text-xs">
+          <InputGroupText className="text-xs text-muted-foreground">
             {text.length}/{max}
           </InputGroupText>
           <InputGroupButton variant="default" size="sm" className="ml-auto">
@@ -260,13 +248,9 @@ export const Invalid: Story = {
         <InputGroupAddon>
           <Mail />
         </InputGroupAddon>
-        <InputGroupInput
-          type="email"
-          aria-invalid="true"
-          defaultValue="email-invalide"
-        />
+        <InputGroupInput type="email" aria-invalid="true" defaultValue="email-invalide" />
       </InputGroup>
-      <p className="text-destructive text-sm">Adresse e-mail invalide.</p>
+      <p className="text-sm text-destructive">Adresse e-mail invalide.</p>
     </div>
   ),
 }

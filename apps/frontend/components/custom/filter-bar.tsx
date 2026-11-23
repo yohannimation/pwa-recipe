@@ -1,7 +1,8 @@
 'use client'
 
-import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { useTransition } from 'react'
+
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import { SelectField } from '@/components/custom/fields/select-field'
 import { FilterList } from '@/components/custom/filter-list'
@@ -10,7 +11,7 @@ import type { CategoryInterface } from '@/types/categories'
 import type { SortInterface } from '@/types/sort'
 
 interface FilterBarProps {
-  categories: CategoryInterface[],
+  categories: CategoryInterface[]
   currentSort: SortInterface
 }
 

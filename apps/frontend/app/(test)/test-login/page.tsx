@@ -1,23 +1,24 @@
-'use client';
+'use client'
 
 // Page de test TEMPORAIRE : à supprimer avant la mise en production.
+import { useState } from 'react'
 
-import { useState } from 'react';
-import { useAuth } from '@/providers/auth-provider';
-import { useRegister } from '@/lib/api/auth';
-import { api, ApiError } from '@/lib/api/client';
+import { useRegister } from '@/lib/api/auth'
+import { ApiError, api } from '@/lib/api/client'
 
-type LogEntry = { id: number; time: string; label: string; ok: boolean; detail: string };
+import { useAuth } from '@/providers/auth-provider'
 
-let nextId = 0;
+type LogEntry = { id: number; time: string; label: string; ok: boolean; detail: string }
+
+let nextId = 0
 
 export default function DebugAuthPage() {
-  const { user, isLoading, login, logout } = useAuth();
-  const register = useRegister();
+  const { user, isLoading, login, logout } = useAuth()
+  const register = useRegister()
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [logs, setLogs] = useState<LogEntry[]>([]);
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [logs, setLogs] = useState<LogEntry[]>([])
 
   function addLog(label: string, ok: boolean, detail: string) {
     const entry: LogEntry = {
@@ -26,27 +27,29 @@ export default function DebugAuthPage() {
       label,
       ok,
       detail,
-    };
-    setLogs((l) => [entry, ...l]);
+    }
+    setLogs((l) => [entry, ...l])
   }
 
   async function run(label: string, fn: () => Promise<unknown>) {
     try {
-      const data = await fn();
-      addLog(label, true, JSON.stringify(data ?? null, null, 2));
+      const data = await fn()
+      addLog(label, true, JSON.stringify(data ?? null, null, 2))
     } catch (e) {
       if (e instanceof ApiError) {
-        addLog(label, false, `HTTP ${e.status}\n${JSON.stringify(e.data, null, 2)}`);
+        addLog(label, false, `HTTP ${e.status}\n${JSON.stringify(e.data, null, 2)}`)
       } else {
-        addLog(label, false, String(e));
+        addLog(label, false, String(e))
       }
     }
   }
 
-  const creds = { username, password };
+  const creds = { username, password }
 
   return (
-    <main style={{ maxWidth: 720, margin: '2rem auto', padding: '0 1rem', fontFamily: 'sans-serif' }}>
+    <main
+      style={{ maxWidth: 720, margin: '2rem auto', padding: '0 1rem', fontFamily: 'sans-serif' }}
+    >
       <h1>Test auth (provider + React Query)</h1>
 
       <section style={box}>
@@ -86,11 +89,11 @@ export default function DebugAuthPage() {
           </button>
           <button onClick={() => run('login', () => login(creds))}>Login</button>
           <button onClick={() => run('logout', () => logout())}>Logout</button>
-          <button onClick={() => run('GET /auth/me', () => api('/auth/me'))}>
-            GET /auth/me
-          </button>
+          <button onClick={() => run('GET /auth/me', () => api('/auth/me'))}>GET /auth/me</button>
           <button
-            onClick={() => run('POST /auth/refresh', () => api('/auth/refresh', { method: 'POST' }))}
+            onClick={() =>
+              run('POST /auth/refresh', () => api('/auth/refresh', { method: 'POST' }))
+            }
           >
             POST /auth/refresh
           </button>
@@ -98,19 +101,19 @@ export default function DebugAuthPage() {
             onClick={() =>
               run('5x /auth/me en parallèle', () =>
                 Promise.allSettled(Array.from({ length: 5 }, () => api('/auth/me'))).then((r) =>
-                  r.map((x) => x.status),
-                ),
+                  r.map((x) => x.status)
+                )
               )
             }
           >
             5 requêtes en parallèle
           </button>
         </div>
-        <p style={{ fontSize: 13, color: '#666', marginTop: "20px" }}>
+        <p style={{ fontSize: 13, color: '#666', marginTop: '20px' }}>
           Pour tester le refresh automatique : connectez-vous, supprimez le cookie
-          <code> access_token</code> dans DevTools (Application → Cookies), puis cliquez sur
-          « GET /auth/me » ou « 5 requêtes en parallèle ». Dans l'onglet Network, vous devez voir
-          un seul <code>POST /api/auth/refresh</code>, puis les requêtes rejouées.
+          <code> access_token</code> dans DevTools (Application → Cookies), puis cliquez sur « GET
+          /auth/me » ou « 5 requêtes en parallèle ». Dans l'onglet Network, vous devez voir un seul{' '}
+          <code>POST /api/auth/refresh</code>, puis les requêtes rejouées.
         </p>
       </section>
 
@@ -138,7 +141,7 @@ export default function DebugAuthPage() {
         ))}
       </section>
     </main>
-  );
+  )
 }
 
 const box: React.CSSProperties = {
@@ -146,5 +149,5 @@ const box: React.CSSProperties = {
   borderRadius: 6,
   padding: '0.5rem 1rem',
   margin: '1rem 0',
-};
-const h2: React.CSSProperties = { fontSize: 16, margin: '0.5rem 0' };
+}
+const h2: React.CSSProperties = { fontSize: 16, margin: '0.5rem 0' }

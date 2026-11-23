@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Button } from '@/components/ui/button'
-
 import { Mail } from 'lucide-react'
+
+import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
 
 // Define a type for the Storybook args that includes our custom preview controls
@@ -18,28 +18,11 @@ const meta: Meta<ButtonStoryArgs> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: [
-        'default',
-        'outline',
-        'secondary',
-        'ghost',
-        'destructive',
-        'link',
-        'icon',
-      ],
+      options: ['default', 'outline', 'secondary', 'ghost', 'destructive', 'link', 'icon'],
     },
     size: {
       control: 'select',
-      options: [
-        'default',
-        'xs',
-        'sm',
-        'lg',
-        'icon',
-        'icon-xs',
-        'icon-sm',
-        'icon-lg',
-      ],
+      options: ['default', 'xs', 'sm', 'lg', 'icon', 'icon-xs', 'icon-sm', 'icon-lg'],
     },
     disabled: {
       control: 'boolean',
@@ -66,9 +49,7 @@ const meta: Meta<ButtonStoryArgs> = {
     return (
       <Button {...buttonArgs} disabled={args.disabled || isLoading}>
         {isLoading && <Spinner data-icon="inline-start" />}
-        {showText && (
-          <span className="truncate">{buttonArgs.children || 'Button'}</span>
-        )}
+        {showText && <span className="truncate">{buttonArgs.children || 'Button'}</span>}
         {!isLoading && showIcon && <Mail data-icon="inline-end" />}
       </Button>
     )

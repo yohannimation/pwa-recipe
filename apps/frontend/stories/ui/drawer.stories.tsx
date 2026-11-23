@@ -1,14 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react'
+
+import { Button } from '@/components/ui/button'
 import {
   Drawer,
-  DrawerTrigger,
   DrawerContent,
-  DrawerHeader,
-  DrawerFooter,
-  DrawerTitle,
   DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
 } from '@/components/ui/drawer'
-import { Button } from '@/components/ui/button'
 
 const meta: Meta<typeof Drawer> = {
   title: 'UI/Drawer',
@@ -29,14 +30,11 @@ export const Default: Story = {
         <DrawerHeader>
           <DrawerTitle>Drawer Title</DrawerTitle>
           <DrawerDescription>
-            This is a drawer that slides up from the bottom. Check its
-            background color and rounded top corners.
+            This is a drawer that slides up from the bottom. Check its background color and rounded
+            top corners.
           </DrawerDescription>
         </DrawerHeader>
-        <p>
-          Drawer content goes here. You can verify the popover styles and
-          spacing.
-        </p>
+        <p>Drawer content goes here. You can verify the popover styles and spacing.</p>
         <DrawerFooter>
           <Button>Confirm</Button>
           <Button variant="outline">Cancel</Button>

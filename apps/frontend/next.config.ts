@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
         source: '/uploads/:path*',
         destination: 'http://backend:3000/uploads/:path*',
       },
-    ];
+    ]
   },
 }
 

@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { cva, type VariantProps } from 'class-variance-authority'
+
+import { type VariantProps, cva } from 'class-variance-authority'
 import { cn } from 'cn'
 import { Slot } from 'radix-ui'
 
@@ -9,12 +10,9 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default: 'bg-primary text-white [a]:hover:bg-secondary',
-        outline:
-          'bg-white text-primary [a]:hover:bg-muted [a]:hover:text-foreground border-border',
-        secondary:
-          'bg-secondary text-white [a]:hover:bg-muted [a]:hover:text-secondary-foreground',
-        ghost:
-          'bg-transparent p-0 text-foreground [a]:hover:bg-muted [a]:hover:text-foreground',
+        outline: 'bg-white text-primary [a]:hover:bg-muted [a]:hover:text-foreground border-border',
+        secondary: 'bg-secondary text-white [a]:hover:bg-muted [a]:hover:text-secondary-foreground',
+        ghost: 'bg-transparent p-0 text-foreground [a]:hover:bg-muted [a]:hover:text-foreground',
         destructive:
           'bg-destructive text-white [a]:hover:bg-destructive/50 [a]:focus-visible:ring-destructive/20 [a]:dark:bg-destructive/20 [a]:dark:focus-visible:ring-destructive/40',
         link: 'text-secondary [a]:underline [a]:underline-offset-6 [a]:hover:text-secondary-foreground [a]:hover:underline-offset-4',
@@ -31,8 +29,7 @@ function Badge({
   variant = 'default',
   asChild = false,
   ...props
-}: React.ComponentProps<'span'> &
-  VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
+}: React.ComponentProps<'span'> & VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
   const Comp = asChild ? Slot.Root : 'span'
 
   return (

@@ -1,3 +1,9 @@
+import { ArrowRight } from 'lucide-react'
+
+import { Cta } from '@/components/custom/cta'
+import { RecipeCardContent } from '@/components/custom/recipes/recipe-card-content'
+import { RecipeCardDescription } from '@/components/custom/recipes/recipe-card-description'
+import { RecipeCardImage } from '@/components/custom/recipes/recipe-card-img'
 import {
   Card,
   CardContent,
@@ -6,19 +12,11 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Cta } from '@/components/custom/cta'
-
-import { RecipeCardContent } from '@/components/custom/recipes/recipe-card-content'
-import { RecipeCardDescription } from '@/components/custom/recipes/recipe-card-description'
-import { RecipeCardImage } from '@/components/custom/recipes/recipe-card-img'
 
 import type { RecipeInterface } from '@/types/recipes'
 
-import { ArrowRight } from 'lucide-react'
-
 function RecipeCard({ recipe }: { recipe: RecipeInterface }) {
-  const {id, name, imageName, preparationTime, cookTime, numberPeople, categories, user } =
-    recipe
+  const { id, name, imageName, preparationTime, cookTime, numberPeople, categories, user } = recipe
 
   return (
     <Card className="overflow-hidden pt-0">
@@ -31,7 +29,7 @@ function RecipeCard({ recipe }: { recipe: RecipeInterface }) {
             preparationTime={preparationTime}
             cookingTime={cookTime}
             user={user}
-            likedBy={["Yohann", "Louise", "Test 3", "Test 4", "Test 5"]}
+            likedBy={['Yohann', 'Louise', 'Test 3', 'Test 4', 'Test 5']}
           />
         </CardDescription>
       </CardHeader>
@@ -41,12 +39,7 @@ function RecipeCard({ recipe }: { recipe: RecipeInterface }) {
       </CardContent>
 
       <CardFooter className="justify-end">
-        <Cta
-          text="Voir la recette"
-          icon={<ArrowRight />}
-          href={`/test-${id}`}
-          size="md"
-        />
+        <Cta text="Voir la recette" icon={<ArrowRight />} href={`/test-${id}`} size="md" />
       </CardFooter>
     </Card>
   )

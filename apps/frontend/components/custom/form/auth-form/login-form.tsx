@@ -1,27 +1,27 @@
 'use client'
 
 import { useEffect, useTransition } from 'react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import Link from 'next/link'
 
-import { useAuth } from '@/providers/auth-provider'
-
-import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import Link from 'next/link'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { Button } from '@/components/ui/button'
-import { FieldError, FieldGroup } from '@/components/ui/field'
 import { PasswordField } from '@/components/custom/fields/password-field'
 import { TextField } from '@/components/custom/fields/text-field'
-import { Spinner } from '@/components/ui/spinner'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { FieldError, FieldGroup } from '@/components/ui/field'
+import { Spinner } from '@/components/ui/spinner'
+
+import { useAuth } from '@/providers/auth-provider'
 
 const loginSchema = yup.object({
   username: yup
     .string()
     .min(3, 'Le username doit contenir au moins 3 caractères')
-    .required("Le username est requis"),
+    .required('Le username est requis'),
   password: yup
     .string()
     .min(8, 'Le mot de passe doit contenir au moins 8 caractères')
@@ -50,7 +50,6 @@ function LoginForm() {
       startTransition(() => {
         router.push(nextPage ?? '/')
       })
-
   }, [user, router, nextPage])
 
   async function onSubmit(values: LoginFormValues) {
@@ -64,18 +63,18 @@ function LoginForm() {
   return (
     <form
       onSubmit={form.handleSubmit(onSubmit)}
-      className='flex justify-center items-center flex-col gap-8 w-full'
+      className="flex w-full flex-col items-center justify-center gap-8"
       noValidate
     >
-      <Card className='w-full md:w-[75%] lg:w-[50%] max-w-[600px]'>
+      <Card className="w-full max-w-[600px] md:w-[75%] lg:w-[50%]">
         <CardHeader>
           <CardTitle>Connexion</CardTitle>
         </CardHeader>
-        <CardContent className='flex flex-col gap-4'>
+        <CardContent className="flex flex-col gap-4">
           <FieldGroup>
             <Controller
               control={form.control}
-              name='username'
+              name="username"
               render={({ field, fieldState }) => (
                 <TextField
                   ref={field.ref}
@@ -113,20 +112,20 @@ function LoginForm() {
           )}
         </CardContent>
 
-        <CardFooter className='flex justify-end gap-2'>
-          <Button
-            type='submit'
-            disabled={form.formState.isSubmitting || !!isLoading}
-          >
+        <CardFooter className="flex justify-end gap-2">
+          <Button type="submit" disabled={form.formState.isSubmitting || !!isLoading}>
             {form.formState.isSubmitting && <Spinner data-icon="inline-start" />}
-              <span className="truncate">Connexion</span>
+            <span className="truncate">Connexion</span>
           </Button>
         </CardFooter>
       </Card>
 
-      <p className='text-center'>
+      <p className="text-center">
         Pas encore de toque et vous souhaitez rejoindre nos cuisines ?<br />
-        <Button variant={'link'} className='p-0 text-foreground' asChild><Link href={'/auth/register'}>Créer un compte</Link></Button> pour cuisiner avec nous !
+        <Button variant={'link'} className="p-0 text-foreground" asChild>
+          <Link href={'/auth/register'}>Créer un compte</Link>
+        </Button>{' '}
+        pour cuisiner avec nous !
       </p>
     </form>
   )

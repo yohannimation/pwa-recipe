@@ -2,12 +2,7 @@
 
 import * as React from 'react'
 
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldLabel,
-} from '@/components/ui/field'
+import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field'
 import {
   Select,
   SelectContent,
@@ -22,10 +17,7 @@ type SelectFieldOption = {
   disabled?: boolean
 }
 
-type SelectFieldProps = Omit<
-  React.ComponentProps<typeof Select>,
-  'children'
-> & {
+type SelectFieldProps = Omit<React.ComponentProps<typeof Select>, 'children'> & {
   label?: string
   options: SelectFieldOption[]
   placeholder?: string
@@ -63,20 +55,12 @@ function SelectField({
         }}
         {...props}
       >
-        <SelectTrigger
-          id={triggerId}
-          aria-invalid={hasError}
-          className={className}
-        >
+        <SelectTrigger id={triggerId} aria-invalid={hasError} className={className}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
           {options.map((option) => (
-            <SelectItem
-              key={option.value}
-              value={option.value}
-              disabled={option.disabled}
-            >
+            <SelectItem key={option.value} value={option.value} disabled={option.disabled}>
               {option.label}
             </SelectItem>
           ))}

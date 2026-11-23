@@ -2,6 +2,9 @@
 
 import { useState } from 'react'
 
+import { Settings2 } from 'lucide-react'
+
+import { CheckboxField } from '@/components/custom/fields/checkbox-field'
 import {
   Accordion,
   AccordionContent,
@@ -9,7 +12,6 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
-import { CheckboxField } from '@/components/custom/fields/checkbox-field'
 import {
   Dialog,
   DialogContent,
@@ -30,8 +32,6 @@ import {
 import { useMediaQuery } from '@/lib/useMediaQuery'
 
 import type { CategoryInterface } from '@/types/categories'
-
-import { Settings2 } from 'lucide-react'
 
 function FilterList({ categories }: { categories: CategoryInterface[] }) {
   const [open, setOpen] = useState<boolean>(false)

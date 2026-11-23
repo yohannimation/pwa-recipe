@@ -1,5 +1,7 @@
 import * as React from 'react'
+
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+
 import {
   Combobox,
   ComboboxChip,
@@ -171,12 +173,7 @@ export const Multiple: Story = {
   render: () => {
     const anchor = useComboboxAnchor()
     return (
-      <Combobox
-        multiple
-        autoHighlight
-        items={frameworks}
-        defaultValue={['Next.js', 'Astro']}
-      >
+      <Combobox multiple autoHighlight items={frameworks} defaultValue={['Next.js', 'Astro']}>
         <ComboboxChips ref={anchor}>
           <ComboboxValue>
             {(values: string[]) => (
@@ -208,12 +205,7 @@ export const MultipleDisabled: Story = {
   render: () => {
     const anchor = useComboboxAnchor()
     return (
-      <Combobox
-        multiple
-        disabled
-        items={frameworks}
-        defaultValue={['Next.js', 'Astro']}
-      >
+      <Combobox multiple disabled items={frameworks} defaultValue={['Next.js', 'Astro']}>
         <ComboboxChips ref={anchor}>
           <ComboboxValue>
             {(values: string[]) => (
@@ -301,11 +293,7 @@ export const WithGroups: Story = {
 
 export const WithObjects: Story = {
   render: (args) => (
-    <Combobox
-      {...args}
-      items={countries}
-      itemToStringValue={(country: any) => country.label}
-    >
+    <Combobox {...args} items={countries} itemToStringValue={(country: any) => country.label}>
       <ComboboxInput placeholder="Choisir un pays" showClear />
       <ComboboxContent>
         <ComboboxEmpty>Aucun pays trouvé.</ComboboxEmpty>
@@ -314,9 +302,7 @@ export const WithObjects: Story = {
             <ComboboxItem key={country.code} value={country}>
               <div className="flex flex-col">
                 <span>{country.label}</span>
-                <span className="text-muted-foreground text-xs">
-                  {country.continent}
-                </span>
+                <span className="text-xs text-muted-foreground">{country.continent}</span>
               </div>
             </ComboboxItem>
           )}

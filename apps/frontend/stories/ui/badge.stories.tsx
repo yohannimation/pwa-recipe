@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Badge } from '@/components/ui/badge'
-
 import { Mail } from 'lucide-react'
+
+import { Badge } from '@/components/ui/badge'
 import { Spinner } from '@/components/ui/spinner'
 
 // Define a type for the Storybook args that includes our custom preview controls
@@ -17,14 +17,7 @@ const meta: Meta<BadgeStoryArgs> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: [
-        'default',
-        'outline',
-        'secondary',
-        'ghost',
-        'destructive',
-        'link',
-      ],
+      options: ['default', 'outline', 'secondary', 'ghost', 'destructive', 'link'],
     },
     showIcon: {
       control: 'boolean',

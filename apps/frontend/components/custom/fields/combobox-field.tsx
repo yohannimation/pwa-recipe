@@ -18,12 +18,7 @@ import {
   ComboboxValue,
   useComboboxAnchor,
 } from '@/components/ui/combobox'
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldLabel,
-} from '@/components/ui/field'
+import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field'
 
 type ComboboxFieldOption = {
   value: string
@@ -102,8 +97,7 @@ function ComboboxField(props: ComboboxFieldProps) {
     items: groups ?? options,
     name,
     disabled,
-    isItemEqualToValue: (a: ComboboxFieldOption, b: ComboboxFieldOption) =>
-      a.value === b.value,
+    isItemEqualToValue: (a: ComboboxFieldOption, b: ComboboxFieldOption) => a.value === b.value,
     itemToStringValue: (item: ComboboxFieldOption) => item.value,
   }
 
@@ -118,13 +112,13 @@ function ComboboxField(props: ComboboxFieldProps) {
       <ComboboxEmpty>{emptyText}</ComboboxEmpty>
       <ComboboxList>
         {groups
-        ? (group: ComboboxFieldGroup) => (
-            <ComboboxGroup key={group.value} items={group.items}>
-              <ComboboxLabel>{group.value}</ComboboxLabel>
-              <ComboboxCollection>{renderItem}</ComboboxCollection>
-            </ComboboxGroup>
-          )
-        : renderItem}
+          ? (group: ComboboxFieldGroup) => (
+              <ComboboxGroup key={group.value} items={group.items}>
+                <ComboboxLabel>{group.value}</ComboboxLabel>
+                <ComboboxCollection>{renderItem}</ComboboxCollection>
+              </ComboboxGroup>
+            )
+          : renderItem}
       </ComboboxList>
     </>
   )
@@ -147,10 +141,7 @@ function ComboboxField(props: ComboboxFieldProps) {
         }}
         {...valueProps}
       >
-        <ComboboxChips
-          ref={anchor}
-          aria-invalid={hasError}
-        >
+        <ComboboxChips ref={anchor} aria-invalid={hasError}>
           <ComboboxValue>
             {(selected: ComboboxFieldOption[]) => (
               <>

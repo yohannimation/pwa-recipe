@@ -2,22 +2,10 @@
 
 import { ReactNode, useId } from 'react'
 
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldLabel,
-} from '@/components/ui/field'
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from '@/components/ui/input-group'
+import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 
-type TextFieldProps = Omit<
-  React.ComponentProps<typeof InputGroupInput>,
-  'type'
-> & {
+type TextFieldProps = Omit<React.ComponentProps<typeof InputGroupInput>, 'type'> & {
   label: string
   error?: string | { message: string }[]
   description?: string
@@ -50,9 +38,7 @@ function TextField({
       <FieldLabel htmlFor={inputId}>{label}</FieldLabel>
 
       <InputGroup>
-        {startAddon ? (
-          <InputGroupAddon align="inline-start">{startAddon}</InputGroupAddon>
-        ) : null}
+        {startAddon ? <InputGroupAddon align="inline-start">{startAddon}</InputGroupAddon> : null}
 
         <InputGroupInput
           id={inputId}
@@ -63,9 +49,7 @@ function TextField({
           onChange={(e) => onValueChange?.(e.target.value)}
         />
 
-        {endAddon ? (
-          <InputGroupAddon align="inline-end">{endAddon}</InputGroupAddon>
-        ) : null}
+        {endAddon ? <InputGroupAddon align="inline-end">{endAddon}</InputGroupAddon> : null}
       </InputGroup>
 
       {hasError && Array.isArray(error) ? (

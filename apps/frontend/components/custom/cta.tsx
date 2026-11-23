@@ -1,8 +1,9 @@
 'use client'
 
-import Link from 'next/link'
-import { Button, buttonVariants } from '@/components/ui/button'
 import { VariantProps } from 'class-variance-authority'
+import Link from 'next/link'
+
+import { Button, buttonVariants } from '@/components/ui/button'
 
 type CtaProps = {
   text: string
@@ -43,15 +44,13 @@ function Cta({ text, icon, size = 'md', href, target, onClick }: CtaProps) {
       {/* Background */}
       <span
         aria-hidden
-        className={`bg-primary group-hover:bg-secondary absolute inset-y-0 right-0 ${background} duration-300 ease-out group-hover:w-full`}
+        className={`absolute inset-y-0 right-0 bg-primary group-hover:bg-secondary ${background} duration-300 ease-out group-hover:w-full`}
       />
 
-      <span className="text-foreground relative transition-colors duration-150 group-hover:text-white">
+      <span className="relative text-foreground transition-colors duration-150 group-hover:text-white">
         {text}
       </span>
-      <span
-        className={`relative z-1 text-white transition-[margin] duration-200 ${iconMargin}`}
-      >
+      <span className={`relative z-1 text-white transition-[margin] duration-200 ${iconMargin}`}>
         {icon}
       </span>
     </>

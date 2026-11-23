@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { Heart, MapPin } from 'lucide-react'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -11,8 +12,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-
-import { Heart, MapPin } from 'lucide-react'
 
 const meta: Meta<typeof Card> = {
   title: 'UI/Card',
@@ -39,8 +38,7 @@ type Story = StoryObj<typeof Card>
 const base = 'w-full max-w-sm'
 
 // Images
-const img = (seed: string, w = 800, h = 450) =>
-  `https://picsum.photos/seed/${seed}/${w}/${h}`
+const img = (seed: string, w = 800, h = 450) => `https://picsum.photos/seed/${seed}/${w}/${h}`
 
 /* -------------------------------------------------------------------- */
 /*  Basics                                                              */
@@ -62,7 +60,7 @@ export const FullCard: Story = {
         <p>Main content of the card goes here. You can put anything inside.</p>
       </CardContent>
       <CardFooter>
-        <span className="text-muted-foreground text-xs">Footer info</span>
+        <span className="text-xs text-muted-foreground">Footer info</span>
       </CardFooter>
     </Card>
   ),
@@ -106,20 +104,16 @@ export const WithImageHeader: Story = {
       />
       <CardHeader>
         <CardTitle>Aventure en montagne</CardTitle>
-        <CardDescription>
-          Une randonnée de 3 jours dans les Pyrénées.
-        </CardDescription>
+        <CardDescription>Une randonnée de 3 jours dans les Pyrénées.</CardDescription>
       </CardHeader>
       <CardContent>
         <p>
-          Découvrez des sentiers préservés, des lacs d'altitude et des panoramas
-          à couper le souffle.
+          Découvrez des sentiers préservés, des lacs d'altitude et des panoramas à couper le
+          souffle.
         </p>
       </CardContent>
       <CardFooter className="justify-between">
-        <span className="text-muted-foreground text-xs">
-          3 jours · Niveau moyen
-        </span>
+        <span className="text-xs text-muted-foreground">3 jours · Niveau moyen</span>
         <Button size="sm">Réserver</Button>
       </CardFooter>
     </Card>
@@ -130,11 +124,7 @@ export const ImageWithBadge: Story = {
   render: (args) => (
     <Card {...args} className={`${base} overflow-hidden pt-0`}>
       <div className="relative">
-        <img
-          src={img('coast')}
-          alt="Côte rocheuse"
-          className="aspect-video w-full object-cover"
-        />
+        <img src={img('coast')} alt="Côte rocheuse" className="aspect-video w-full object-cover" />
         <Badge className="absolute top-3 left-3">Nouveau</Badge>
         <Button
           variant="secondary"
@@ -166,21 +156,14 @@ export const ImageFooter: Story = {
         <CardTitle>Galerie</CardTitle>
         <CardDescription>L'image se place en bas de la carte.</CardDescription>
       </CardHeader>
-      <img
-        src={img('gallery')}
-        alt="Illustration"
-        className="aspect-video w-full object-cover"
-      />
+      <img src={img('gallery')} alt="Illustration" className="aspect-video w-full object-cover" />
     </Card>
   ),
 }
 
 export const ImageOverlay: Story = {
   render: (args) => (
-    <Card
-      {...args}
-      className={`${base} relative overflow-hidden border-0 p-0 text-white`}
-    >
+    <Card {...args} className={`${base} relative overflow-hidden border-0 p-0 text-white`}>
       <img
         src={img('night', 800, 600)}
         alt="Ville de nuit"
@@ -199,24 +182,15 @@ export const ImageOverlay: Story = {
 
 export const HorizontalWithImage: Story = {
   render: (args) => (
-    <Card
-      {...args}
-      className="w-full max-w-xl flex-row gap-0 overflow-hidden py-0"
-    >
-      <img
-        src={img('forest', 400, 400)}
-        alt="Forêt"
-        className="w-40 shrink-0 object-cover"
-      />
+    <Card {...args} className="w-full max-w-xl flex-row gap-0 overflow-hidden py-0">
+      <img src={img('forest', 400, 400)} alt="Forêt" className="w-40 shrink-0 object-cover" />
       <div className="flex flex-1 flex-col gap-4 py-4">
         <CardHeader>
           <CardTitle>Forêt de Fontainebleau</CardTitle>
           <CardDescription>Escalade et randonnée</CardDescription>
         </CardHeader>
         <CardContent>
-          <p className="text-sm">
-            Un terrain de jeu unique à une heure de Paris.
-          </p>
+          <p className="text-sm">Un terrain de jeu unique à une heure de Paris.</p>
         </CardContent>
         <CardFooter>
           <Button size="sm" variant="outline">

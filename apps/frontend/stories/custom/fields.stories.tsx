@@ -1,18 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { Mail } from 'lucide-react'
 
-import { Field } from '@/components/ui/field'
-
+import { CheckboxField } from '@/components/custom/fields/checkbox-field'
+import { ComboboxField } from '@/components/custom/fields/combobox-field'
+import { FileField } from '@/components/custom/fields/file-field'
 // Custom fields
 import { NumberField } from '@/components/custom/fields/number-field'
 import { PasswordField } from '@/components/custom/fields/password-field'
-import { FileField } from '@/components/custom/fields/file-field'
 import { SelectField } from '@/components/custom/fields/select-field'
-import { ComboboxField } from '@/components/custom/fields/combobox-field'
 import { TextField } from '@/components/custom/fields/text-field'
-
-import { Mail } from 'lucide-react'
 import { TextareaField } from '@/components/custom/fields/textarea-field'
-import { CheckboxField } from '@/components/custom/fields/checkbox-field'
+import { Field } from '@/components/ui/field'
 
 const triggerLog = (componentName: string, value: unknown) => {
   console.log(componentName, value)
@@ -71,10 +69,7 @@ export const TextMultipleInvalid: Story = {
   render: () => (
     <TextField
       label="Text field multi error"
-      error={[
-        { message: 'minimum 8 char' },
-        { message: 'minimum 1 special char' },
-      ]}
+      error={[{ message: 'minimum 8 char' }, { message: 'minimum 1 special char' }]}
       placeholder="Text"
       onValueChange={(value: unknown) => triggerLog('TextField', value)}
     />
@@ -117,10 +112,7 @@ export const PasswordMultipleInvalid: Story = {
   render: () => (
     <PasswordField
       label="Password field multi error"
-      error={[
-        { message: 'minimum 8 char' },
-        { message: 'minimum 1 special char' },
-      ]}
+      error={[{ message: 'minimum 8 char' }, { message: 'minimum 1 special char' }]}
       placeholder="MotDePasse123!"
       onValueChange={(value: unknown) => triggerLog('PasswordField', value)}
     />
@@ -186,10 +178,7 @@ export const NumberDisabled: Story = {
 /* -------------------------------------------------------------------- */
 export const File: Story = {
   render: () => (
-    <FileField
-      label="File"
-      onValueChange={(value: unknown) => triggerLog('FileField', value)}
-    />
+    <FileField label="File" onValueChange={(value: unknown) => triggerLog('FileField', value)} />
   ),
 }
 export const FileSingleInvalid: Story = {
@@ -205,10 +194,7 @@ export const FileMultipleInvalid: Story = {
   render: () => (
     <FileField
       label="File field multi error"
-      error={[
-        { message: 'Format not accepted' },
-        { message: 'Size too excessive' },
-      ]}
+      error={[{ message: 'Format not accepted' }, { message: 'Size too excessive' }]}
       onValueChange={(value: unknown) => triggerLog('FileField', value)}
     />
   ),

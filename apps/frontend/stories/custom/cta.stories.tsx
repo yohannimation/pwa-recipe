@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { ArrowRight, Mail } from 'lucide-react'
 
 // Custom fields
 import { Cta } from '@/components/custom/cta'
-
-import { ArrowRight, Mail } from 'lucide-react'
 
 const meta = {
   title: 'Custom/Cta',

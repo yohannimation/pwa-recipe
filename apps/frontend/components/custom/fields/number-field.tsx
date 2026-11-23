@@ -1,14 +1,10 @@
 'use client'
 
 import { useId, useState } from 'react'
-import { cn } from '@/lib/utils'
 
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldLabel,
-} from '@/components/ui/field'
+import { Minus, Plus } from 'lucide-react'
+
+import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field'
 import {
   InputGroup,
   InputGroupAddon,
@@ -16,7 +12,7 @@ import {
   InputGroupInput,
 } from '@/components/ui/input-group'
 
-import { Minus, Plus } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 type NumberFieldProps = Omit<
   React.ComponentProps<typeof InputGroupInput>,
@@ -57,9 +53,7 @@ function NumberField({
   const generatedId = useId()
   const inputId = id ?? generatedId
 
-  const [internalValue, setInternalValue] = useState<number | undefined>(
-    defaultValue
-  )
+  const [internalValue, setInternalValue] = useState<number | undefined>(defaultValue)
   const isControlled = value !== undefined
   const current = isControlled ? (value ?? undefined) : internalValue
 
@@ -98,11 +92,7 @@ function NumberField({
   }
 
   return (
-    <Field
-      data-invalid={hasError}
-      data-disabled={disabled}
-      className={className}
-    >
+    <Field data-invalid={hasError} data-disabled={disabled} className={className}>
       <FieldLabel htmlFor={inputId}>{label}</FieldLabel>
 
       <InputGroup>
@@ -131,7 +121,7 @@ function NumberField({
           disabled={disabled}
           onChange={handleChange}
           onBlur={handleBlur}
-          className='text-center'
+          className="text-center"
           {...props}
         />
 

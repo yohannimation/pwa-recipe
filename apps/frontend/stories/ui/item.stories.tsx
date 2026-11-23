@@ -1,16 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { User } from 'lucide-react'
+
+import { Button } from '@/components/ui/button'
 import {
   Item,
-  ItemMedia,
-  ItemContent,
-  ItemTitle,
-  ItemDescription,
   ItemActions,
+  ItemContent,
+  ItemDescription,
   ItemGroup,
+  ItemMedia,
   ItemSeparator,
+  ItemTitle,
 } from '@/components/ui/item'
-import { Button } from '@/components/ui/button'
-import { User } from 'lucide-react'
 
 const meta: Meta<typeof Item> = {
   title: 'UI/Item',
@@ -39,9 +40,7 @@ export const Default: Story = {
       </ItemMedia>
       <ItemContent>
         <ItemTitle>User Profile</ItemTitle>
-        <ItemDescription>
-          Manage your account settings and preferences.
-        </ItemDescription>
+        <ItemDescription>Manage your account settings and preferences.</ItemDescription>
       </ItemContent>
       <ItemActions>
         <Button size="sm" variant="ghost">

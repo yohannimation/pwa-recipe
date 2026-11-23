@@ -1,21 +1,21 @@
 'use client'
 
 import { useEffect, useState, useTransition } from 'react'
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 
-import { useRegister } from '@/lib/api/auth'
-
-import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { Button } from '@/components/ui/button'
-import { FieldError, FieldGroup } from '@/components/ui/field'
 import { PasswordField } from '@/components/custom/fields/password-field'
 import { TextField } from '@/components/custom/fields/text-field'
-import { Spinner } from '@/components/ui/spinner'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { FieldError, FieldGroup } from '@/components/ui/field'
+import { Spinner } from '@/components/ui/spinner'
+
+import { useRegister } from '@/lib/api/auth'
 
 import { UserInterface } from '@/types/users'
 
@@ -23,18 +23,21 @@ const registerSchema = yup.object({
   username: yup
     .string()
     .min(3, 'Le username doit contenir au moins 3 caractères')
-    .required("Le username est requis"),
+    .required('Le username est requis'),
   password: yup
     .string()
     .min(8, 'Le mot de passe doit contenir au moins 8 caractères')
     .matches(/[A-Z]/, 'Le mot de passe doit contenir au moins une majuscule')
     .matches(/[0-9]/, 'Le mot de passe doit contenir au moins un chiffre')
-    .matches(/[!@#$%^&*(),.?":{}|<>_\-+=/\\[\]~`;' ]/, 'Le mot de passe doit contenir au moins un caractère spécial')
+    .matches(
+      /[!@#$%^&*(),.?":{}|<>_\-+=/\\[\]~`;' ]/,
+      'Le mot de passe doit contenir au moins un caractère spécial'
+    )
     .required('Le mot de passe est requis'),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref('password')], 'Le mot de passe ne correspond pas')
-    .required('La confirmation de mot de passe est requise')
+    .required('La confirmation de mot de passe est requise'),
 })
 
 type RegisterFormValues = yup.InferType<typeof registerSchema>
@@ -51,14 +54,13 @@ function RegisterForm() {
       confirmPassword: '',
     },
   })
-  const [user, setUser] = useState<UserInterface|null>(null)
+  const [user, setUser] = useState<UserInterface | null>(null)
 
   useEffect(() => {
     if (user)
       startTransition(() => {
         router.push('/auth/login')
       })
-
   }, [user, router])
 
   async function onSubmit(values: RegisterFormValues) {
@@ -66,8 +68,8 @@ function RegisterForm() {
       setUser(
         await register.mutateAsync({
           username: values.username,
-          password: values.password}
-        )
+          password: values.password,
+        })
       )
     } catch {
       form.setError('root', { message: 'Une erreur est survenue' })
@@ -77,18 +79,18 @@ function RegisterForm() {
   return (
     <form
       onSubmit={form.handleSubmit(onSubmit)}
-      className='flex justify-center items-center flex-col gap-8 w-full'
+      className="flex w-full flex-col items-center justify-center gap-8"
       noValidate
     >
-      <Card className='w-full md:w-[75%] lg:w-[50%] max-w-[600px]'>
+      <Card className="w-full max-w-[600px] md:w-[75%] lg:w-[50%]">
         <CardHeader>
           <CardTitle>Inscription</CardTitle>
         </CardHeader>
-        <CardContent className='flex flex-col gap-4'>
+        <CardContent className="flex flex-col gap-4">
           <FieldGroup>
             <Controller
               control={form.control}
-              name='username'
+              name="username"
               render={({ field, fieldState }) => (
                 <TextField
                   ref={field.ref}
@@ -112,7 +114,7 @@ function RegisterForm() {
               <PasswordField
                 ref={field.ref}
                 name={field.name}
-                description='Doit contenir au minimum : 8 caractères, 1 majuscule, 1 chiffre, 1 caractère spécial'
+                description="Doit contenir au minimum : 8 caractères, 1 majuscule, 1 chiffre, 1 caractère spécial"
                 value={field.value}
                 onBlur={field.onBlur}
                 onValueChange={field.onChange}
@@ -143,20 +145,20 @@ function RegisterForm() {
           )}
         </CardContent>
 
-        <CardFooter className='flex justify-end gap-2'>
-          <Button
-            type='submit'
-            disabled={form.formState.isSubmitting}
-          >
+        <CardFooter className="flex justify-end gap-2">
+          <Button type="submit" disabled={form.formState.isSubmitting}>
             {form.formState.isSubmitting && <Spinner data-icon="inline-start" />}
-              <span className="truncate">Inscription</span>
+            <span className="truncate">Inscription</span>
           </Button>
         </CardFooter>
       </Card>
 
-      <p className='text-center'>
+      <p className="text-center">
         Vous avez déjà une toque ?<br />
-        <Button variant={'link'} className='p-0 text-foreground' asChild><Link href={'/auth/login'}>Connectez-vous</Link></Button>, on a besoin de vous en cuisine !
+        <Button variant={'link'} className="p-0 text-foreground" asChild>
+          <Link href={'/auth/login'}>Connectez-vous</Link>
+        </Button>
+        , on a besoin de vous en cuisine !
       </p>
     </form>
   )

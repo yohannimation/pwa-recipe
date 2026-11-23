@@ -11,10 +11,7 @@ import {
   FieldLabel,
 } from '@/components/ui/field'
 
-type CheckboxFieldProps = Omit<
-  React.ComponentProps<typeof Checkbox>,
-  'onCheckedChange'
-> & {
+type CheckboxFieldProps = Omit<React.ComponentProps<typeof Checkbox>, 'onCheckedChange'> & {
   /** Text or JSX (ex: text with link) */
   label: ReactNode
   error?: string | { message: string }[]

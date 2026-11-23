@@ -1,11 +1,13 @@
+import { useState } from 'react'
+
 import type { Meta, StoryObj } from '@storybook/react'
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import { useState } from 'react'
 
 /* -------------------------------------------------------------------------- */
 /*  Data                                                                      */
@@ -40,11 +42,7 @@ function FaqItems({ disabledValue }: { disabledValue?: string }) {
   return (
     <>
       {faq.map((item) => (
-        <AccordionItem
-          key={item.value}
-          value={item.value}
-          disabled={item.value === disabledValue}
-        >
+        <AccordionItem key={item.value} value={item.value} disabled={item.value === disabledValue}>
           <AccordionTrigger>{item.question}</AccordionTrigger>
           <AccordionContent>{item.answer}</AccordionContent>
         </AccordionItem>
@@ -71,7 +69,7 @@ function ControlledExample() {
       >
         <FaqItems />
       </Accordion>
-      <p className="text-muted-foreground text-sm">
+      <p className="text-sm text-muted-foreground">
         Valeur : <code>{value || '""'}</code>
       </p>
     </div>
@@ -114,8 +112,7 @@ const meta = {
     },
     collapsible: {
       control: 'boolean',
-      description:
-        "Autorise la fermeture de l'item ouvert (uniquement en mode `single`)",
+      description: "Autorise la fermeture de l'item ouvert (uniquement en mode `single`)",
     },
     disabled: {
       control: 'boolean',

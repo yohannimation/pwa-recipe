@@ -1,8 +1,8 @@
-import { Badge } from '@/components/ui/badge'
-import { AvatarGroup, AvatarGroupCount } from '@/components/ui/avatar'
-import { Blobatar } from '@/components/ui/blobatar'
-
 import { ChefHat, CookingPot, Heart, Timer } from 'lucide-react'
+
+import { AvatarGroup, AvatarGroupCount } from '@/components/ui/avatar'
+import { Badge } from '@/components/ui/badge'
+import { Blobatar } from '@/components/ui/blobatar'
 
 import type { UserInterface } from '@/types/users'
 
@@ -37,7 +37,11 @@ function RecipeCardDescription({
   const createdByContent = (
     <>
       {' | '}
-      <Badge variant={'ghost'} className="rounded-none border-none overflow-visible" title={`Créée par ${user.username}`}>
+      <Badge
+        variant={'ghost'}
+        className="overflow-visible rounded-none border-none"
+        title={`Créée par ${user.username}`}
+      >
         <ChefHat />
         <Blobatar
           key={user.id}
@@ -52,7 +56,7 @@ function RecipeCardDescription({
   const likedByContent = (
     <>
       {' | '}
-      <Badge variant={'ghost'} className="rounded-none border-none overflow-visible">
+      <Badge variant={'ghost'} className="overflow-visible rounded-none border-none">
         <Heart />
         <AvatarGroup>
           {/* Display X Blobatar */}

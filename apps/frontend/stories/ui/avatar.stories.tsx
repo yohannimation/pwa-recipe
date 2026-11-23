@@ -1,24 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { love, scared, shy, sick, surprised, thinking, unsure, wink } from 'blobatar/expression'
+
 import {
   Avatar,
-  AvatarImage,
-  AvatarFallback,
   AvatarBadge,
+  AvatarFallback,
   AvatarGroup,
   AvatarGroupCount,
+  AvatarImage,
 } from '@/components/ui/avatar'
-
 import { Blobatar } from '@/components/ui/blobatar'
-import {
-  love,
-  thinking,
-  surprised,
-  wink,
-  unsure,
-  scared,
-  shy,
-  sick,
-} from 'blobatar/expression'
 
 // Define a type for the Storybook args that includes our custom preview controls
 type AvatarStoryArgs = React.ComponentProps<typeof Avatar> & {
@@ -51,9 +42,7 @@ const meta: Meta<AvatarStoryArgs> = {
 
     return (
       <Avatar {...avatarArgs}>
-        {showImage && (
-          <AvatarImage src="https://github.com/shadcn.png" alt="User" />
-        )}
+        {showImage && <AvatarImage src="https://github.com/shadcn.png" alt="User" />}
         <AvatarFallback>CN</AvatarFallback>
         {showBadge && <AvatarBadge />}
       </Avatar>
@@ -96,10 +85,7 @@ export const Group: Story = {
           expression: thinking,
         }}
       />
-      <Blobatar
-        name="louise"
-        blobatar={{ background: 'circle', animate: 'always' }}
-      />
+      <Blobatar name="louise" blobatar={{ background: 'circle', animate: 'always' }} />
       <Avatar>
         <AvatarImage src="https://github.com/vercel.png" />
         <AvatarFallback>V</AvatarFallback>
