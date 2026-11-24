@@ -34,6 +34,63 @@ import { useMediaQuery } from '@/lib/useMediaQuery'
 
 import type { CategoryInterface } from '@/types/categories'
 
+/**
+ * Default opened groups :
+ * - Each one containing minimum one sub-category selected
+ * - Else, uniquely the first group
+ */
+function getInitialOpenGroups(categories: CategoryInterface[], selected: string[]): string[] {
+  const withSelection = categories
+    .filter((category) => category.children.some((child) => selected.includes(child.name)))
+    .map((category) => category.name)
+
+  if (withSelection.length > 0) return withSelection
+
+  return categories[0] ? [categories[0].name] : []
+}
+
+function CategoryAccordion({
+  groups,
+  openGroups,
+  onOpenGroupsChange,
+  selected,
+  onToggle,
+}: {
+  groups: CategoryInterface[]
+  openGroups: string[]
+  onOpenGroupsChange: (value: string[]) => void
+  selected: string[]
+  onToggle: (name: string) => void
+}) {
+  return (
+    <Accordion
+      type="multiple"
+      value={openGroups}
+      onValueChange={onOpenGroupsChange}
+      className="w-full flex-1"
+    >
+      {groups.map((category) => (
+        <AccordionItem key={category.name} value={category.name}>
+          <AccordionTrigger>{category.name}</AccordionTrigger>
+          <AccordionContent>
+            <ul className="flex flex-col gap-1.5">
+              {category.children.map((child) => (
+                <li key={child.name}>
+                  <CheckboxField
+                    label={child.name}
+                    onCheckedChange={() => onToggle(child.name)}
+                    checked={selected.includes(child.name)}
+                  />
+                </li>
+              ))}
+            </ul>
+          </AccordionContent>
+        </AccordionItem>
+      ))}
+    </Accordion>
+  )
+}
+
 function FilterList({ categories }: { categories: CategoryInterface[] }) {
   // Display state
   const [open, setOpen] = useState<boolean>(false)
@@ -46,6 +103,25 @@ function FilterList({ categories }: { categories: CategoryInterface[] }) {
 
   const categoriesParam = 'categories'
   const selected = searchParams.getAll(categoriesParam)
+
+  // Accordion state (opened groups)
+  const [openGroups, setOpenGroups] = useState<string[]>(() =>
+    getInitialOpenGroups(categories, selected)
+  )
+
+  const handleOpenChange = (value: boolean) => {
+    if (value) setOpenGroups(getInitialOpenGroups(categories, selected))
+    setOpen(value)
+  }
+
+  /**
+   * Desktop: two accordions share the same state
+   * Each one update they groups
+   */
+  const updateColumn = (columnGroups: CategoryInterface[]) => (value: string[]) => {
+    const columnNames = columnGroups.map((category) => category.name)
+    setOpenGroups((prev) => [...prev.filter((name) => !columnNames.includes(name)), ...value])
+  }
 
   const toggle = (name: string) => {
     const next = selected.includes(name)
@@ -70,6 +146,9 @@ function FilterList({ categories }: { categories: CategoryInterface[] }) {
     })
   }
 
+  const evenGroups = categories.filter((_, i) => i % 2 === 0)
+  const oddGroups = categories.filter((_, i) => i % 2 !== 0)
+
   const trigger = (
     <div>
       <Button className="hidden sm:flex">
@@ -86,83 +165,32 @@ function FilterList({ categories }: { categories: CategoryInterface[] }) {
       <div className="flex flex-col items-start gap-x-8 lg:flex-row">
         {isDesktop ? (
           <>
-            {/* Colonne 1 : Index pairs (0, 2, 4...) */}
-            <Accordion
-              type="multiple"
-              defaultValue={[categories[0].name]}
-              className="w-full flex-1"
-            >
-              {categories
-                .filter((_, i) => i % 2 === 0)
-                .map((category: CategoryInterface) => (
-                  <AccordionItem key={category.name} value={category.name}>
-                    <AccordionTrigger>{category.name}</AccordionTrigger>
-                    <AccordionContent>
-                      <ul className="flex flex-col gap-1.5">
-                        {category.children.map((child: CategoryInterface) => (
-                          <li key={child.name}>
-                            <CheckboxField
-                              label={child.name}
-                              onCheckedChange={() => toggle(child.name)}
-                              checked={selected.includes(child.name)}
-                            />
-                          </li>
-                        ))}
-                      </ul>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-            </Accordion>
+            {/* Column 1 : pairs index (0, 2, 4...) */}
+            <CategoryAccordion
+              groups={evenGroups}
+              openGroups={openGroups}
+              onOpenGroupsChange={updateColumn(evenGroups)}
+              selected={selected}
+              onToggle={toggle}
+            />
 
-            {/* Colonne 2 : Index impairs (1, 3, 5...) */}
-            <Accordion type="multiple" className="w-full flex-1">
-              {categories
-                .filter((_, i) => i % 2 !== 0)
-                .map((category: CategoryInterface) => (
-                  <AccordionItem key={category.name} value={category.name}>
-                    <AccordionTrigger>{category.name}</AccordionTrigger>
-                    <AccordionContent>
-                      <ul className="flex flex-col gap-1.5">
-                        {category.children.map((child: CategoryInterface) => (
-                          <li key={child.name}>
-                            <CheckboxField
-                              label={child.name}
-                              onCheckedChange={() => toggle(child.name)}
-                              checked={selected.includes(child.name)}
-                            />
-                          </li>
-                        ))}
-                      </ul>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-            </Accordion>
+            {/* Column 2 : impairs index (1, 3, 5...) */}
+            <CategoryAccordion
+              groups={oddGroups}
+              openGroups={openGroups}
+              onOpenGroupsChange={updateColumn(oddGroups)}
+              selected={selected}
+              onToggle={toggle}
+            />
           </>
         ) : (
-          <Accordion type="multiple">
-            {categories.map((category) => {
-              return (
-                <AccordionItem key={category.name} value={category.name}>
-                  <AccordionTrigger>{category.name}</AccordionTrigger>
-                  <AccordionContent>
-                    <ul className="flex flex-col gap-1.5">
-                      {category.children.map((child) => {
-                        return (
-                          <li key={child.name}>
-                            <CheckboxField
-                              label={child.name}
-                              onCheckedChange={() => toggle(child.name)}
-                              checked={selected.includes(child.name)}
-                            />
-                          </li>
-                        )
-                      })}
-                    </ul>
-                  </AccordionContent>
-                </AccordionItem>
-              )
-            })}
-          </Accordion>
+          <CategoryAccordion
+            groups={categories}
+            openGroups={openGroups}
+            onOpenGroupsChange={setOpenGroups}
+            selected={selected}
+            onToggle={toggle}
+          />
         )}
       </div>
     </div>
@@ -180,7 +208,7 @@ function FilterList({ categories }: { categories: CategoryInterface[] }) {
 
   if (isDesktop) {
     return (
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog open={open} onOpenChange={handleOpenChange}>
         <DialogTrigger asChild>{trigger}</DialogTrigger>
         <DialogContent className="min-w-170">
           {/* Dialog header */}
@@ -199,7 +227,7 @@ function FilterList({ categories }: { categories: CategoryInterface[] }) {
   }
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
+    <Drawer open={open} onOpenChange={handleOpenChange}>
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
       <DrawerContent>
         {/* Drawer header */}
