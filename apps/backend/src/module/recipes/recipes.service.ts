@@ -78,15 +78,40 @@ export class RecipesService {
 
   async findAll(query: {
     name?: string;
-    category?: string;
+    categories?: string | string[];
     sort?: SortInterface;
   }) {
-    const { name, category, sort } = query;
+    const { name, sort } = query;
+    const categories = [
+      ...new Set(
+        (Array.isArray(query.categories)
+          ? query.categories
+          : (query.categories?.split(',') ?? [])
+        ).filter(Boolean),
+      ),
+    ];
 
     const where: FindManyOptions<Recipe>['where'] = {};
 
     if (name) where.name = ILike(`%${name}%`);
-    if (category) where.categories = { name: ILike(`%${category}%`) };
+
+    if (categories.length > 0) {
+      const rows = await this.recipeRepository
+        .createQueryBuilder('recipe')
+        .select('recipe.id', 'id')
+        .innerJoin('recipe.categories', 'category')
+        .where('category.name IN (:...categories)', { categories })
+        .groupBy('recipe.id')
+        .having('COUNT(DISTINCT category.id) = :count', {
+          count: categories.length,
+        })
+        .getRawMany<{ id: string }>();
+
+      // No recipes have all categories
+      if (rows.length === 0) return [];
+
+      where.id = In(rows.map((row) => row.id));
+    }
 
     const SORT_MAP: Record<SortInterface, FindManyOptions<Recipe>['order']> = {
       'name-asc': { name: 'ASC' },

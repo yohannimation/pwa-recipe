@@ -65,10 +65,10 @@ export class RecipesController {
   @ApiResponse({ status: 200, type: [Recipe] })
   findAll(
     @Query('name') name?: string,
-    @Query('category') category?: string,
+    @Query('categories') categories?: string[],
     @Query('sort') sort?: SortInterface,
   ) {
-    return this.recipesService.findAll({ name, category, sort });
+    return this.recipesService.findAll({ name, categories, sort });
   }
 
   @Get(':id')
