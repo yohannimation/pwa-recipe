@@ -151,7 +151,7 @@ function ComboboxItem({ className, children, ...props }: ComboboxPrimitive.Item.
     <ComboboxPrimitive.Item
       data-slot="combobox-item"
       className={cn(
-        "relative flex w-full cursor-default items-center gap-2 rounded-md py-1 pr-8 pl-1.5 text-sm outline-hidden select-none data-highlighted:bg-primary data-highlighted:text-white not-data-[variant=destructive]:data-highlighted:**:text-white data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "relative flex w-full cursor-pointer items-center gap-2 rounded-md py-1 pr-8 pl-1.5 text-sm outline-hidden select-none in-data-[slot=combobox-group]:pl-5 data-highlighted:bg-primary data-highlighted:text-white not-data-[variant=destructive]:data-highlighted:**:text-white data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       {...props}
@@ -176,7 +176,7 @@ function ComboboxLabel({ className, ...props }: ComboboxPrimitive.GroupLabel.Pro
   return (
     <ComboboxPrimitive.GroupLabel
       data-slot="combobox-label"
-      className={cn('px-2 py-1.5 text-xs text-muted-foreground', className)}
+      className={cn('px-2 py-1.5 text-muted-foreground', className)}
       {...props}
     />
   )

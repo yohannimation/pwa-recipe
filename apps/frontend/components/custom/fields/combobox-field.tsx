@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, useId } from 'react'
+import { useId } from 'react'
 
 import {
   Combobox,
@@ -25,10 +25,13 @@ type ComboboxFieldOption = {
   label: string
   disabled?: boolean
 }
+
 type ComboboxFieldGroup = {
   value: string
   items: ComboboxFieldOption[]
 }
+
+type ComboboxFieldError = string | { message: string }[]
 
 type ComboboxFieldBaseProps = {
   label: string
@@ -37,7 +40,7 @@ type ComboboxFieldBaseProps = {
   placeholder?: string
   emptyText?: string
   showClear?: boolean
-  error?: string | { message: string }[]
+  error?: ComboboxFieldError
   description?: string
   name?: string
   id?: string
@@ -61,6 +64,203 @@ type ComboboxFieldMultipleProps = ComboboxFieldBaseProps & {
 
 type ComboboxFieldProps = ComboboxFieldSingleProps | ComboboxFieldMultipleProps
 
+/* -------------------------------------------------------------------------- */
+/*  Helpers purs (hors composant : pas recréés à chaque rendu)                */
+/* -------------------------------------------------------------------------- */
+
+const hasErrors = (error: ComboboxFieldError | undefined) =>
+  Array.isArray(error) ? error.length > 0 : Boolean(error)
+
+const isSameOption = (a: ComboboxFieldOption, b: ComboboxFieldOption) => a.value === b.value
+const optionToString = (option: ComboboxFieldOption) => option.value
+
+/**
+ * Le Combobox travaille avec l'objet option complet, pas seulement sa valeur.
+ * Ce lookup convertit les valeurs (string) du formulaire en objets option.
+ */
+function createOptionLookup(options: ComboboxFieldOption[], groups?: ComboboxFieldGroup[]) {
+  const flat = groups ? groups.flatMap((group) => group.items) : options
+  const byValue = new Map(flat.map((option) => [option.value, option]))
+
+  return {
+    one: (value: string | null | undefined) =>
+      value == null ? null : (byValue.get(value) ?? null),
+    many: (values: string[] | undefined) =>
+      (values ?? []).flatMap((value) => {
+        const option = byValue.get(value)
+        return option ? [option] : []
+      }),
+  }
+}
+
+type OptionLookup = ReturnType<typeof createOptionLookup>
+
+/* -------------------------------------------------------------------------- */
+/*  Sous-composants internes                                                  */
+/* -------------------------------------------------------------------------- */
+
+function renderItem(option: ComboboxFieldOption) {
+  return (
+    <ComboboxItem key={option.value} value={option} disabled={option.disabled}>
+      {option.label}
+    </ComboboxItem>
+  )
+}
+
+function renderGroup(group: ComboboxFieldGroup) {
+  return (
+    <ComboboxGroup key={group.value} items={group.items}>
+      <ComboboxLabel>{group.value}</ComboboxLabel>
+      <ComboboxCollection>{renderItem}</ComboboxCollection>
+    </ComboboxGroup>
+  )
+}
+
+function ComboboxFieldList({ grouped, emptyText }: { grouped: boolean; emptyText: string }) {
+  return (
+    <>
+      <ComboboxEmpty>{emptyText}</ComboboxEmpty>
+      <ComboboxList>{grouped ? renderGroup : renderItem}</ComboboxList>
+    </>
+  )
+}
+
+/** Props communes aux deux modes (single / multiple). */
+type ControlProps = {
+  inputId: string
+  items: ComboboxFieldOption[] | ComboboxFieldGroup[]
+  grouped: boolean
+  lookup: OptionLookup
+  name?: string
+  disabled?: boolean
+  placeholder: string
+  emptyText: string
+  hasError: boolean
+}
+
+function SingleControl({
+  value,
+  defaultValue,
+  onValueChange,
+  showClear,
+  inputId,
+  items,
+  grouped,
+  lookup,
+  name,
+  disabled,
+  placeholder,
+  emptyText,
+  hasError,
+}: ControlProps &
+  Pick<ComboboxFieldSingleProps, 'value' | 'defaultValue' | 'onValueChange'> & {
+    showClear: boolean
+  }) {
+  const valueProps =
+    value !== undefined ? { value: lookup.one(value) } : { defaultValue: lookup.one(defaultValue) }
+
+  return (
+    <Combobox
+      items={items}
+      name={name}
+      disabled={disabled}
+      isItemEqualToValue={isSameOption}
+      itemToStringValue={optionToString}
+      onValueChange={(option: ComboboxFieldOption | null) => onValueChange?.(option?.value ?? null)}
+      {...valueProps}
+    >
+      <ComboboxInput
+        id={inputId}
+        placeholder={placeholder}
+        showClear={showClear}
+        aria-invalid={hasError}
+        disabled={disabled}
+      />
+      <ComboboxContent>
+        <ComboboxFieldList grouped={grouped} emptyText={emptyText} />
+      </ComboboxContent>
+    </Combobox>
+  )
+}
+
+function MultipleControl({
+  value,
+  defaultValue,
+  onValueChange,
+  inputId,
+  items,
+  grouped,
+  lookup,
+  name,
+  disabled,
+  placeholder,
+  emptyText,
+  hasError,
+}: ControlProps & Pick<ComboboxFieldMultipleProps, 'value' | 'defaultValue' | 'onValueChange'>) {
+  // Le hook n'est appelé que dans le mode qui en a besoin.
+  const anchor = useComboboxAnchor()
+
+  const valueProps =
+    value !== undefined
+      ? { value: lookup.many(value) }
+      : { defaultValue: lookup.many(defaultValue) }
+
+  return (
+    <Combobox
+      multiple
+      items={items}
+      name={name}
+      disabled={disabled}
+      isItemEqualToValue={isSameOption}
+      itemToStringValue={optionToString}
+      onValueChange={(selected: ComboboxFieldOption[]) =>
+        onValueChange?.(selected.map(optionToString))
+      }
+      {...valueProps}
+    >
+      <ComboboxChips ref={anchor} aria-invalid={hasError}>
+        <ComboboxValue>
+          {(selected: ComboboxFieldOption[]) => (
+            <>
+              {selected.map((option) => (
+                <ComboboxChip key={option.value}>{option.label}</ComboboxChip>
+              ))}
+              <ComboboxChipsInput
+                id={inputId}
+                placeholder={selected.length === 0 ? placeholder : undefined}
+                aria-invalid={hasError}
+                disabled={disabled}
+              />
+            </>
+          )}
+        </ComboboxValue>
+      </ComboboxChips>
+      <ComboboxContent anchor={anchor}>
+        <ComboboxFieldList grouped={grouped} emptyText={emptyText} />
+      </ComboboxContent>
+    </Combobox>
+  )
+}
+
+function ComboboxFieldFooter({
+  error,
+  description,
+  hasError,
+}: {
+  error?: ComboboxFieldError
+  description?: string
+  hasError: boolean
+}) {
+  if (hasError && error) {
+    return Array.isArray(error) ? <FieldError errors={error} /> : <FieldError>{error}</FieldError>
+  }
+  return description ? <FieldDescription>{description}</FieldDescription> : null
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Composant public                                                          */
+/* -------------------------------------------------------------------------- */
+
 function ComboboxField(props: ComboboxFieldProps) {
   const {
     label,
@@ -79,129 +279,42 @@ function ComboboxField(props: ComboboxFieldProps) {
 
   const generatedId = useId()
   const inputId = id ?? generatedId
-  const anchor = useComboboxAnchor()
+  const hasError = hasErrors(error)
 
-  const hasError = Array.isArray(error) ? error.length > 0 : !!error
-
-  const flatOptions = groups ? groups.flatMap((group) => group.items) : options
-  // Le Combobox travaille avec l'objet option complet, pas seulement sa valeur
-  const findOption = (value: string | null | undefined) =>
-    flatOptions.find((option) => option.value === value) ?? null
-  const findOptions = (values: string[] | undefined) =>
-    (values ?? []).flatMap((value) => {
-      const option = findOption(value)
-      return option ? [option] : []
-    })
-
-  const sharedProps = {
+  const controlProps: ControlProps = {
+    inputId,
     items: groups ?? options,
+    grouped: Boolean(groups),
+    lookup: createOptionLookup(options, groups),
     name,
     disabled,
-    isItemEqualToValue: (a: ComboboxFieldOption, b: ComboboxFieldOption) => a.value === b.value,
-    itemToStringValue: (item: ComboboxFieldOption) => item.value,
-  }
-
-  const renderItem = (option: ComboboxFieldOption) => (
-    <ComboboxItem key={option.value} value={option} disabled={option.disabled}>
-      {option.label}
-    </ComboboxItem>
-  )
-
-  const list = (
-    <>
-      <ComboboxEmpty>{emptyText}</ComboboxEmpty>
-      <ComboboxList>
-        {groups
-          ? (group: ComboboxFieldGroup) => (
-              <ComboboxGroup key={group.value} items={group.items}>
-                <ComboboxLabel>{group.value}</ComboboxLabel>
-                <ComboboxCollection>{renderItem}</ComboboxCollection>
-              </ComboboxGroup>
-            )
-          : renderItem}
-      </ComboboxList>
-    </>
-  )
-
-  let control: ReactNode
-
-  if (props.multiple) {
-    const { value, defaultValue, onValueChange } = props
-    const valueProps =
-      value !== undefined
-        ? { value: findOptions(value) }
-        : { defaultValue: findOptions(defaultValue) }
-
-    control = (
-      <Combobox
-        multiple
-        {...sharedProps}
-        onValueChange={(selected: ComboboxFieldOption[]) => {
-          onValueChange?.(selected.map((option) => option.value))
-        }}
-        {...valueProps}
-      >
-        <ComboboxChips ref={anchor} aria-invalid={hasError}>
-          <ComboboxValue>
-            {(selected: ComboboxFieldOption[]) => (
-              <>
-                {selected.map((option) => (
-                  <ComboboxChip key={option.value}>{option.label}</ComboboxChip>
-                ))}
-                <ComboboxChipsInput
-                  id={inputId}
-                  placeholder={selected.length === 0 ? placeholder : undefined}
-                  aria-invalid={hasError}
-                  disabled={disabled}
-                />
-              </>
-            )}
-          </ComboboxValue>
-        </ComboboxChips>
-        <ComboboxContent anchor={anchor}>{list}</ComboboxContent>
-      </Combobox>
-    )
-  } else {
-    const { value, defaultValue, onValueChange } = props
-    const valueProps =
-      value !== undefined
-        ? { value: findOption(value) }
-        : { defaultValue: findOption(defaultValue) }
-
-    control = (
-      <Combobox
-        {...sharedProps}
-        onValueChange={(option: ComboboxFieldOption | null) => {
-          onValueChange?.(option?.value ?? null)
-        }}
-        {...valueProps}
-      >
-        <ComboboxInput
-          id={inputId}
-          placeholder={placeholder}
-          showClear={showClear}
-          aria-invalid={hasError}
-          disabled={disabled}
-          className={className}
-        />
-        <ComboboxContent>{list}</ComboboxContent>
-      </Combobox>
-    )
+    placeholder,
+    emptyText,
+    hasError,
   }
 
   return (
     <Field data-invalid={hasError} data-disabled={disabled} className={className}>
       <FieldLabel htmlFor={inputId}>{label}</FieldLabel>
 
-      {control}
+      {props.multiple ? (
+        <MultipleControl
+          {...controlProps}
+          value={props.value}
+          defaultValue={props.defaultValue}
+          onValueChange={props.onValueChange}
+        />
+      ) : (
+        <SingleControl
+          {...controlProps}
+          showClear={showClear}
+          value={props.value}
+          defaultValue={props.defaultValue}
+          onValueChange={props.onValueChange}
+        />
+      )}
 
-      {hasError && Array.isArray(error) ? (
-        <FieldError errors={error} />
-      ) : hasError ? (
-        <FieldError>{error as string}</FieldError>
-      ) : description ? (
-        <FieldDescription>{description}</FieldDescription>
-      ) : null}
+      <ComboboxFieldFooter error={error} description={description} hasError={hasError} />
     </Field>
   )
 }
@@ -209,6 +322,8 @@ function ComboboxField(props: ComboboxFieldProps) {
 export { ComboboxField }
 export type {
   ComboboxFieldOption,
+  ComboboxFieldGroup,
+  ComboboxFieldError,
   ComboboxFieldProps,
   ComboboxFieldSingleProps,
   ComboboxFieldMultipleProps,
