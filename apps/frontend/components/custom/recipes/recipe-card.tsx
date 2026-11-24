@@ -4,6 +4,7 @@ import { Cta } from '@/components/custom/cta'
 import { RecipeCardContent } from '@/components/custom/recipes/recipe-card-content'
 import { RecipeCardDescription } from '@/components/custom/recipes/recipe-card-description'
 import { RecipeCardImage } from '@/components/custom/recipes/recipe-card-img'
+import { RecipeCardLikeButton } from '@/components/custom/recipes/recipe-card-like-button'
 import {
   Card,
   CardContent,
@@ -20,6 +21,7 @@ function RecipeCard({ recipe }: { recipe: RecipeInterface }) {
 
   return (
     <Card className="overflow-hidden pt-0">
+      <RecipeCardLikeButton />
       <RecipeCardImage image={imageName} alt={name} />
 
       <CardHeader>
