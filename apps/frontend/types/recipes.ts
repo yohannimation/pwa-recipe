@@ -20,4 +20,5 @@ export type RecipeInterface = {
 export type RecipeFilterInterface = {
   sort: SortInterface
   name?: string
+  categories?: string[]
 }

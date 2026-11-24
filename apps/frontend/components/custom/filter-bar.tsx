@@ -2,24 +2,25 @@
 
 import { useTransition } from 'react'
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { SelectField } from '@/components/custom/fields/select-field'
 import { FilterList } from '@/components/custom/filter-list'
 
 import type { CategoryInterface } from '@/types/categories'
-import type { SortInterface } from '@/types/sort'
+import type { RecipeFilterInterface } from '@/types/recipes'
 
 interface FilterBarProps {
   categories: CategoryInterface[]
-  currentSort: SortInterface
+  filters: RecipeFilterInterface
 }
 
-function FilterBar({ categories, currentSort }: FilterBarProps) {
+function FilterBar({ categories, filters }: FilterBarProps) {
   const router = useRouter()
-  const pathname = usePathname()
   const searchParams = useSearchParams()
   const [isPending, startTransition] = useTransition()
+
+  const { sort } = filters
 
   const sortValuesList = [
     { value: 'creation-asc', label: 'Date de création A-Z' },
@@ -33,7 +34,7 @@ function FilterBar({ categories, currentSort }: FilterBarProps) {
     params.set('sort', value)
 
     startTransition(() => {
-      router.push(`${pathname}?${params.toString()}`, { scroll: false })
+      router.push(`/?${params.toString()}`)
     })
   }
 
@@ -41,11 +42,7 @@ function FilterBar({ categories, currentSort }: FilterBarProps) {
     <aside className="relative z-10 flex flex-wrap items-center justify-between gap-2 rounded-xl bg-white p-2 shadow-(--shadow)">
       <FilterList categories={categories} />
 
-      <SelectField
-        options={sortValuesList}
-        defaultValue={currentSort}
-        onValueChange={sortTrigger}
-      />
+      <SelectField options={sortValuesList} defaultValue={sort} onValueChange={sortTrigger} />
     </aside>
   )
 }

@@ -8,6 +8,8 @@ async function RecipeList({ filters }: { filters: RecipeFilterInterface }) {
   const params = new URLSearchParams()
   params.set('sort', filters.sort)
   if (filters.name) params.set('name', filters.name)
+  if (filters.categories)
+    filters.categories.forEach((category: string) => params.append('categories', category))
 
   const recipes = (await serverApi<RecipeInterface[]>(`/recipes?${params}`)) ?? []
 

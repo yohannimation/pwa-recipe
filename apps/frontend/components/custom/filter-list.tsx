@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 
 import { Settings2 } from 'lucide-react'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { CheckboxField } from '@/components/custom/fields/checkbox-field'
 import {
@@ -34,8 +35,40 @@ import { useMediaQuery } from '@/lib/useMediaQuery'
 import type { CategoryInterface } from '@/types/categories'
 
 function FilterList({ categories }: { categories: CategoryInterface[] }) {
+  // Display state
   const [open, setOpen] = useState<boolean>(false)
   const isDesktop = useMediaQuery('(min-width: 768px)')
+
+  // Params state
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const [isPending, startTransition] = useTransition()
+
+  const categoriesParam = 'categories'
+  const selected = searchParams.getAll(categoriesParam)
+
+  const toggle = (name: string) => {
+    const next = selected.includes(name)
+      ? selected.filter((category) => category !== name)
+      : [...selected, name]
+
+    const params = new URLSearchParams(searchParams.toString())
+    params.delete(categoriesParam) // Delete all occurrences
+    next.forEach((c) => params.append(categoriesParam, c)) // And rewrite them
+
+    startTransition(() => {
+      router.push(`/?${params.toString()}`)
+    })
+  }
+
+  const reset = () => {
+    const params = new URLSearchParams(searchParams.toString())
+    params.delete(categoriesParam) // Delete all occurrences
+
+    startTransition(() => {
+      router.push(`/?${params.toString()}`)
+    })
+  }
 
   const trigger = (
     <div>
@@ -68,7 +101,11 @@ function FilterList({ categories }: { categories: CategoryInterface[] }) {
                       <ul className="flex flex-col gap-1.5">
                         {category.children.map((child: CategoryInterface) => (
                           <li key={child.name}>
-                            <CheckboxField label={child.name} />
+                            <CheckboxField
+                              label={child.name}
+                              onCheckedChange={() => toggle(child.name)}
+                              checked={selected.includes(child.name)}
+                            />
                           </li>
                         ))}
                       </ul>
@@ -88,7 +125,11 @@ function FilterList({ categories }: { categories: CategoryInterface[] }) {
                       <ul className="flex flex-col gap-1.5">
                         {category.children.map((child: CategoryInterface) => (
                           <li key={child.name}>
-                            <CheckboxField label={child.name} />
+                            <CheckboxField
+                              label={child.name}
+                              onCheckedChange={() => toggle(child.name)}
+                              checked={selected.includes(child.name)}
+                            />
                           </li>
                         ))}
                       </ul>
@@ -108,7 +149,11 @@ function FilterList({ categories }: { categories: CategoryInterface[] }) {
                       {category.children.map((child) => {
                         return (
                           <li key={child.name}>
-                            <CheckboxField label={child.name} />
+                            <CheckboxField
+                              label={child.name}
+                              onCheckedChange={() => toggle(child.name)}
+                              checked={selected.includes(child.name)}
+                            />
                           </li>
                         )
                       })}
@@ -124,10 +169,12 @@ function FilterList({ categories }: { categories: CategoryInterface[] }) {
   )
   const footer = (
     <div className="flex flex-col gap-2 sm:flex-row">
-      <Button variant={'outline'} className="flex-1">
+      <Button variant={'outline'} className="flex-1" onClick={reset}>
         Réinitialiser tous les filtres
       </Button>
-      <Button className="flex-1">Appliquer</Button>
+      <Button className="flex-1" onClick={() => setOpen(false)}>
+        Appliquer
+      </Button>
     </div>
   )
 
