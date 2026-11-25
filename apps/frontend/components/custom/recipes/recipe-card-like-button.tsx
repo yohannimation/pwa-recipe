@@ -1,17 +1,16 @@
 'use client'
 
 import { Heart } from 'lucide-react'
-import { usePathname, useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
 
 import { useAuth } from '@/providers/auth-provider'
+import { useRedirectToLogin } from '@/lib/usePathname'
 
 function RecipeCardLikeButton() {
-  const router = useRouter()
-  const path = usePathname()
   const { user, isLoading } = useAuth()
+  const redirectToLogin = useRedirectToLogin()
 
   const triggerLike = () => {
     if (user) {
@@ -20,7 +19,7 @@ function RecipeCardLikeButton() {
       toast.error('Vous devez-être connecté pour aimer du contenu', {
         action: {
           label: 'Se connecter',
-          onClick: () => router.push(`/auth/login?next=${encodeURIComponent(path)}`),
+          onClick: () => redirectToLogin(),
         },
         duration: 6000,
       })

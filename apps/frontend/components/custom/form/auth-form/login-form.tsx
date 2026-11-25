@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useTransition } from 'react'
+import { useEffect } from 'react'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import Link from 'next/link'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
@@ -34,7 +34,6 @@ function LoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const nextPage = searchParams.get('next')
-  const [isPending, startTransition] = useTransition()
 
   const { user, isLoading, login } = useAuth()
   const form = useForm<LoginFormValues>({
@@ -46,10 +45,7 @@ function LoginForm() {
   })
 
   useEffect(() => {
-    if (user)
-      startTransition(() => {
-        router.push(nextPage ?? '/')
-      })
+    if (user) router.push(nextPage ?? '/')
   }, [user, router, nextPage])
 
   async function onSubmit(values: LoginFormValues) {

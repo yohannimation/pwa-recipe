@@ -2,18 +2,17 @@
 
 import { useEffect } from 'react'
 
-import { usePathname, useRouter } from 'next/navigation'
-
 import { useAuth } from '@/providers/auth-provider'
+import { useRedirectToLogin } from '@/lib/usePathname'
 
 export function RequireAuth({ role, children }: { role?: string; children: React.ReactNode }) {
   const { user, isLoading } = useAuth()
-  const router = useRouter()
-  const path = usePathname()
+
+  const redirectToLogin = useRedirectToLogin()
 
   useEffect(() => {
-    if (!isLoading && !user) router.replace(`/auth/login?next=${encodeURIComponent(path)}`)
-  }, [isLoading, user, router, path])
+    if (!isLoading && !user) redirectToLogin()
+  }, [isLoading, user, redirectToLogin])
 
   if (isLoading || !user) return <p>Chargement</p>
   if (role && user.role !== role) return <p>Accès refusé</p>
