@@ -1,8 +1,9 @@
 'use client'
 
+import { CircleAlert, CircleCheck, CircleX, Info } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Toaster as Sonner, type ToasterProps } from 'sonner'
-import { CircleCheck, Info, CircleAlert, CircleX } from 'lucide-react'
+
 import { Spinner } from '@/components/ui/spinner'
 
 const Toaster = ({ ...props }: ToasterProps) => {
@@ -36,7 +37,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
           title: '',
           description: 'text-sm',
           actionButton:
-            'cursor-pointer px-3 py-1 bg-muted rounded-sm hover:bg-primary hover:text-white',
+            'cursor-pointer px-3 py-1 bg-muted text-foreground rounded-sm hover:bg-primary hover:text-white',
           cancelButton:
             'inline-flex h-8 shrink-0 items-center justify-center rounded-md bg-muted px-3 text-xs font-medium text-muted-foreground hover:bg-muted/80',
           closeButton:

@@ -1,11 +1,12 @@
 'use client'
 
-import { useEffect, useState, useTransition } from 'react'
+import { useEffect, useState } from 'react'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Controller, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import * as yup from 'yup'
 
 import { PasswordField } from '@/components/custom/fields/password-field'
@@ -44,7 +45,6 @@ type RegisterFormValues = yup.InferType<typeof registerSchema>
 
 function RegisterForm() {
   const router = useRouter()
-  const [isPending, startTransition] = useTransition()
   const register = useRegister()
   const form = useForm<RegisterFormValues>({
     resolver: yupResolver(registerSchema),
@@ -57,10 +57,14 @@ function RegisterForm() {
   const [user, setUser] = useState<UserInterface | null>(null)
 
   useEffect(() => {
-    if (user)
-      startTransition(() => {
-        router.push('/auth/login')
+    if (user) {
+      toast.success('Inscription réussi', {
+        description: 'Veuillez vous connecter',
+        duration: 6000,
       })
+
+      router.push('/auth/login')
+    }
   }, [user, router])
 
   async function onSubmit(values: RegisterFormValues) {
